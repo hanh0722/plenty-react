@@ -1,0 +1,175 @@
+@import '../constant/variable';
+.nav{
+    position: $rl;
+    height: 70px;
+    .logo{
+        width: 100px;
+        height: auto;
+        img{
+            width: 100%;
+            height: auto;
+        }
+    }
+    ul{
+        list-style: none;
+        display: $flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 0% 5%;
+        height: 100%;
+        margin: 0;
+    }
+    .items, .icons{
+        display: $flex;
+        svg{
+            cursor: pointer;
+        }
+    }
+    .icons{
+        li{
+            padding: $sm-pd $md-pd 8px 0;
+        }
+    }
+    .child{
+        text-decoration: none;
+        color: $black !important;
+        padding: $sm-pd $md-pd 8px 0;
+        position: $rl;
+        margin: 0 $sm-mg;
+        font-size: $fs-sm;
+        &:before{
+            position: $ab;
+            left: 0;
+            bottom: 0;
+            content: '';
+            background: $black;
+            height: 2px;
+            width: 0;
+            transition: width .5s;
+        }
+        &:hover{
+            &:before{
+                width: 100%;
+            }
+            color: $green !important;
+        }
+    }
+    a{
+        text-decoration: none !important;
+        color: $black;
+        transition: all .5s;
+        &:hover{
+            color: $green;
+        }
+    }
+    .items{
+        svg{
+            position: $ab;
+            top: calc(60% - 1px);
+            right: 0;
+            transform: translateY(-50%);
+            font-size: 12px;
+        }
+    }
+    .active{
+        color: $green !important;
+    }
+    .list__inside{
+        &::before{
+            position: $ab;
+            top: -20px;
+            width: 100%;
+            content: '';
+            height: 20px;
+            left: 0;
+        }
+        position: $ab;
+        border-radius: 10px;
+        top: calc(100% + 10px);
+        display: $flex;
+        flex-direction: column;
+        width: 200px;
+        left: -20px;
+        padding: 20px;
+        height: auto;
+        transition: all .5s;
+        transform: translateY(20%);
+        opacity: 0;
+        z-index: -5;
+        visibility: hidden;
+        a{
+            margin: 0;
+            padding: $sm-pd 0;
+            &:hover{
+                &::before{
+                    display: none;
+                }
+            }
+        }
+        box-shadow: $sm-shadow;
+    }
+    .row{
+        &:hover{
+            .list__inside{
+                transform: translateY(0%);
+                opacity: 1;
+                z-index: 4;
+                visibility: visible;
+            }
+        }
+    }
+}
+@media screen and (max-width: 991px){
+    .nav{
+        .items{
+            position: $ab;
+            top: 100%;
+            flex-direction: column;
+            height: calc(100vh - 55px);
+            transition: all .8s ease-in-out;
+            left: 0;
+            padding: $sm-pd $lg-pd;
+            box-shadow: $sm-shadow;
+            transform: translateX(-100%);
+            z-index: 5;
+            background: $white;
+            width: 50%;
+            overflow-x: hidden;
+        }
+        .back{
+            transform: translateX(0%);
+        }
+        .child{
+            margin: 0;
+            position: static;
+            & >a {
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+            }
+            svg{
+                position: static;
+                transform: none;
+            }
+            &::before{
+                display: none;
+            }
+        }
+        .list__inside{
+            position: static;
+            opacity: 1;
+            z-index: 1;
+            width: 100%;
+            visibility: visible;
+            transform: translateY(0%);
+            box-shadow: none;
+            padding: $sm-pd $md-pd 8px 0;
+            &::before{
+                display: none;
+            }
+            a{
+                padding: $sm-pd $md-pd 8px $md-pd;
+            }
+        }
+    }
+}

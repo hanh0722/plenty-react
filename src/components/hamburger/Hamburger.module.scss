@@ -1,0 +1,33 @@
+@import '../constant/variable';
+.hamburger{
+    div{
+        width: 25px;
+        height: 2px;
+        background: $black;
+        margin: 4px 0px;
+        transition: transform .5s;
+    }
+    cursor: pointer;
+    display: none;
+    z-index: 5;
+}
+
+@media screen and (max-width: 991px){
+    .hamburger{
+        display: $block;
+    }
+    .transform__origin{
+        div{
+            &:first-child{
+                transform: rotate(45deg) translateY(8px);
+            }
+            &:nth-child(2){
+                visibility: hidden;
+            }
+            &:last-child{
+                transform: rotate(-45deg) translateY(-8px);
+            }
+            background: $white;
+        }
+    }
+}
