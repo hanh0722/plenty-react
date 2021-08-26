@@ -1,7 +1,8 @@
 import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
-    isClicked: false
+    isClicked: false,
+    isShowed: false
 }
 const hamburgerSlice = createSlice({
     name: 'hamburger',
@@ -9,6 +10,9 @@ const hamburgerSlice = createSlice({
     reducers: {
         setClickedHandler(state){
             state.isClicked = !state.isClicked;
+        },
+        searchSlide(state){
+            state.isShowed = !state.isShowed;
         }
     }
 })

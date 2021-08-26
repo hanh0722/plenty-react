@@ -46,30 +46,27 @@ const Navigation = () => {
               </li>
             </NavLink>
           </div>
-          <div className={`${styles.items} ${state && styles.back}`}>
-            <div className={styles.child}>
+          <header className={`${styles.items} ${state && styles.back}`}>
+            <div className={`${styles.child} d-flex justify-content-center align-items-center`}>
               <NavLink to="/" activeClassName={styles.active} exact>
                 <li>Home</li>
                 <FontAwesomeIcon icon={faAngleDown} />
               </NavLink>
             </div>
-            <div className={`${styles.child}`}>
+            <div className={`${styles.child} d-flex justify-content-center align-items-center`}>
               <NavLink to="/shop" activeClassName={styles.active}>
                 <li>Shop</li>
                 <FontAwesomeIcon icon={faAngleDown} />
               </NavLink>
             </div>
-            <div className={`${styles.child} ${styles.row}`}>
-              <NavLink
+            <div className={`${styles.child} ${styles.row} d-flex justify-content-center align-items-center`}>
+              <p
                 onClick={setShowedUpHandler}
-                className={styles.row}
-                to="/products"
-                activeClassName={styles.active}
-                exact
+                className={`${styles.row}`}
               >
                 <li>Products</li>
                 <FontAwesomeIcon icon={faAngleDown} />
-              </NavLink>
+              </p>
               <LayoutList isClicked={showedUp}>
                 <div className={styles["list__inside"]}>
                   {nestedPath.map((items) => {
@@ -82,15 +79,18 @@ const Navigation = () => {
                 </div>
               </LayoutList>
             </div>
-            <div className={styles.child}>
+            <div className={`${styles.child} d-flex justify-content-center align-items-center`}>
               <NavLink to="/blogs" activeClassName={styles.active}>
                 <li>Blogs</li>
                 <FontAwesomeIcon icon={faAngleDown} />
               </NavLink>
             </div>
-          </div>
+          </header>
           <div className={styles.icons}>
             {icons.map((items, index) => {
+              if(index === 0){
+                return <li onClick={() => dispatch(hamburgerActions.searchSlide())} key={index}><FontAwesomeIcon icon={items}/></li>
+              }
               return (
                 <li key={index}>
                   <FontAwesomeIcon icon={items} />

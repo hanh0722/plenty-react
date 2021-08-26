@@ -29,6 +29,9 @@
         li{
             padding: $sm-pd $md-pd 8px 0;
         }
+        svg{
+            font-size: $fs-md;
+        }
     }
     .child{
         text-decoration: none;
@@ -65,7 +68,7 @@
     .items{
         svg{
             position: $ab;
-            top: calc(60% - 1px);
+            top: 60%;
             right: 0;
             transform: translateY(-50%);
             font-size: 12px;
@@ -121,6 +124,8 @@
 }
 @media screen and (max-width: 991px){
     .nav{
+        height: 60px;
+        padding: 0px 30px;
         .items{
             position: $ab;
             top: 100%;
@@ -142,7 +147,8 @@
         .child{
             margin: 0;
             position: static;
-            & >a {
+            display: block !important;
+            & >a, .row {
                 display: flex;
                 justify-content: space-between;
                 align-items: center;
@@ -170,6 +176,36 @@
             a{
                 padding: $sm-pd $md-pd 8px $md-pd;
             }
+        }
+        ul{
+            padding: 0;
+        }
+    }
+    .icons{
+        li{
+            &:nth-child(3), &:nth-child(2){
+                display: none;
+            }
+            padding: 0 !important;
+            &:nth-child(4){
+                padding-left: 15px !important;
+            }
+        }
+    }
+}
+@media screen and (max-width: 576px) {
+    .nav{
+        .logo{
+            width: 75px !important;
+        }
+        padding: 0px 20px;
+        .icons{
+            svg{
+                font-size: $fs-sm;
+            }
+        }
+        .items{
+            width: 80%;
         }
     }
 }
