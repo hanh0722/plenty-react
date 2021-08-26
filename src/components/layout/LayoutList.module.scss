@@ -1,7 +1,7 @@
 @import '../constant/variable';
 @media screen and (max-width: 991px) {
     .layout{
-        position: absolute;
+        position: $ab;
         top: 0;
         left: 0;
         bottom: 0;

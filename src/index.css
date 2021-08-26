@@ -6,3 +6,32 @@
 body{
   overflow-x: hidden;
 }
+p{
+  margin: 0 !important;
+}
+.error__text{
+  padding-top: 20px;
+  font-size: 14px;
+  color: red;
+}
+.slide-enter{
+  opacity: 0;
+  transform: translateY(-50%);
+}
+.slide-enter-active{
+  opacity: 1;
+  transition: all .5s;
+  transform: translateY(0%);
+}
+.slide-exit{
+  opacity: 1;
+  transform: translateY(0%);
+}
+.slide-exit-active{
+  opacity: 0;
+  transform: translateY(-50%);
+  transition: all .5s;
+}
+.invalid{
+  border-color: red;
+}

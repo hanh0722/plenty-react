@@ -1,0 +1,17 @@
+@import '../constant/variable';
+.container{
+    height: $height-full;
+    z-index: 10;
+    position: fixed;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    background: $white;
+}
+.line__box{
+    padding: $lg-pd 0;
+}
+.row{
+    padding-bottom: $md-pd;
+}

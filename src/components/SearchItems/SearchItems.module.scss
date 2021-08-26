@@ -1,0 +1,22 @@
+@import '../constant/variable';
+.product__item{
+    .image{
+        img{
+            width: 100%;
+            height: auto;
+        }
+    }
+    .information{
+        a{
+            text-decoration: none;
+            color: $black;
+        }
+        padding-top: $sm-pd;
+        .type{
+            padding: $sm-pd 0;
+            font-size: $fs-sm;
+            color: gray;
+        }
+        line-height: 25px;
+    }
+}
