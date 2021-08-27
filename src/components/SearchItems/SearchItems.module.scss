@@ -11,12 +11,19 @@
             text-decoration: none;
             color: $black;
         }
-        padding-top: $sm-pd;
+        padding-top: 10px;
         .type{
-            padding: $sm-pd 0;
+            padding: 10px 0;
             font-size: $fs-sm;
             color: gray;
         }
         line-height: 25px;
     }
+}
+.name, .type{
+    font-size: 14px;
+    text-transform: capitalize;
+}
+.col{
+    margin-bottom: 20px;
 }

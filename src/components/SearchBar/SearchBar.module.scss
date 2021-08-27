@@ -1,17 +1,32 @@
 @import '../constant/variable';
 .container{
-    height: $height-full;
     z-index: 10;
     position: fixed;
     top: 0;
-    left: 0;
-    bottom: 0;
-    right: 0;
+    width: 100%;
     background: $white;
-}
-.line__box{
-    padding: $lg-pd 0;
 }
 .row{
     padding-bottom: $md-pd;
+}
+.grid__layout{
+    padding: $lg-pd;
+}
+.items{
+    padding: 0 0 $md-pd 0;
+    margin-top: $md-pd;
+}
+.flow__items{
+    overflow-x: hidden;
+}
+@media screen and (max-width: 991px) {
+    .items{
+        height: 50vh;
+        overflow: scroll;
+    }
+}
+@media screen and (max-width: 768px) {
+    .items{
+        height: 70vh;
+    }
 }

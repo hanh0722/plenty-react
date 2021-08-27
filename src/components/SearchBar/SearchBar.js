@@ -9,7 +9,9 @@ import { hamburgerActions } from "../store/hamburgerSlice";
 import Overlay from "../overlay/Overlay";
 import ReactDOM from "react-dom";
 import SearchItems from "../SearchItems/SearchItems";
-import { Container } from "react-bootstrap";
+import { Container, Row } from "react-bootstrap";
+import DUMMY_DATA from "../DummyData/DUMMY_DATA";
+import { Button } from "@material-ui/core";
 const SearchBar = ({ isShowed }) => {
   const {
     valid,
@@ -26,6 +28,9 @@ const SearchBar = ({ isShowed }) => {
   const submitHandler = (event) => {
     event.preventDefault();
   };
+  const renderListItems = DUMMY_DATA.filter((items) => {
+    return items.name.trim().includes(value);
+  });
   return (
     <CSSTransition
       in={isShowed}
@@ -36,13 +41,18 @@ const SearchBar = ({ isShowed }) => {
     >
       <>
         <form onSubmit={submitHandler} className={styles.container}>
-          <Container>
+          <Container className={styles["grid__layout"]} fluid>
             <div className={`${styles["line__box"]} w-100 p-20`}>
               <div
                 className={`d-flex justify-content-between align-items-center ${styles.row}`}
               >
                 <p>Search our store...!</p>
-                <CloseButton onClick={changeLayoutHandler} />
+                <CloseButton
+                  onClick={() => {
+                    changeLayoutHandler();
+                    resetHandler();
+                  }}
+                />
               </div>
               <Input
                 input={{
@@ -50,6 +60,7 @@ const SearchBar = ({ isShowed }) => {
                   onChange: changeInputHandler,
                   onBlur: touchedInputHandler,
                   value: value,
+                  className: !valid && isTouched ? "error__input" : "",
                 }}
                 hasValue={value.trim().length > 0}
                 setValueHandler={resetHandler}
@@ -57,11 +68,65 @@ const SearchBar = ({ isShowed }) => {
               {!valid && isTouched && (
                 <p className="error__text">Searching box is empty!</p>
               )}
+              {value.trim().length > 0 && renderListItems.length === 0 && (
+                <p className="error__text text-center">
+                  No result for <span>"{value}"</span>
+                </p>
+              )}
             </div>
-            <SearchItems />
+            {value.trim().length > 0 && (
+              <div className={styles["flow__items"]}>
+                {renderListItems.length > 0 && (
+                  <>
+                    <p className="text-center pt-3">
+                      <span style={{ color: "gray", fontSize: '16px'}}>
+                        Found {renderListItems.length} results for:
+                      </span>{" "}
+                      "{value}"
+                    </p>
+                    <Row className={`${styles.items}`}>
+                      {value.trim().length !== 0 &&
+                        renderListItems.map((product, index) => {
+                          if (index <= 5) {
+                            return (
+                              <SearchItems
+                                key={product.id}
+                                type={product.type}
+                                price={product.price}
+                                name={product.name}
+                                imageUrl={product.imageUrl}
+                              />
+                            );
+                          }
+                          return "";
+                        })}
+                    </Row>
+                    {renderListItems.length > 0 && (
+                      <div className={`text-center pt-4`}>
+                        <Button
+                          type="submit"
+                          className="button"
+                          variant="contained"
+                        >
+                          More Results!
+                        </Button>
+                      </div>
+                    )}
+                  </>
+                )}
+              </div>
+            )}
           </Container>
         </form>
-        {ReactDOM.createPortal(<Overlay />, document.getElementById("bg__ol"))}
+        {ReactDOM.createPortal(
+          <Overlay
+            onClick={() => {
+              changeLayoutHandler();
+              resetHandler();
+            }}
+          />,
+          document.getElementById("bg__ol")
+        )}
       </>
     </CSSTransition>
   );
