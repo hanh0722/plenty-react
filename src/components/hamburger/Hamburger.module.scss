@@ -22,7 +22,6 @@
         &:last-child{
             transform: rotate(-45deg) translateY(-8px);
         }
-        background: $white;
     }
 }
 .absolute-btn{
@@ -40,6 +39,7 @@
         div{
             width: 20px;
             height: 1px;
+            
         }
     }
     .transform__origin{

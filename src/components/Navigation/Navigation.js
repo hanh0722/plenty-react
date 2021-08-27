@@ -15,6 +15,7 @@ import { hamburgerActions } from "../store/hamburgerSlice";
 import ReactDOM from "react-dom";
 import Overlay from "../overlay/Overlay";
 import LayoutList from "../layout/LayoutList";
+import Thumb from "../Thumb/Thumb";
 const icons = [faSearch, faUser, faStar, faShoppingBasket];
 const nestedPath = [
   {
@@ -24,7 +25,7 @@ const nestedPath = [
   { path: "outdoor", name: "Outdoor Plans" },
   { path: "herbs-veggies", name: "Herb + Veggies" },
 ];
-const Navigation = () => {
+const Navigation = ({isDowned}) => {
     const [showedUp, setShowedUp] = useState(false);
   const dispatch = useDispatch();
   const clickHandler = () => {
@@ -36,7 +37,7 @@ const Navigation = () => {
   }
   return (
     <>
-      <nav className={styles.nav}>
+      <nav className={`${isDowned && styles['nav__top']} ${styles.nav}`}>
         <ul>
           <Hamburger onClick={clickHandler} isClicked={state} />
           <div className={styles.logo}>
@@ -89,7 +90,10 @@ const Navigation = () => {
           <div className={styles.icons}>
             {icons.map((items, index) => {
               if(index === 0){
-                return <li onClick={() => dispatch(hamburgerActions.searchSlide())} key={index}><FontAwesomeIcon icon={items}/></li>
+                return <li onClick={() => dispatch(hamburgerActions.searchSlide())} key={index}>
+                    <FontAwesomeIcon icon={items}/>
+                    <Thumb className={styles.tooltip}>Search</Thumb>
+                  </li>
               }
               return (
                 <li key={index}>
