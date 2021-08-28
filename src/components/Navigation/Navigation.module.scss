@@ -23,7 +23,7 @@
         display: $flex;
         justify-content: space-between;
         align-items: center;
-        padding: 0% 5%;
+        padding: 0 3rem;
         height: 100%;
         margin: 0;
     }
@@ -35,7 +35,7 @@
     }
     .icons{
         li{
-            padding: .75rem;
+            padding: .65rem;
             position: relative;
             &:hover{
                 .tooltip{
@@ -45,14 +45,15 @@
                 }
             }
         }
-        svg{
+        svg, i{
             font-size: $fs-md;
+            cursor: pointer;
         }
     }
     .child{
         text-decoration: none;
         color: $black !important;
-        padding: .75rem;
+        padding: .75rem .75rem .75rem 0;
         position: $rl;
         margin: 0 $sm-mg;
         font-size: $fs-sm;
@@ -137,6 +138,9 @@
             }
         }
     }
+    .signin__btn{
+        display: none;
+    }
 }
 @media screen and (max-width: 991px){
     .nav{
@@ -205,6 +209,16 @@
             padding: 0 !important;
             &:nth-child(4){
                 padding-left: 15px !important;
+            }
+        }
+    }
+    .signin__btn{
+        display: block !important;
+        button{
+            width: 100%;
+            &:first-child{
+                background: $brown !important;
+                color: $white !important;
             }
         }
     }

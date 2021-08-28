@@ -1,0 +1,26 @@
+@import '../constant/variable';
+.container{
+    padding-top: 100px;
+}
+
+
+@media screen and (max-width: 768px) {
+
+    .container{
+        padding: 60px 0 0 0;
+        margin: 0;
+        max-width: 100%;
+    }
+    .line{
+        position: relative;
+        &::before{
+            content: '';
+            position: $ab;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            top: 0;
+            background: rgba($color: $black, $alpha: .35);
+        }
+    }
+}
