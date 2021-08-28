@@ -3,7 +3,8 @@ import Navigation from './components/Navigation/Navigation';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import SearchBar from './components/SearchBar/SearchBar';
 import { useSelector } from 'react-redux';
-import { Switch } from 'react-router-dom';
+import { Route, Switch } from 'react-router-dom';
+import Index from './components/views';
 const App = () => {
   const [navigation, setNavigation] = useState(false);
   const state = useSelector(state => state.hamburger.isShowed);
@@ -28,6 +29,7 @@ const App = () => {
       <Navigation isDowned={navigation}/>
       <SearchBar isShowed={state}/>
       <Switch>
+        <Route path='/' exact component={Index}/>
       </Switch>
     </>
   );

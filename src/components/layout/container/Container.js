@@ -1,7 +1,11 @@
 import React from 'react';
-
-const Container = () => {
+import styles from './container.module.scss'
+const Container = (props) => {
     return(
-        <div></div>
+        <div className={`${styles.container} ${props.className}`}>
+            {props.children}
+        </div>
     )
 }
+
+export default Container;
