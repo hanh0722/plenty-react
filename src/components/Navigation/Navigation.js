@@ -105,14 +105,14 @@ const Navigation = ({ isDowned }) => {
                     onClick={() => dispatch(hamburgerActions.searchSlide())}
                     key={index}
                   >
-                    <i className={`fal ${items}`}></i>
+                    <i className={`far ${items}`}></i>
                     <Thumb className={styles.tooltip}>Search</Thumb>
                   </li>
                 );
               }
               return (
                 <li key={index}>
-                  <i className={`fal ${items}`}></i>
+                  <i className={`far ${items}`}></i>
                   <Thumb className={styles.tooltip}>{dataToolTip[index]}</Thumb>
                 </li>
               );

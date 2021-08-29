@@ -1,0 +1,58 @@
+@import '../constant/variable';
+.text{
+    padding: $lg-pd;
+    line-height: 40px;
+    h2{
+        padding: $md-pd 0;
+        font-size: 50px;
+        text-transform: $capitalize;
+    }
+    a{
+        text-decoration: none;
+        color: $black;
+        font-weight: bold;
+        padding: $md-pd 0;
+        position: relative;
+    }
+    h4{
+        font-size: $fs-md;
+        color: $brown;
+        font-weight: bold;
+    }
+}
+.scale-enter{
+    opacity: 0;
+    transform: scale(.65) translateY(20%);
+}
+.scale-enter-active{
+    opacity: 1;
+    transform: scale(1) translateY(0%);
+    transition: all .5s;
+}
+.scale-exit{
+    opacity: 1;
+    transform: scale(1) translateY(0%);
+}
+.scale-exit-active{
+    opacity: 0;
+    transform: scale(.65) translateY(20%);
+    transition: all .5s;
+}
+@media screen and (max-width: 1200px) {
+    .text{
+        padding: $md-pd;
+        h2{
+            font-size: 33px;
+        }
+        p{
+            &:first-child{
+                font-size: 15px;
+            }
+        }
+    }
+}
+@media screen and (max-width: 768px) {
+    .text{
+        padding: $md-pd 15px;
+    }
+}

@@ -29,7 +29,7 @@ const SearchBar = ({ isShowed }) => {
     event.preventDefault();
   };
   const renderListItems = DUMMY_DATA.filter((items) => {
-    return items.name.trim().includes(value);
+    return items.name.trim().toLowerCase().includes(value.toLowerCase());
   });
   return (
     <CSSTransition

@@ -5,6 +5,7 @@ import SearchBar from './components/SearchBar/SearchBar';
 import { useSelector } from 'react-redux';
 import { Route, Switch } from 'react-router-dom';
 import Index from './components/views';
+import './components/styles/styles.scss';
 const App = () => {
   const [navigation, setNavigation] = useState(false);
   const state = useSelector(state => state.hamburger.isShowed);

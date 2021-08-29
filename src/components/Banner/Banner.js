@@ -1,15 +1,15 @@
-import React from 'react';
-import banner from '../image/banner.jpeg';
-import styles from './Banner.module.scss';
-import { Col } from 'react-bootstrap';
+import React from "react";
+import banner from "../image/banner.jpeg";
+import { Col } from "react-bootstrap";
+import BannerImages from "../layout/Banner-images/BannerImages";
 const Banner = () => {
-    return(
-        <Col className={styles.container} xs={12} sm={12} md={6} lg={6}>
-            <div className={styles.banner}>
-                <img src={banner} alt='banner'/>
-            </div>
-        </Col>
-    )
-}
+  return (
+    <Col xs={12} sm={12} md={6} lg={6}>
+      <BannerImages>
+        <img src={banner} alt="banner" />
+      </BannerImages>
+    </Col>
+  );
+};
 
 export default Banner;

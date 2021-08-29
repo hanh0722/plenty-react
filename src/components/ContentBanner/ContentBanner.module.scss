@@ -3,7 +3,7 @@
 .text{
     padding: $lg-pd;
     line-height: 40px;
-    span{
+    .thumb{
         padding: 5px;
         border-radius: 5px;
         background: $brown;
@@ -14,12 +14,18 @@
         font-size: 50px;
         text-transform: $capitalize;
     }
+    h4{
+        font-size: $fs-md;
+        color: $brown;
+        font-weight: bold;
+    }
     a{
         text-decoration: none;
         color: $black;
         font-weight: bold;
-        padding: $sm-pd 0;
+        padding: $sm-pd 0px;
         position: relative;
+        transition: all .5s;
         &::before, &::after{
             position: absolute;
             bottom: 0;
@@ -28,6 +34,17 @@
             height: 3px;
             background: $brown;
             left: 0;
+            transition: all .5s;
+        }
+        .hover{
+            position: absolute;
+            right: 0;
+            top: 0;
+            width: 0;
+            height: 100%;
+            z-index: -1;
+            opacity: 0;
+            background: $brown;
             transition: all .5s;
         }
         &::after{
@@ -43,6 +60,12 @@
             &::after{
                 width: 100%;
             }
+            .hover{
+                width: 100%;
+                opacity: 1;
+            }
+            color: $white;
+            padding: $sm-pd $sm-pd;
         }
     }
 }
@@ -73,6 +96,17 @@
             &::before, &::after{
                 background: $white !important;
             }
+        }
+    }
+}
+@media screen and (max-width: 576px){
+    .text{
+        h2{
+            font-size: 25px;
+        }
+        left: calc(50% + 10px);
+        p{
+            font-size: 14px !important;
         }
     }
 }
