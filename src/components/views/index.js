@@ -1,12 +1,15 @@
 import React from "react";
+import Landing from "../Landing/Landing";
+// import ListTree from "../ListTree/ListTree";
 import Main from "../Main/Main";
-import styles from '../StyleView/index.module.scss';
+import Package from "../Package/Package";
 const Index = () => {
   return (
     <>
-      <div className={styles.container}>
-        <Main/>
-      </div>
+      <Main />
+      <Landing/>
+      {/* <ListTree/> */}
+      <Package/>
     </>
   );
 };

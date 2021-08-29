@@ -1,13 +1,12 @@
 .container{
     max-width: 1320px;
-    padding: 70px 15px 0px 15px;
+    padding: 0px 15px 0px 15px;
     margin: 0 auto;
 }
 
 @media screen and (max-width: 1200px){
     .container{
         max-width: 1140px;
-        padding: 70px 25px 0px 25px;
     }
 }
 @media screen and (max-width: 991px){
@@ -24,6 +23,6 @@
 @media screen and (max-width: 576px) {
     .container{
         max-width: 100%;
-        padding: 70px 15px 0px 15px;
+        padding: 0px 15px 0px 15px;
     }
 }
