@@ -6,12 +6,12 @@ import Sale from "./Sale/Sale";
 import p1 from "../image/banner-2.jpeg";
 import BannerImages from "../layout/Banner-images/BannerImages";
 import SmallButton from "../SmallButton/SmallButton";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faFeatherAlt } from "@fortawesome/free-solid-svg-icons";
 import Information from "./Information/Information";
 import styles from "./Package.module.scss";
 import { Link } from "react-router-dom";
 import { CSSTransition } from "react-transition-group";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faFeatherAlt } from "@fortawesome/free-solid-svg-icons";
 const Package = () => {
   const [nodeIsClicked, setNodeIsClicked] = useState(false);
   return (
@@ -26,7 +26,7 @@ const Package = () => {
               <div style={{ position: "relative" }}>
                 <img src={p1} alt="banner-3" />
                 <SmallButton onClick={() => setNodeIsClicked(prevState => !prevState)}>
-                  <FontAwesomeIcon icon={faFeatherAlt} />
+                  <FontAwesomeIcon icon={faFeatherAlt}/>
                 </SmallButton>
                 <CSSTransition in={nodeIsClicked} timeout={500} mountOnEnter unmountOnExit classNames='scale'>
                   <Information style={{top: '33%', right: '28%'}}>

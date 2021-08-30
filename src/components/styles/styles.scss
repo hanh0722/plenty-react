@@ -1,4 +1,16 @@
 @import '../constant/variable';
+// :root{
+//     --black: #000000;
+//     --white: #fff;
+// }
+// .dark{
+//     h1, h2, h3, h4, h5, h6, p, a, ul, li, nav, header, section{
+//         color: var(--white) !important;
+//         background: var(--black) !important;
+//     }
+//     background: var(--black) !important;
+//     color: var(--white) !important;
+// }
 .text{
     padding: $lg-pd;
     line-height: 40px;
@@ -18,6 +30,7 @@
         font-size: $fs-md;
         color: $brown;
         font-weight: bold;
+        text-transform: $capitalize;
     }
 }
 .scale-enter{
@@ -53,6 +66,6 @@
 }
 @media screen and (max-width: 768px) {
     .text{
-        padding: $md-pd 15px;
+        padding: $md-pd 0px;
     }
 }
