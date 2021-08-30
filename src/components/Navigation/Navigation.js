@@ -1,8 +1,6 @@
 import React, { useState } from "react";
 import { NavLink } from "react-router-dom";
 import styles from "./Navigation.module.scss";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faAngleDown } from "@fortawesome/free-solid-svg-icons";
 import logo from "../image/logo.png";
 import Hamburger from "../hamburger/Hamburger";
 import { useDispatch, useSelector } from "react-redux";
@@ -12,8 +10,11 @@ import Overlay from "../overlay/Overlay";
 import LayoutList from "../layout/LayoutList";
 import Thumb from "../Thumb/Thumb";
 import { Button } from "@material-ui/core";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faSearch, faShoppingCart, faAngleDown} from "@fortawesome/free-solid-svg-icons";
+import {faUser, faHeart, } from '@fortawesome/free-regular-svg-icons'
 const dataToolTip = ["Search", "Account", "WishList", "Cart"];
-const Icon = ["fa-search", 'fa-user', "fa-star",  "fa-shopping-cart"];
+const Icon = [faSearch, faUser, faHeart, faShoppingCart];
 const nestedPath = [
   {
     path: "indoor",
@@ -54,7 +55,7 @@ const Navigation = ({ isDowned }) => {
             >
               <NavLink to="/" activeClassName={styles.active} exact>
                 <li>Home</li>
-                <FontAwesomeIcon icon={faAngleDown} />
+                
               </NavLink>
             </div>
             <div
@@ -62,7 +63,6 @@ const Navigation = ({ isDowned }) => {
             >
               <NavLink to="/shop" activeClassName={styles.active}>
                 <li>Shop</li>
-                <FontAwesomeIcon icon={faAngleDown} />
               </NavLink>
             </div>
             <div
@@ -70,7 +70,7 @@ const Navigation = ({ isDowned }) => {
             >
               <p onClick={setShowedUpHandler} className={`${styles.row}`}>
                 <li>Products</li>
-                <FontAwesomeIcon icon={faAngleDown} />
+                <FontAwesomeIcon icon={faAngleDown}/>
               </p>
               <LayoutList isClicked={showedUp} setBack={setShowedUpHandler}>
                 <div className={styles["list__inside"]}>
@@ -89,7 +89,6 @@ const Navigation = ({ isDowned }) => {
             >
               <NavLink to="/blogs" activeClassName={styles.active}>
                 <li>Blogs</li>
-                <FontAwesomeIcon icon={faAngleDown} />
               </NavLink>
             </div>
             <div className={styles["signin__btn"]}>
@@ -105,14 +104,14 @@ const Navigation = ({ isDowned }) => {
                     onClick={() => dispatch(hamburgerActions.searchSlide())}
                     key={index}
                   >
-                    <i className={`far ${items}`}></i>
+                    <FontAwesomeIcon icon={items}/>
                     <Thumb className={styles.tooltip}>Search</Thumb>
                   </li>
                 );
               }
               return (
                 <li key={index}>
-                  <i className={`far ${items}`}></i>
+                  <FontAwesomeIcon icon={items}/>
                   <Thumb className={styles.tooltip}>{dataToolTip[index]}</Thumb>
                 </li>
               );

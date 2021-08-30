@@ -2,7 +2,6 @@ import React from "react";
 import { Button } from "@material-ui/core";
 import LineSale from "../../LineSale/LineSale";
 import styles from "./Sale.module.scss";
-
 const DUMMY_LIST = [
   {
     name: "PEPEROMIA OBTUSIFOLIA",

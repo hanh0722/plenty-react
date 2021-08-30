@@ -1,39 +1,49 @@
-import React, {useEffect, useState} from 'react';
-import Navigation from './components/Navigation/Navigation';
-import 'bootstrap/dist/css/bootstrap.min.css';
-import SearchBar from './components/SearchBar/SearchBar';
-import { useSelector } from 'react-redux';
-import { Route, Switch } from 'react-router-dom';
-import Index from './components/views';
-import './components/styles/styles.scss';
+import React, { useEffect, useState } from "react";
+import Navigation from "./components/Navigation/Navigation";
+import "bootstrap/dist/css/bootstrap.min.css";
+import SearchBar from "./components/SearchBar/SearchBar";
+import { useSelector, useDispatch } from "react-redux";
+import { Route, Switch } from "react-router-dom";
+import Index from "./components/views";
+import "./components/styles/styles.scss";
+import ButtonTop from "./components/ButtonTop/ButtonTop";
+import { buttonTopActions } from "./components/store/button-top";
 const App = () => {
   const [navigation, setNavigation] = useState(false);
-  const state = useSelector(state => state.hamburger.isShowed);
-
-  useEffect(() =>{
+  const state = useSelector((state) => state.hamburger.isShowed);
+  const dispatch = useDispatch();
+  useEffect(() => {
     let oldValue = 0;
     let newValue = 0;
-    const getScrollHandler = () =>{
+    const getScrollHandler = () => {
       newValue = window.pageYOffset;
-
-      if(oldValue < newValue){
-        setNavigation(true)
+      if (newValue > 50) {
+        dispatch(buttonTopActions.setVisibleHandler());
+      } else {
+        dispatch(buttonTopActions.setHiddenHandler());
+      }
+      if (oldValue < newValue) {
+        setNavigation(true);
       } else {
         setNavigation(false);
       }
       oldValue = newValue;
-    }
-    window.addEventListener('scroll', getScrollHandler);
-  }, [])
+    };
+    window.addEventListener("scroll", getScrollHandler);
+  }, [dispatch]);
+  const upToTopHandler = () => {
+    window.scrollTo(0, 0);
+  };
   return (
     <>
-      <Navigation isDowned={navigation}/>
-      <SearchBar isShowed={state}/>
+      <Navigation isDowned={navigation} />
+      <SearchBar isShowed={state} />
+      <ButtonTop onClick={upToTopHandler} />
       <Switch>
-        <Route path='/' exact component={Index}/>
+        <Route path="/" exact component={Index} />
       </Switch>
     </>
   );
-}
+};
 
 export default App;
