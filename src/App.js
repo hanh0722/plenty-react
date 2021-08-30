@@ -8,6 +8,7 @@ import Index from "./components/views";
 import "./components/styles/styles.scss";
 import ButtonTop from "./components/ButtonTop/ButtonTop";
 import { buttonTopActions } from "./components/store/button-top";
+import Footer from "./components/Footer/Footer";
 const App = () => {
   const [navigation, setNavigation] = useState(false);
   const state = useSelector((state) => state.hamburger.isShowed);
@@ -42,6 +43,7 @@ const App = () => {
       <Switch>
         <Route path="/" exact component={Index} />
       </Switch>
+      <Footer/>
     </>
   );
 };
