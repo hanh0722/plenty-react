@@ -3,6 +3,7 @@
 .text{
     padding: $lg-pd;
     line-height: 40px;
+    z-index: 2;
     .thumb{
         padding: 5px;
         border-radius: 5px;
@@ -21,7 +22,7 @@
     }
     a{
         text-decoration: none;
-        color: $black;
+        color: var(--black);
         font-weight: bold;
         padding: $sm-pd 0px;
         position: relative;
@@ -44,7 +45,7 @@
             height: 100%;
             z-index: -1;
             opacity: 0;
-            background: $brown;
+            background: var(--btn-hover);
             transition: all .5s;
         }
         &::after{
@@ -89,7 +90,7 @@
         position: absolute;
         top: 50%;
         left: calc(50% + 20px);
-        transform: translate(-50%, -50%);
+        transform: translate(-50%, -50%) !important;
         color: $white;
         a{
             color: $white;

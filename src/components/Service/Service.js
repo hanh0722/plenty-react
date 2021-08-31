@@ -9,13 +9,13 @@ const Service = () => {
   return (
     <Content>
       <div className={`text text-center ${styles["row__bg"]}`}>
-        <div className={styles.text}>
+        <div data-aos='fade-up' className={styles.text}>
           <h4>Over 10 years with tree care services in the US</h4>
           <h2>Experience Our Services</h2>
         </div>
       </div>
       <div className={`d-flex justify-content-evenly ${styles.blocks}`}>
-        <BlockService>
+        <BlockService data-aos='zoom-in-up'>
           <div className={styles["block-introduction"]}>
             <h5>Basic</h5>
             <FontAwesomeIcon icon={faTree} />
@@ -36,7 +36,7 @@ const Service = () => {
             <Button variant='contained'>Upgrade</Button>
           </div>
         </BlockService>
-        <BlockService>
+        <BlockService data-aos='zoom-in-up'>
           <div className={styles["block-introduction"]}>
             <h5>Advanced</h5>
             <FontAwesomeIcon icon={faWind} />

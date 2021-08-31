@@ -9,11 +9,19 @@ import "./components/styles/styles.scss";
 import ButtonTop from "./components/ButtonTop/ButtonTop";
 import { buttonTopActions } from "./components/store/button-top";
 import Footer from "./components/Footer/Footer";
+import Aos from "aos";
+import 'aos/dist/aos.css';
 const App = () => {
   const [navigation, setNavigation] = useState(false);
   const state = useSelector((state) => state.hamburger.isShowed);
   const dispatch = useDispatch();
   useEffect(() => {
+    Aos.init({
+      once: true,
+      duration: 1200,
+      offset: 250,
+      delay: 600
+    })
     let oldValue = 0;
     let newValue = 0;
     const getScrollHandler = () => {
@@ -43,7 +51,7 @@ const App = () => {
       <Switch>
         <Route path="/" exact component={Index} />
       </Switch>
-      <Footer/>
+      <Footer />
     </>
   );
 };
