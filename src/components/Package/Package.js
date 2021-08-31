@@ -18,10 +18,10 @@ const Package = () => {
     <Content>
       <Container>
         <Row className={`justify-content-between align-items-center`}>
-          <Col xs={12} sm={12} md={6} lg={6}>
+          <Col data-aos='fade-right' xs={12} sm={12} md={6} lg={6}>
             <Sale />
           </Col>
-          <Col xs={12} sm={12} md={6} lg={6}>
+          <Col data-aos='fade-right' xs={12} sm={12} md={6} lg={6}>
             <BannerImages className={styles.banner}>
               <div style={{ position: "relative" }}>
                 <img src={p1} alt="banner-3" />

@@ -8,7 +8,7 @@
     position: fixed;
     width: 100%;
     height: 70px;
-    background: $white;
+    background: var(--white);
     z-index: 10;
     .logo{
         width: 100px;
@@ -52,11 +52,12 @@
     }
     .child{
         text-decoration: none;
-        color: $black !important;
+        color: var(--black) !important;
         padding: .75rem .75rem .75rem 0;
         position: $rl;
         margin: 0 $sm-mg;
         font-size: $fs-sm;
+        cursor: pointer;
         &:before{
             position: $ab;
             left: 0;
@@ -76,7 +77,7 @@
     }
     a{
         text-decoration: none !important;
-        color: $black;
+        color: var(--black);
         transition: all .5s;
         &:hover{
             color: $green;
@@ -90,9 +91,10 @@
             transform: translateY(-50%);
             font-size: 12px;
         }
+        padding-left: 40px;
     }
     .active{
-        color: $green !important;
+        color: var(--active);
     }
     .list__inside{
         &::before{
@@ -117,6 +119,7 @@
         transform: translateY(20%);
         opacity: 0;
         z-index: -5;
+        pointer-events: none;
         visibility: hidden;
         a{
             margin: 0;
@@ -126,6 +129,7 @@
                     display: none;
                 }
             }
+            color: $black;
         }
         box-shadow: $sm-shadow;
     }
@@ -136,31 +140,42 @@
                 opacity: 1;
                 z-index: 4;
                 visibility: visible;
+                pointer-events: visible;
             }
         }
     }
-    .signin__btn{
-        display: none;
+    .btn__mb, .signin__btn{
+        display: none !important;
     }
 }
 @media screen and (max-width: 991px){
     .nav{
         height: 60px;
         padding: 0px 30px;
+        .btn__mb{
+            display: block !important;
+            position: $ab;
+            top: 10px;
+            right: 10px;
+        }
         .items{
             position: $ab;
             top: 100%;
             flex-direction: column;
             height: calc(100vh - 55px);
-            transition: all .8s ease-in-out;
+            transition: all .5s ease-in-out;
             left: 0;
-            padding: $sm-pd $lg-pd;
+            padding: $lg-pd;
             box-shadow: $sm-shadow;
             transform: translateX(-100%);
             z-index: 5;
             background: $white;
             width: 50%;
             overflow-x: hidden;
+            background: var(--white);
+        }
+        .btn__main{
+            display: none !important;
         }
         .back{
             transform: translateX(0%);
@@ -191,16 +206,33 @@
             transform: translateY(0%);
             box-shadow: none;
             padding: $sm-pd $md-pd 8px 0;
+            background: var(--white);
+            color: var(--black);
             &::before{
                 display: none;
             }
             a{
                 padding: $sm-pd $md-pd 8px $md-pd;
+                color: var(--black);
+            }
+        }
+        .signin__btn{
+            display: block !important;
+            button{
+                width: 100%;
+                &:first-child{
+                    background: $brown !important;
+                    color: $white !important;
+                }
             }
         }
         ul{
             padding: 0;
         }
+    }
+    .register{
+        border-color: var(--black);
+        color: var(--black);
     }
     .icons{
         li{
@@ -210,16 +242,6 @@
             padding: 0 !important;
             &:nth-child(4){
                 padding-left: 15px !important;
-            }
-        }
-    }
-    .signin__btn{
-        display: block !important;
-        button{
-            width: 100%;
-            &:first-child{
-                background: $brown !important;
-                color: $white !important;
             }
         }
     }

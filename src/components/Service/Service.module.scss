@@ -1,6 +1,6 @@
 @import '../constant/variable';
 .row__bg{
-    background: linear-gradient(135deg, #CB905E, #D08A47 35%, #db995c 55%);
+    background: linear-gradient(135deg, var(--brown-light), var(--brown-dark) 35%, var(--brown-darker) 55%);
     color: $white;
     h4{
         color: rgba($color: $white, $alpha: .85) !important;
@@ -31,7 +31,7 @@
         background: $brown;
         color: $white;
         &:hover{
-            background: #D08A47;
+            background: var(--color-button);
         }
     }
 }
@@ -45,7 +45,7 @@
 }
 .cons{
     padding: 0;
-    color: gray;
+    color: var(--gray);
     text-decoration: line-through;
 }
 @media screen and (max-width: 768px) {

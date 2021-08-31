@@ -1,7 +1,9 @@
-import React from "react";
+import React, {useContext} from "react";
 import styles from "./Footer.module.scss";
 import logo from "../image/logo.png";
+import logoDarkTheme from '../image/logo-dark.png';
 import { Link } from "react-router-dom";
+import { DarkModeContext } from "../darkmode-context/darkmode-content";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faFacebook,
@@ -19,12 +21,13 @@ const informationList = [
 
 const iconsSocial = [faFacebook, faTwitter, faInstagram];
 const Footer = () => {
+  const DarkModeCtx = useContext(DarkModeContext);
   return (
     <footer className={styles["layout-ft"]}>
       <div className={styles.footer}>
         <div className={styles["list__items"]}>
           <div className={styles.logo}>
-            <img src={logo} alt="logo" />
+            <img src={DarkModeCtx.dark ? logoDarkTheme : logo} alt="logo" />
           </div>
           <div className={styles["first__list"]}>
             <h4>Don't miss a thing</h4>

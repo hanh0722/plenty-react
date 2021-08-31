@@ -4,7 +4,7 @@ import { Col } from "react-bootstrap";
 import BannerImages from "../layout/Banner-images/BannerImages";
 const Banner = () => {
   return (
-    <Col xs={12} sm={12} md={6} lg={6}>
+    <Col data-aos='fade-left' xs={12} sm={12} md={6} lg={6}>
       <BannerImages>
         <img src={banner} alt="banner" />
       </BannerImages>

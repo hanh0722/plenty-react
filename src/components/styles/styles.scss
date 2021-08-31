@@ -1,19 +1,31 @@
 @import '../constant/variable';
-
-
 :root{
     --black: #000000;
     --white: #fff;
-    --beigh: #fbf5ef
+    --beigh: #fbf5ef;
+    --brown-light: #CB905E;
+    --brown-dark: #D08A47;
+    --brown-darker: #db995c;
+    --gray: #ccc;
+    --color-button: #cd783e;
+    --block-bg: #fff;
+    --icon-dark: #D2A830;
+    --btn-hover: #cd783e;
+    --active: #0BAF57;
 }
-// .dark{
-//     h1, h2, h3, h4, h5, h6, p, a, ul, li, nav, header, section{
-//         color: var(--white) !important;
-//         background: var(--black) !important;
-//     }
-//     background: var(--black) !important;
-//     color: var(--white) !important;
-// }
+body[data-theme='dark']{
+    color: var(--black);
+    background: var(--white);
+    --black: #fff;
+    --white: #000000;
+    --beigh: #000;
+    --brown-light: #33363b;
+    --brown-dark: #33363b;
+    --brown-darker: #33363b;
+    --gray: #fff;
+    --block-bg: #33363b;
+    --icon-dark: #fff;
+}
 .text{
     padding: $lg-pd;
     line-height: 40px;
@@ -24,7 +36,7 @@
     }
     a{
         text-decoration: none;
-        color: $black;
+        color: var(--black);
         font-weight: bold;
         padding: $md-pd 0;
         position: relative;

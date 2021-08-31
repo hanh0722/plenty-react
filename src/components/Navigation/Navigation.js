@@ -1,7 +1,8 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import { NavLink } from "react-router-dom";
 import styles from "./Navigation.module.scss";
 import logo from "../image/logo.png";
+import logoDarkTheme from '../image/logo-dark.png';
 import Hamburger from "../hamburger/Hamburger";
 import { useDispatch, useSelector } from "react-redux";
 import { hamburgerActions } from "../store/hamburgerSlice";
@@ -13,6 +14,8 @@ import { Button } from "@material-ui/core";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faSearch, faShoppingCart, faAngleDown} from "@fortawesome/free-solid-svg-icons";
 import {faUser, faHeart, } from '@fortawesome/free-regular-svg-icons'
+import DarkModeBtn from "../DarkModeBtn/DarkModeBtn";
+import { DarkModeContext } from "../darkmode-context/darkmode-content";
 const dataToolTip = ["Search", "Account", "WishList", "Cart"];
 const Icon = [faSearch, faUser, faHeart, faShoppingCart];
 const nestedPath = [
@@ -24,6 +27,7 @@ const nestedPath = [
   { path: "herbs-veggies", name: "Herb + Veggies" },
 ];
 const Navigation = ({ isDowned }) => {
+  const DarkModeCtx = useContext(DarkModeContext);
   const [showedUp, setShowedUp] = useState(false);
   const dispatch = useDispatch();
   const clickHandler = () => {
@@ -45,7 +49,7 @@ const Navigation = ({ isDowned }) => {
           <div className={styles.logo}>
             <NavLink activeClassName={styles.active} to="/">
               <li>
-                <img src={logo} alt="logo" />
+                <img src={ DarkModeCtx.dark ? logoDarkTheme : logo} alt="logo" />
               </li>
             </NavLink>
           </div>
@@ -93,8 +97,9 @@ const Navigation = ({ isDowned }) => {
             </div>
             <div className={styles["signin__btn"]}>
               <Button className='mt-3 mb-3' variant="contained">Log in</Button>
-              <Button variant="outlined">Register</Button>
+              <Button className={styles.register} variant="outlined">Register</Button>
             </div>
+            <DarkModeBtn className={styles['btn__mb']}/>
           </header>
           <div className={styles.icons}>
             {Icon.map((items, index) => {
@@ -116,6 +121,7 @@ const Navigation = ({ isDowned }) => {
                 </li>
               );
             })}
+            <DarkModeBtn className={styles['btn__main']}/>
           </div>
         </ul>
       </nav>
