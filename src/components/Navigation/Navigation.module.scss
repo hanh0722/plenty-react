@@ -78,7 +78,6 @@
     a{
         text-decoration: none !important;
         color: var(--black);
-        transition: all .5s;
         &:hover{
             color: $green;
         }
@@ -152,6 +151,7 @@
     .nav{
         height: 60px;
         padding: 0px 30px;
+        z-index: 15;
         .btn__mb{
             display: block !important;
             position: $ab;
@@ -159,7 +159,7 @@
             right: 10px;
         }
         .items{
-            position: $ab;
+            position: fixed;
             top: 100%;
             flex-direction: column;
             height: calc(100vh - 55px);
@@ -168,7 +168,7 @@
             padding: $lg-pd;
             box-shadow: $sm-shadow;
             transform: translateX(-100%);
-            z-index: 5;
+            z-index: 13;
             background: $white;
             width: 50%;
             overflow-x: hidden;

@@ -79,7 +79,7 @@ const SearchBar = ({ isShowed }) => {
                 {renderListItems.length > 0 && (
                   <>
                     <p className="text-center pt-3">
-                      <span style={{ color: "gray", fontSize: '16px'}}>
+                      <span className={styles.title}>
                         Found {renderListItems.length} results for:
                       </span>{" "}
                       "{value}"
@@ -95,6 +95,7 @@ const SearchBar = ({ isShowed }) => {
                                 price={product.price}
                                 name={product.name}
                                 imageUrl={product.imageUrl}
+                                id={product.id}
                               />
                             );
                           }

@@ -12,6 +12,11 @@
     --icon-dark: #D2A830;
     --btn-hover: #cd783e;
     --active: #0BAF57;
+    --border-color: #ddd;
+    --btn-quantity: #cd783e;
+    --quantity: #f8f8f8;
+    --checkout-bg: #f7f7f7;
+    --search-bg: #fff;
 }
 body[data-theme='dark']{
     color: var(--black);
@@ -25,6 +30,9 @@ body[data-theme='dark']{
     --gray: #fff;
     --block-bg: #33363b;
     --icon-dark: #fff;
+    --btn-quantity: #fff;
+    --checkout-bg: #33363b;
+    --search-bg: #33363b;
 }
 .text{
     padding: $lg-pd;
