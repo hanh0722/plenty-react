@@ -2,7 +2,7 @@ import React, { useState, useContext } from "react";
 import { NavLink } from "react-router-dom";
 import styles from "./Navigation.module.scss";
 import logo from "../image/logo.png";
-import logoDarkTheme from '../image/logo-dark.png';
+import logoDarkTheme from "../image/logo-dark.png";
 import Hamburger from "../hamburger/Hamburger";
 import { useDispatch, useSelector } from "react-redux";
 import { hamburgerActions } from "../store/hamburgerSlice";
@@ -12,8 +12,12 @@ import LayoutList from "../layout/LayoutList";
 import Thumb from "../Thumb/Thumb";
 import { Button } from "@material-ui/core";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faSearch, faShoppingCart, faAngleDown} from "@fortawesome/free-solid-svg-icons";
-import {faUser, faHeart, } from '@fortawesome/free-regular-svg-icons'
+import {
+  faSearch,
+  faShoppingCart,
+  faAngleDown,
+} from "@fortawesome/free-solid-svg-icons";
+import { faUser, faHeart } from "@fortawesome/free-regular-svg-icons";
 import DarkModeBtn from "../DarkModeBtn/DarkModeBtn";
 import { DarkModeContext } from "../darkmode-context/darkmode-content";
 const dataToolTip = ["Search", "Account", "WishList", "Cart"];
@@ -26,7 +30,7 @@ const nestedPath = [
   { path: "outdoor", name: "Outdoor Plans" },
   { path: "herbs-veggies", name: "Herb + Veggies" },
 ];
-const Navigation = ({ isDowned }) => {
+const Navigation = ({ isDowned, showCart }) => {
   const DarkModeCtx = useContext(DarkModeContext);
   const [showedUp, setShowedUp] = useState(false);
   const dispatch = useDispatch();
@@ -49,7 +53,7 @@ const Navigation = ({ isDowned }) => {
           <div className={styles.logo}>
             <NavLink activeClassName={styles.active} to="/">
               <li>
-                <img src={ DarkModeCtx.dark ? logoDarkTheme : logo} alt="logo" />
+                <img src={DarkModeCtx.dark ? logoDarkTheme : logo} alt="logo" />
               </li>
             </NavLink>
           </div>
@@ -59,7 +63,6 @@ const Navigation = ({ isDowned }) => {
             >
               <NavLink to="/" activeClassName={styles.active} exact>
                 <li>Home</li>
-                
               </NavLink>
             </div>
             <div
@@ -74,7 +77,7 @@ const Navigation = ({ isDowned }) => {
             >
               <p onClick={setShowedUpHandler} className={`${styles.row}`}>
                 <li>Products</li>
-                <FontAwesomeIcon icon={faAngleDown}/>
+                <FontAwesomeIcon icon={faAngleDown} />
               </p>
               <LayoutList isClicked={showedUp} setBack={setShowedUpHandler}>
                 <div className={styles["list__inside"]}>
@@ -96,10 +99,14 @@ const Navigation = ({ isDowned }) => {
               </NavLink>
             </div>
             <div className={styles["signin__btn"]}>
-              <Button className='mt-3 mb-3' variant="contained">Log in</Button>
-              <Button className={styles.register} variant="outlined">Register</Button>
+              <Button className="mt-3 mb-3" variant="contained">
+                Log in
+              </Button>
+              <Button className={styles.register} variant="outlined">
+                Register
+              </Button>
             </div>
-            <DarkModeBtn className={styles['btn__mb']}/>
+            <DarkModeBtn className={styles["btn__mb"]} />
           </header>
           <div className={styles.icons}>
             {Icon.map((items, index) => {
@@ -109,19 +116,29 @@ const Navigation = ({ isDowned }) => {
                     onClick={() => dispatch(hamburgerActions.searchSlide())}
                     key={index}
                   >
-                    <FontAwesomeIcon icon={items}/>
+                    <FontAwesomeIcon icon={items} />
                     <Thumb className={styles.tooltip}>Search</Thumb>
+                  </li>
+                );
+              }
+              if (index === 3) {
+                return (
+                  <li onClick={showCart} key={index}>
+                    <FontAwesomeIcon icon={items} />
+                    <Thumb className={styles.tooltip}>
+                      {dataToolTip[index]}
+                    </Thumb>
                   </li>
                 );
               }
               return (
                 <li key={index}>
-                  <FontAwesomeIcon icon={items}/>
+                  <FontAwesomeIcon icon={items} />
                   <Thumb className={styles.tooltip}>{dataToolTip[index]}</Thumb>
                 </li>
               );
             })}
-            <DarkModeBtn className={styles['btn__main']}/>
+            <DarkModeBtn className={styles["btn__main"]} />
           </div>
         </ul>
       </nav>

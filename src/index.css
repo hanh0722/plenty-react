@@ -45,7 +45,7 @@ a{
   color: white !important;
 }
 .error__text span{
-  color: black;
+  color: var(--black);
   font-weight: bold;
 }
 .error__input{

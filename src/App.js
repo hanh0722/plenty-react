@@ -5,6 +5,7 @@ import SearchBar from "./components/SearchBar/SearchBar";
 import { useSelector, useDispatch } from "react-redux";
 import { Route, Switch } from "react-router-dom";
 import Index from "./components/views";
+import CartMain from "./components/CartMain/CartMain";
 import "./components/styles/styles.scss";
 import ButtonTop from "./components/ButtonTop/ButtonTop";
 import { buttonTopActions } from "./components/store/button-top";
@@ -13,6 +14,7 @@ import Aos from "aos";
 import 'aos/dist/aos.css';
 const App = () => {
   const [navigation, setNavigation] = useState(false);
+  const [cartBasic, setCartBasic] = useState(false);
   const state = useSelector((state) => state.hamburger.isShowed);
   const dispatch = useDispatch();
   useEffect(() => {
@@ -31,7 +33,7 @@ const App = () => {
       } else {
         dispatch(buttonTopActions.setHiddenHandler());
       }
-      if (oldValue < newValue) {
+      if (oldValue < newValue && newValue > 50) {
         setNavigation(true);
       } else {
         setNavigation(false);
@@ -43,11 +45,15 @@ const App = () => {
   const upToTopHandler = () => {
     window.scrollTo(0, 0);
   };
+  const setCartBasicHandler = () => {
+    setCartBasic(prevState => !prevState);
+  }
   return (
     <>
-      <Navigation isDowned={navigation} />
+      <Navigation showCart={setCartBasicHandler} isDowned={navigation} />
       <SearchBar isShowed={state} />
       <ButtonTop onClick={upToTopHandler} />
+      <CartMain showCart={cartBasic} removeCart={setCartBasicHandler} />
       <Switch>
         <Route path="/" exact component={Index} />
       </Switch>

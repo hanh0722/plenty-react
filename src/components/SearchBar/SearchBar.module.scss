@@ -1,11 +1,10 @@
 @import '../constant/variable';
 .container{
-    z-index: 10;
+    z-index: 15;
     position: fixed;
     top: 0;
     width: 100%;
-    background: $white;
-    color: $black;
+    background: var(--search-bg);
 }
 .row{
     padding-bottom: $md-pd;
@@ -20,6 +19,9 @@
 }
 .flow__items{
     overflow-x: hidden;
+}
+.title{
+    font-size: $fs-sm;
 }
 @media screen and (max-width: 991px) {
     .items{
