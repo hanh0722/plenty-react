@@ -1,0 +1,8 @@
+@import '../constant/variable';
+.box{
+    padding: $md-pd;
+    input{
+        width: 100%;
+        padding: 6px 16px;
+    }
+}

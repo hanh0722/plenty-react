@@ -17,6 +17,8 @@
     --quantity: #f8f8f8;
     --checkout-bg: #f7f7f7;
     --search-bg: #fff;
+    --btn-slider: transparent;
+    --bullet-pagination: #000;
 }
 body[data-theme='dark']{
     color: var(--black);
@@ -33,6 +35,8 @@ body[data-theme='dark']{
     --btn-quantity: #fff;
     --checkout-bg: #33363b;
     --search-bg: #33363b;
+    --btn-slider: rgb(231, 218, 218);
+    --bullet-pagination: #ffffff;
 }
 .text{
     padding: $lg-pd;
@@ -73,6 +77,60 @@ body[data-theme='dark']{
     opacity: 0;
     transform: scale(.65) translateY(20%);
     transition: all .5s;
+}
+.swiper-container{
+    &:hover{
+        .swiper-button-prev{
+            transform: translateX(15%) !important;
+        }
+        .swiper-button-next{
+            transform: translate(-15%) !important;
+        }
+    }
+}
+.swiper-button-next, .swiper-button-prev{
+    width: 40px;
+    height: 40px;
+    &::after{
+        font-size: 20px;
+        color: #cd783e;
+        font-weight: bold;
+    }
+    &:hover{
+        background: #cd783e;
+        &::after{
+            color: $white;
+        }
+    }
+    background: rgba($color: white, $alpha: .7);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 50%;
+    transition: all .3s;
+}
+.swiper-pagination{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.swiper-pagination-bullet{
+    background: var(--bullet-pagination) !important;
+}
+.swiper-pagination-bullet-active{
+    background: var(--btn-slider) !important;
+    border: 3px solid var(--black);
+    width: 12px !important;
+    height: 12px !important;
+    animation: active-pagination .35s forwards;
+}
+@keyframes active-pagination {
+    0%{
+        opacity: 0;
+    }
+    100%{
+        opacity: 1;
+    }
 }
 @media screen and (max-width: 1200px) {
     .text{
