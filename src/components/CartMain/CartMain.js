@@ -6,6 +6,7 @@ import Item from "./Item/Item";
 import Overlay from "../overlay/Overlay";
 import ReactDOM from "react-dom";
 import { useSelector } from "react-redux";
+import ApplyVoucher from "../ApplyVoucher/ApplyVoucher";
 const CartMain = ({ showCart, removeCart }) => {
   const cart = useSelector((state) => state.cart.cart);
   return (
@@ -72,6 +73,7 @@ const CartMain = ({ showCart, removeCart }) => {
             </Button>
           </div>
         </div>
+        <ApplyVoucher/>
       </div>
       {showCart &&
         ReactDOM.createPortal(
