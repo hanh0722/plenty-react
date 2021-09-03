@@ -3,17 +3,38 @@ import styles from "./Slide.module.scss";
 import { Link } from "react-router-dom";
 import { faStar, faEye } from "@fortawesome/free-regular-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-const Slide = ({ imageUrl, name, price, type }) => {
+import { faCartPlus } from "@fortawesome/free-solid-svg-icons";
+import { CartActions } from "../../store/cart";
+import { useDispatch } from "react-redux";
+import { ProductActions } from "../../store/Product";
+const Slide = ({ imageUrl, name, price, type, id }) => {
+  const dispatch = useDispatch();
   return (
     <div className={styles.item}>
       <div className={styles.image}>
-        <img src={imageUrl} alt="" />
+        <Link to='/'><img src={imageUrl} alt="" /></Link>
         <div className={styles["options-image"]}>
           <p>
             <FontAwesomeIcon icon={faStar} />
           </p>
-          <p>
+          <p onClick={() => dispatch(ProductActions.setIdProduct(id))} className={styles.watch}>
             <FontAwesomeIcon icon={faEye} />
+          </p>
+          <p>
+            <FontAwesomeIcon
+              onClick={() =>
+                dispatch(
+                  CartActions.addToCartHandler({
+                    imageUrl,
+                    name,
+                    price,
+                    type,
+                    id,
+                  })
+                )
+              }
+              icon={faCartPlus}
+            />
           </p>
         </div>
       </div>
