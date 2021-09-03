@@ -34,3 +34,12 @@
     }
     padding-bottom: 20px;
 }
+@media screen and (max-width: 576px) {
+    .options{
+        flex-direction: column;
+        padding-left: 0;
+        li{
+            margin-bottom: 15px;
+        }
+    }
+}

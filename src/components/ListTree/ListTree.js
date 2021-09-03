@@ -1,4 +1,4 @@
-import React, {useCallback, useEffect, useState} from "react";
+import React, { useCallback, useEffect, useState } from "react";
 import Container from "../layout/container/Container";
 import Content from "../layout/Content/Content";
 import { Swiper, SwiperSlide } from "swiper/react";
@@ -6,42 +6,60 @@ import "swiper/swiper-bundle.min.css";
 import "swiper/components/navigation/navigation.min.css";
 import "swiper/components/pagination/pagination.min.css";
 import SwiperCore, { Navigation, Pagination } from "swiper/core";
-import styles from './ListTree.module.scss';
+import styles from "./ListTree.module.scss";
 import Slide from "./Slide/Slide";
-import DUMMY_DATA from '../DummyData/DUMMY_DATA';
+import DUMMY_DATA from "../DummyData/DUMMY_DATA";
 SwiperCore.use([Navigation, Pagination]);
 
 const ListTree = () => {
   const [slide, setSlide] = useState([]);
-  const [type, setType] = useState('indoor');
+  const [type, setType] = useState("indoor");
   const [filterList, setFilterList] = useState([]);
-  const filterListItem = useCallback((type) => {
-    const newValue = slide.filter(item => {
-      return item.type === type;
-    })
-    return newValue;
-  }, [slide])
+  const filterListItem = useCallback(
+    (type) => {
+      const newValue = slide.filter((item) => {
+        return item.type === type;
+      });
+      return newValue;
+    },
+    [slide]
+  );
   useEffect(() => {
     // fake data
     // fetch ... .then()
     setTimeout(() => {
       setSlide(DUMMY_DATA);
       setFilterList(DUMMY_DATA);
-    }, 1000)
-  }, [])
+    }, 1000);
+  }, []);
 
   useEffect(() => {
     const newList = filterListItem(type);
     setFilterList(newList);
-  }, [filterListItem, type])
+  }, [filterListItem, type]);
   return (
     <Content>
       <Container>
         <h3 className={`text-center ${styles.title}`}>Perfect Plants</h3>
         <ul className={styles.options}>
-          <li className={type === 'indoor' ? styles.active : ''} onClick={() => setType('indoor')}>Indoor plants</li>
-          <li className={type === 'outdoor' ? styles.active : ''} onClick={() => setType('outdoor')}>Outdoor plants</li>
-          <li className={type === 'veggies' ? styles.active : ''} onClick={() => setType('veggies')}>Herbs + Veggies</li>
+          <li
+            className={type === "indoor" ? styles.active : ""}
+            onClick={() => setType("indoor")}
+          >
+            Indoor plants
+          </li>
+          <li
+            className={type === "outdoor" ? styles.active : ""}
+            onClick={() => setType("outdoor")}
+          >
+            Outdoor plants
+          </li>
+          <li
+            className={type === "veggies" ? styles.active : ""}
+            onClick={() => setType("veggies")}
+          >
+            Herbs + Veggies
+          </li>
         </ul>
         <Swiper
           className={styles.swiper}
@@ -70,17 +88,21 @@ const ListTree = () => {
           loop={true}
           navigation
           pagination={{ clickable: true }}
-          grabCursor
           autoplay={{ delay: 5000 }}
         >
-          {filterList.map(product => {
+          {filterList.map((product) => {
             return (
               <SwiperSlide key={product.id}>
-                <Slide name={product.name} price={product.price} imageUrl={product.imageUrl} type={product.type}/>
+                <Slide
+                  name={product.name}
+                  price={product.price}
+                  imageUrl={product.imageUrl}
+                  type={product.type}
+                  id={product.id}
+                />
               </SwiperSlide>
-            )
+            );
           })}
-          
         </Swiper>
       </Container>
     </Content>

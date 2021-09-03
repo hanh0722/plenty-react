@@ -1,0 +1,108 @@
+@import '../constant/variable';
+.view{
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    background: var(--white);
+    transform: translate(-50%, -50%);
+    border-radius: 15px;
+    z-index: 21;
+    .image, .product__info{
+        width: 50%;
+    }
+    .product__info{
+        padding: $md-pd;
+        .content{
+            font-size: $fs-sm;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            display: -webkit-box;
+            -webkit-line-clamp: 2; /* number of lines to show */
+            -webkit-box-orient: vertical;
+            margin: 20px 0 !important;
+        }
+    }
+    a{
+        text-decoration: none;
+        color: var(--black);
+        font-size: $fs-lg;
+        font-weight: bold;
+        margin-bottom: 10px;
+        display: block;
+    }
+    .type{
+        font-size: $fs-sm;
+    }
+    display: flex;
+    justify-content: space-between;
+    img{
+        width: 100%;
+        height: auto;
+        border-top-left-radius: 15px;
+        border-bottom-left-radius: 15px;
+    }
+    width: 50%;
+    button{
+        background: var(--color-button);
+        color: $white;
+    }
+}
+.quantity{
+    div{
+        width: 30px;
+        height: 30px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        &:first-child{
+            border-right: 1px solid #ddd;
+        }
+        &:last-child{
+            border-left: 1px solid #ddd;
+        }
+    }
+    border: 1px solid #ddd;
+    input{
+        border: none;
+        text-align: center;
+        padding: 5px;
+        &:focus{
+            outline: none;
+        }
+        font-size: $fs-sm;
+    }
+}
+@media screen and (max-width: 1191px) {
+    .view{
+        width: 75%;
+        .image{
+            width: 40%;
+        }
+        .product__info{
+            width: 60%;
+        }
+    }
+}
+@media screen and (max-width: 992px) {
+    .view{
+        .product__info{
+            .content{
+                margin: 10px 0 !important;
+            }
+        }
+    }
+}
+@media screen and (max-width: 768px) {
+    .view{
+        width: 90%;
+        .product__info{
+            padding: 10px;
+        }
+    }
+}
+@media screen and (max-width: 576px){
+    .view{
+        display: none;
+        pointer-events: none;
+    }
+}
