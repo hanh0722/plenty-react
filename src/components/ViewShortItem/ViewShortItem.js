@@ -40,7 +40,7 @@ const ViewShortItem = () => {
   };
   const addItemToCartHandler = event => {
     event.preventDefault();
-    console.log(quantityItem);
+    
     dispatch(CartActions.addToCartHandler({
       ...valueItem,
       quantity: quantityItem
