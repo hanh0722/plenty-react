@@ -20,6 +20,7 @@ import {
 import { faUser, faHeart } from "@fortawesome/free-regular-svg-icons";
 import DarkModeBtn from "../DarkModeBtn/DarkModeBtn";
 import { DarkModeContext } from "../darkmode-context/darkmode-content";
+import { CartActions } from "../store/cart";
 const dataToolTip = ["Search", "Account", "WishList", "Cart"];
 const Icon = [faSearch, faUser, faHeart, faShoppingCart];
 const nestedPath = [
@@ -30,7 +31,7 @@ const nestedPath = [
   { path: "outdoor", name: "Outdoor Plans" },
   { path: "herbs-veggies", name: "Herb + Veggies" },
 ];
-const Navigation = ({ isDowned, showCart }) => {
+const Navigation = ({ isDowned }) => {
   const DarkModeCtx = useContext(DarkModeContext);
   const [showedUp, setShowedUp] = useState(false);
   const dispatch = useDispatch();
@@ -123,7 +124,7 @@ const Navigation = ({ isDowned, showCart }) => {
               }
               if (index === 3) {
                 return (
-                  <li onClick={showCart} key={index}>
+                  <li onClick={() => dispatch(CartActions.showCartHandler())} key={index}>
                     <FontAwesomeIcon icon={items} />
                     <Thumb className={styles.tooltip}>
                       {dataToolTip[index]}

@@ -12,6 +12,7 @@ import SearchItems from "../SearchItems/SearchItems";
 import { Container, Row } from "react-bootstrap";
 import DUMMY_DATA from "../DummyData/DUMMY_DATA";
 import { Button } from "@material-ui/core";
+
 const SearchBar = ({ isShowed }) => {
   const {
     valid,
@@ -96,6 +97,7 @@ const SearchBar = ({ isShowed }) => {
                                 name={product.name}
                                 imageUrl={product.imageUrl}
                                 id={product.id}
+                                resetHandler={resetHandler}
                               />
                             );
                           }

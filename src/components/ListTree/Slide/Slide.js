@@ -9,6 +9,21 @@ import { useDispatch } from "react-redux";
 import { ProductActions } from "../../store/Product";
 const Slide = ({ imageUrl, name, price, type, id }) => {
   const dispatch = useDispatch();
+  const addToCartHandler = () => {
+    // will only send id when using BE
+    dispatch(CartActions.addToCartHandler({
+      imageUrl,
+      name,
+      price,
+      type,
+      id
+    }))
+    dispatch(CartActions.showCartHandler())
+  }
+  const setIdAndOpenModal = (id) => {
+    dispatch(ProductActions.setIdProduct(id))
+    dispatch(ProductActions.setShowModalHandler());
+  }
   return (
     <div className={styles.item}>
       <div className={styles.image}>
@@ -17,22 +32,12 @@ const Slide = ({ imageUrl, name, price, type, id }) => {
           <p>
             <FontAwesomeIcon icon={faStar} />
           </p>
-          <p onClick={() => dispatch(ProductActions.setIdProduct(id))} className={styles.watch}>
+          <p onClick={() => setIdAndOpenModal(id)} className={styles.watch}>
             <FontAwesomeIcon icon={faEye} />
           </p>
           <p>
             <FontAwesomeIcon
-              onClick={() =>
-                dispatch(
-                  CartActions.addToCartHandler({
-                    imageUrl,
-                    name,
-                    price,
-                    type,
-                    id,
-                  })
-                )
-              }
+              onClick={addToCartHandler}
               icon={faCartPlus}
             />
           </p>
