@@ -27,13 +27,13 @@ const CartSlice = createSlice({
           ...state.cart,
           {
             ...action.payload,
-            quantity: action.payload.quantity ? action.payload.quantity : 1,
+            quantity: action.payload.quantity ? +action.payload.quantity : 1,
           },
         ];
         // add to cart if it doesn't exist
       } else {
         // existed => increase quantity
-        const newCart = helperChangeCart(state.cart, isExisted, 1);
+        const newCart = helperChangeCart(state.cart, isExisted, action.payload.quantity ? +action.payload.quantity : 1);
         state.cart = newCart;
       }
     },
