@@ -30,7 +30,7 @@ const ViewShortItem = () => {
     // mongoDB: find(_id: new mongodb.objectId(id))
   }, [itemId]);
   const changeQuantityHandler = (event) => {
-    setQuantityItem(event.target.value);
+    setQuantityItem(+event.target.value);
   };
   const decreseItemHandler = () => {
     if (quantityItem === 1) {
@@ -40,6 +40,7 @@ const ViewShortItem = () => {
   };
   const addItemToCartHandler = event => {
     event.preventDefault();
+    
     dispatch(CartActions.addToCartHandler({
       ...valueItem,
       quantity: quantityItem
