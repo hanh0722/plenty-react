@@ -1,7 +1,8 @@
 import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
-    idProduct: null
+    idProduct: null,
+    showModel: false
 }
 const ProductSlice = createSlice({
     name: 'product_id',
@@ -12,6 +13,9 @@ const ProductSlice = createSlice({
         },
         removeProduct(state){
             state.idProduct = null
+        },
+        setShowModalHandler(state){
+            state.showModel = !state.showModel
         }
     }
 })

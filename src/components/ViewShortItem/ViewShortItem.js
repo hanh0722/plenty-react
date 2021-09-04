@@ -9,10 +9,12 @@ import Overlay from "../overlay/Overlay";
 import ReactDOM from "react-dom";
 import "../CSSTransition/CSSTransition.scss";
 import { ProductActions } from "../store/Product";
+import { CartActions } from "../store/cart";
 const ViewShortItem = () => {
   const [valueItem, setValueItem] = useState(null);
   const [quantityItem, setQuantityItem] = useState(1);
   const itemId = useSelector((state) => state.product.idProduct);
+  const showModel = useSelector(state => state.product.showModel);
   const dispatch = useDispatch();
   useEffect(() => {
     if (!itemId) {
@@ -22,19 +24,41 @@ const ViewShortItem = () => {
     setTimeout(() => {
       const value = DUMMY_DATA.find((item) => item.id === itemId);
       setValueItem(value);
+      setQuantityItem(1);
     }, 500);
     // find in DB and fetch from server
     // mongoDB: find(_id: new mongodb.objectId(id))
   }, [itemId]);
-  const changeQuantityHandler = event => {
-      setQuantityItem(event.target.value);
+  const changeQuantityHandler = (event) => {
+    setQuantityItem(event.target.value);
+  };
+  const decreseItemHandler = () => {
+    if (quantityItem === 1) {
+      return;
+    }
+    setQuantityItem((prevState) => prevState - 1);
+  };
+  const addItemToCartHandler = event => {
+    event.preventDefault();
+    dispatch(CartActions.addToCartHandler({
+      ...valueItem,
+      quantity: quantityItem
+    }))
+    dispatch(CartActions.showCartHandler())
+    resetHandler();
+  }
+  const resetHandler = () => {
+    dispatch(ProductActions.setShowModalHandler())
+    setTimeout(() => {
+      dispatch(ProductActions.removeProduct())
+    }, 500)
   }
   return (
     //   problem with animation because <div> render nothing in here
     <>
-      <div>
+      <form onSubmit={addItemToCartHandler}>
         <CSSTransition
-          in={valueItem !== null}
+          in={showModel}
           timeout={500}
           unmountOnExit
           mountOnEnter
@@ -49,7 +73,7 @@ const ViewShortItem = () => {
                 <div
                   className={`${styles["product__info"]} d-flex flex-column justify-content-between`}
                 >
-                  <div>
+                  <div className={styles["content__product"]}>
                     <Link to="/">{valueItem.name}</Link>
                     <p>Price: ${valueItem.price}</p>
                     <p className={styles.content}>
@@ -58,27 +82,49 @@ const ViewShortItem = () => {
                     </p>
                     <p className={styles.type}>Style: {valueItem.type}</p>
                   </div>
-                  <div className="d-flex justify-content-between align-items-center">
+                  <div
+                    className={`d-flex justify-content-between align-items-center ${styles.row}`}
+                  >
                     <div
                       className={`${styles.quantity} d-flex justify-content-center align-items-center`}
                     >
-                      <div>-</div>
-                      <input onChange={changeQuantityHandler} value={quantityItem} type="number" min="1" max="100" />
-                      <div>+</div>
+                      <div onClick={decreseItemHandler}>-</div>
+                      <input
+                        onChange={changeQuantityHandler}
+                        value={quantityItem}
+                        type="number"
+                        min="1"
+                        max="100"
+                      />
+                      <div
+                        onClick={() =>
+                          setQuantityItem((prevState) => prevState + 1)
+                        }
+                      >
+                        +
+                      </div>
                     </div>
-                    <Button onClick={() => dispatch(ProductActions.removeProduct())} variant="contained">Add To Cart</Button>
+                    <Button
+                      type="submit"
+                      variant="contained"
+                    >
+                      Add To Cart
+                    </Button>
                   </div>
                 </div>
               </>
             )}
           </div>
         </CSSTransition>
-        {valueItem &&
+        {showModel &&
           ReactDOM.createPortal(
-            <Overlay onClick={() => dispatch(ProductActions.removeProduct())} style={{ zIndex: "20" }} />,
+            <Overlay
+              onClick={resetHandler}
+              style={{ zIndex: "20" }}
+            />,
             document.getElementById("product__bg")
           )}
-      </div>
+      </form>
     </>
   );
 };

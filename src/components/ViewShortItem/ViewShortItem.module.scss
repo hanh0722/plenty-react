@@ -7,6 +7,8 @@
     transform: translate(-50%, -50%);
     border-radius: 15px;
     z-index: 21;
+    height: 250px;
+    word-wrap: break-word;
     .image, .product__info{
         width: 50%;
     }
@@ -22,6 +24,11 @@
             margin: 20px 0 !important;
         }
     }
+    .content__product{
+        overflow-x: hidden;
+        overflow-y: scroll;
+        margin-bottom: 20px;
+    }
     a{
         text-decoration: none;
         color: var(--black);
@@ -32,12 +39,13 @@
     }
     .type{
         font-size: $fs-sm;
+        text-transform: capitalize;
     }
     display: flex;
     justify-content: space-between;
     img{
         width: 100%;
-        height: auto;
+        height: 100%;
         border-top-left-radius: 15px;
         border-bottom-left-radius: 15px;
     }
@@ -45,6 +53,9 @@
     button{
         background: var(--color-button);
         color: $white;
+        &:hover{
+            background: var(--color-button);
+        }
     }
 }
 .quantity{
@@ -66,6 +77,10 @@
         border: none;
         text-align: center;
         padding: 5px;
+        &::-webkit-outer-spin-button, &::-webkit-inner-spin-button{
+            -webkit-appearance: none;
+            margin: 0;
+        }
         &:focus{
             outline: none;
         }
@@ -100,9 +115,40 @@
         }
     }
 }
-@media screen and (max-width: 576px){
+@media screen and (max-width: 576px) {
     .view{
-        display: none;
-        pointer-events: none;
+        height: 230px;
+        font-size: 14px;
+        .content__product{
+            margin-bottom: 10px;
+        }
+        .quantity{
+            div{
+                width: 25px;
+                height: 25px;
+            }
+            input{
+                padding: 0;
+            }
+        }
+    }
+    .row{
+        display: block !important;
+        button{
+            width: 100%;
+            margin-top: 10px;
+            padding: 4px !important;
+        }
+        .quantity{
+            align-self: center;
+            display: inline-flex !important;
+            margin: 0 auto;
+        }
+    }
+}
+@media screen and (max-width: 480px) {
+    .view{
+        width: 95%;
+        height: 200px;
     }
 }

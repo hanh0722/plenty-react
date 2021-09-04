@@ -48,6 +48,6 @@ a{
   color: var(--black);
   font-weight: bold;
 }
-.error__input{
+.error__input, .error__input input{
   border-color: red !important;
 }

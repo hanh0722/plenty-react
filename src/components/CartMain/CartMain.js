@@ -5,16 +5,19 @@ import styles from "./CartMain.module.scss";
 import Item from "./Item/Item";
 import Overlay from "../overlay/Overlay";
 import ReactDOM from "react-dom";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import ApplyVoucher from "../ApplyVoucher/ApplyVoucher";
 import { CSSTransition } from "react-transition-group";
+import { CartActions } from "../store/cart";
 import '../CSSTransition/CSSTransition.scss';
-const CartMain = ({ showCart, removeCart }) => {
+const CartMain = () => {
   const cart = useSelector((state) => state.cart.cart);
+  const isShowCart = useSelector(state => state.cart.showCart);
+  const dispatch = useDispatch();
   const [showVoucher, setShowVoucher] = useState(false);
   return (
     <>
-      <div className={`${styles.cart} ${showCart && styles["cart__back"]}`}>
+      <div className={`${styles.cart} ${isShowCart && styles["cart__back"]}`}>
         <CSSTransition in={showVoucher} timeout={500} unmountOnExit mountOnEnter classNames='fade__bg'>
           <div
             onClick={() => setShowVoucher(false)}
@@ -25,7 +28,7 @@ const CartMain = ({ showCart, removeCart }) => {
           className={`d-flex justify-content-between align-items-center ${styles.title}`}
         >
           <h4>Shopping Cart</h4>
-          <ButtonItem onClick={removeCart} />
+          <ButtonItem onClick={() => dispatch(CartActions.showCartHandler())} />
         </div>
         <div
           className={`${styles["cart__items"]} ${
@@ -85,13 +88,13 @@ const CartMain = ({ showCart, removeCart }) => {
         </div>
         <ApplyVoucher showVoucher={showVoucher} />
       </div>
-      {showCart &&
+      {isShowCart &&
         ReactDOM.createPortal(
-          <Overlay onClick={removeCart} style={{ zIndex: "20" }} />,
+          <Overlay onClick={() => dispatch(CartActions.showCartHandler())} style={{ zIndex: "20" }} />,
           document.getElementById("ol__cart")
         )}
     </>
   );
 };
 
-export default CartMain;
+export default React.memo(CartMain);
