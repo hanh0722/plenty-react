@@ -15,6 +15,7 @@ const ListTree = () => {
   const [slide, setSlide] = useState([]);
   const [type, setType] = useState("indoor");
   const [filterList, setFilterList] = useState([]);
+  const [wishList, setWishList] = useState([]);
   const filterListItem = useCallback(
     (type) => {
       const newValue = slide.filter((item) => {
@@ -31,12 +32,31 @@ const ListTree = () => {
       setSlide(DUMMY_DATA);
       setFilterList(DUMMY_DATA);
     }, 1000);
+    // we can fetch wishlist in here
   }, []);
-
   useEffect(() => {
     const newList = filterListItem(type);
     setFilterList(newList);
   }, [filterListItem, type]);
+  useEffect(() => {
+    const retriveId = wishList.map(item => {
+      return item.productId;
+    })
+    console.log(retriveId, DUMMY_DATA);
+  }, [wishList])
+  const addToWishList = (productId) => {
+    const newWishList = [...wishList];
+    const itemIsExisted = newWishList.findIndex(item => item.productId === productId);
+    let newList;
+    if(itemIsExisted === -1){
+      newList = [...newWishList, {productId: productId, quantity: 1}];
+    } else {
+      const cloneWishList = [...newWishList];
+      cloneWishList[itemIsExisted].quantity = cloneWishList[itemIsExisted].quantity + 1;
+      newList = cloneWishList;
+    }
+    setWishList(newList);
+  } 
   return (
     <Content>
       <Container>
@@ -99,6 +119,7 @@ const ListTree = () => {
                   imageUrl={product.imageUrl}
                   type={product.type}
                   id={product.id}
+                  addtoWishList={addToWishList}
                 />
               </SwiperSlide>
             );

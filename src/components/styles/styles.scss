@@ -21,6 +21,7 @@
     --input-border: rgb(250, 239, 218);
     --bullet-pagination: #000;
     --backdrop: rgba(255, 255, 255, 0.75);
+    --break-point: #cd783e;
 }
 body[data-theme='dark']{
     color: var(--black);
@@ -40,6 +41,7 @@ body[data-theme='dark']{
     --btn-slider: rgb(231, 218, 218);
     --bullet-pagination: #ffffff;
     --input-border: #fff;
+    --break-point: #fff;
     --backdrop: rgba(0,0,0, 0.75);
 }
 .text{

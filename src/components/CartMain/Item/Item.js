@@ -46,7 +46,7 @@ const Item = ({ imageUrl, name, price, quantity, id }) => {
                 readOnly
               />
               <div
-                onClick={() => dispatch(CartActions.addToCartHandler(dataItem))}
+                onClick={() => dispatch(CartActions.increseItemHandler(dataItem))}
               >
                 +
               </div>

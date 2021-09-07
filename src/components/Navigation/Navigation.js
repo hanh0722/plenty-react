@@ -21,6 +21,7 @@ import { faUser, faHeart } from "@fortawesome/free-regular-svg-icons";
 import DarkModeBtn from "../DarkModeBtn/DarkModeBtn";
 import { DarkModeContext } from "../darkmode-context/darkmode-content";
 import { CartActions } from "../store/cart";
+import Breakpoints from "../Breakpoints/Breakpoints";
 const dataToolTip = ["Search", "Account", "WishList", "Cart"];
 const Icon = [faSearch, faUser, faHeart, faShoppingCart];
 const nestedPath = [
@@ -39,13 +40,12 @@ const Navigation = ({ isDowned }) => {
     dispatch(hamburgerActions.setClickedHandler());
   };
   const state = useSelector((state) => state.hamburger.isClicked);
-
+  const cart = useSelector(state => state.cart.cart);
   const setShowedUpHandler = () => {
     setShowedUp((prevState) => {
       return (prevState = !prevState);
     });
   };
-
   return (
     <>
       <nav className={`${isDowned && styles["nav__top"]} ${styles.nav}`}>
@@ -129,6 +129,11 @@ const Navigation = ({ isDowned }) => {
                     <Thumb className={styles.tooltip}>
                       {dataToolTip[index]}
                     </Thumb>
+                    {cart.length > 0 && <Breakpoints>
+                      {cart.reduce((acc, item) => {
+                        return acc + item.quantity;
+                      }, 0)}
+                    </Breakpoints>}
                   </li>
                 );
               }
