@@ -7,7 +7,7 @@ import { faCartPlus } from "@fortawesome/free-solid-svg-icons";
 import { CartActions } from "../../store/cart";
 import { useDispatch } from "react-redux";
 import { ProductActions } from "../../store/Product";
-const Slide = ({ imageUrl, name, price, type, id }) => {
+const Slide = ({ imageUrl, name, price, type, id, addtoWishList }) => {
   const dispatch = useDispatch();
   const addToCartHandler = () => {
     // will only send id when using BE
@@ -30,7 +30,7 @@ const Slide = ({ imageUrl, name, price, type, id }) => {
         <Link to='/'><img src={imageUrl} alt="" /></Link>
         <div className={styles["options-image"]}>
           <p>
-            <FontAwesomeIcon icon={faStar} />
+            <FontAwesomeIcon onClick={() => addtoWishList(id)} icon={faStar} />
           </p>
           <p onClick={() => setIdAndOpenModal(id)} className={styles.watch}>
             <FontAwesomeIcon icon={faEye} />
