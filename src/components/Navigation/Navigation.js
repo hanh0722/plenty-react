@@ -41,11 +41,13 @@ const Navigation = ({ isDowned }) => {
   };
   const state = useSelector((state) => state.hamburger.isClicked);
   const cart = useSelector(state => state.cart.cart);
+  const wishlist = useSelector(state => state.wishlist.wishlist);
   const setShowedUpHandler = () => {
     setShowedUp((prevState) => {
       return (prevState = !prevState);
     });
   };
+  
   return (
     <>
       <nav className={`${isDowned && styles["nav__top"]} ${styles.nav}`}>
@@ -119,6 +121,21 @@ const Navigation = ({ isDowned }) => {
                   >
                     <FontAwesomeIcon icon={items} />
                     <Thumb className={styles.tooltip}>Search</Thumb>
+                  </li>
+                );
+              }
+              if(index === 2){
+                return (
+                  <li key={index}>
+                    <FontAwesomeIcon icon={items} />
+                    <Thumb className={styles.tooltip}>
+                      {dataToolTip[index]}
+                    </Thumb>
+                    {
+                      wishlist.length > 0 && <Breakpoints>{wishlist.reduce((acc, item) => {
+                        return acc + item.quantity;
+                      }, 0)}</Breakpoints>
+                    }
                   </li>
                 );
               }

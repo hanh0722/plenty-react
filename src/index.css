@@ -51,3 +51,6 @@ a{
 .error__input, .error__input input{
   border-color: red !important;
 }
+.none{
+  display: none !important;
+}

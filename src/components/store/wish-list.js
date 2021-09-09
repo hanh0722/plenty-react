@@ -9,7 +9,17 @@ const wishListSlice = createSlice({
     initialState: initialState,
     reducers: {
         addToWishList(state, action){
-            console.log(action.payload);
+            const idWishList = action.payload.productId;
+            const cloneWishList = [...state.wishlist];
+            const isExisted = cloneWishList.findIndex(item => item.productId === idWishList);
+            let newList;
+            if(isExisted === -1){
+                newList = [...cloneWishList, {quantity: 1, ...action.payload}]
+            } else {
+                cloneWishList[isExisted].quantity = cloneWishList[isExisted].quantity + 1;
+                newList = cloneWishList;
+            }
+            state.wishlist = newList;
         }
     }
 })

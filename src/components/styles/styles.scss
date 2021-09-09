@@ -22,6 +22,10 @@
     --bullet-pagination: #000;
     --backdrop: rgba(255, 255, 255, 0.75);
     --break-point: #cd783e;
+    --bread-crumb: #ccc;
+    --wish-list-cumb: #cd783e;
+    --input-bg: #f1f1f1;
+    --btn-border-square: black;
 }
 body[data-theme='dark']{
     color: var(--black);
@@ -43,6 +47,8 @@ body[data-theme='dark']{
     --input-border: #fff;
     --break-point: #fff;
     --backdrop: rgba(0,0,0, 0.75);
+    --wish-list-cumb: #fff;
+    --btn-border-square: #cd783e;
 }
 .text{
     padding: $lg-pd;
@@ -129,6 +135,29 @@ body[data-theme='dark']{
     width: 12px !important;
     height: 12px !important;
     animation: active-pagination .35s forwards;
+}
+.bread-crumb{
+    a{
+        font-size: 14px;
+    }
+}
+.fade__box-enter{
+    opacity: 0;
+    transform: translate(-50%, -100%);
+}
+.fade__box-enter-active{
+    opacity: 1;
+    transition: all .8s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    transform: translate(-50%, -50%);
+}
+.fade__box-exit{
+    opacity: 1;
+    transform: translate(-50%, -50%);
+}
+.fade__box-exit-active{
+    opacity: 0;
+    transform: translate(-50%, -100%);
+    transition: all .8s cubic-bezier(0.175, 0.885, 0.32, 1.275);
 }
 @keyframes active-pagination {
     0%{
