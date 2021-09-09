@@ -10,7 +10,7 @@ import {
   faTwitter,
   faInstagram,
 } from "@fortawesome/free-brands-svg-icons";
-const listAbout = ["about", "about us", "contact us", "FAQs", "blog"];
+const listAbout = ["about us", "contact us", "FAQs", "blog"];
 const informationList = [
   "Register",
   "login",
@@ -34,6 +34,7 @@ const Footer = () => {
           </div>
         </div>
         <ul>
+          <li className={styles['title__list']}>About</li>
           {listAbout.map((item, index) => {
             return (
               <Link key={index} to="/">
@@ -43,7 +44,7 @@ const Footer = () => {
           })}
         </ul>
         <ul>
-          <li>Information</li>
+          <li className={styles['title__list']}>Information</li>
           {informationList.map((item, index) => {
             return (
               <Link key={index} to="/">
@@ -53,7 +54,7 @@ const Footer = () => {
           })}
         </ul>
         <ul>
-          <li>Our Store</li>
+          <li className={styles['title__list']}>Our Store</li>
           <div className="d-flex">
             {iconsSocial.map((item, index) => {
               return (

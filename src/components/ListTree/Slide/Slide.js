@@ -30,7 +30,13 @@ const Slide = ({ imageUrl, name, price, type, id, addtoWishList }) => {
         <Link to='/'><img src={imageUrl} alt="" /></Link>
         <div className={styles["options-image"]}>
           <p>
-            <FontAwesomeIcon onClick={() => addtoWishList(id)} icon={faStar} />
+            <FontAwesomeIcon onClick={() => addtoWishList({
+              productId: id,
+              name,
+              price,
+              type,
+              imageUrl
+            })} icon={faStar} />
           </p>
           <p onClick={() => setIdAndOpenModal(id)} className={styles.watch}>
             <FontAwesomeIcon icon={faEye} />

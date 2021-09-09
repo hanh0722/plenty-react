@@ -9,13 +9,15 @@ import SwiperCore, { Navigation, Pagination } from "swiper/core";
 import styles from "./ListTree.module.scss";
 import Slide from "./Slide/Slide";
 import DUMMY_DATA from "../DummyData/DUMMY_DATA";
+import { useDispatch } from "react-redux";
+import { wishListActions } from "../store/wish-list";
 SwiperCore.use([Navigation, Pagination]);
 
 const ListTree = () => {
   const [slide, setSlide] = useState([]);
   const [type, setType] = useState("indoor");
   const [filterList, setFilterList] = useState([]);
-  const [wishList, setWishList] = useState([]);
+  const dispatch = useDispatch();
   const filterListItem = useCallback(
     (type) => {
       const newValue = slide.filter((item) => {
@@ -38,25 +40,9 @@ const ListTree = () => {
     const newList = filterListItem(type);
     setFilterList(newList);
   }, [filterListItem, type]);
-  useEffect(() => {
-    const retriveId = wishList.map(item => {
-      return item.productId;
-    })
-    console.log(retriveId, DUMMY_DATA);
-  }, [wishList])
-  const addToWishList = (productId) => {
-    const newWishList = [...wishList];
-    const itemIsExisted = newWishList.findIndex(item => item.productId === productId);
-    let newList;
-    if(itemIsExisted === -1){
-      newList = [...newWishList, {productId: productId, quantity: 1}];
-    } else {
-      const cloneWishList = [...newWishList];
-      cloneWishList[itemIsExisted].quantity = cloneWishList[itemIsExisted].quantity + 1;
-      newList = cloneWishList;
-    }
-    setWishList(newList);
-  } 
+  const addToWishList = (product) => {
+    dispatch(wishListActions.addToWishList(product));
+  };
   return (
     <Content>
       <Container>
