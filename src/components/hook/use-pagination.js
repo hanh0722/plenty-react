@@ -4,7 +4,7 @@ const usePagination = () => {
     const [product, setProducts] = useState([]);
 
     useEffect(() => {
-
+        
     }, []);
     
 }

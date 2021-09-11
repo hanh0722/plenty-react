@@ -7,7 +7,12 @@ import { HOME_PAGE } from "../link/link";
 import BreadCrumb from "../BreadCrumb/BreadCrumb";
 import DUMMY_DATA from "../DummyData/DUMMY_DATA";
 import { Col, Container, Row } from "react-bootstrap";
+//
 import p1 from "../image/indoor-1.jpeg";
+import p2 from "../image/indoor-2.jpeg";
+import p3 from "../image/indoor-3.jpeg";
+import p4 from "../image/indoor-4.jpeg";
+// fake image data
 import styles from "../styles/DetailItem.module.scss";
 import { faStar } from "@fortawesome/free-regular-svg-icons";
 import { Button } from "@material-ui/core";
@@ -22,8 +27,9 @@ import FormContact from "../FormContact/FormContact";
 import Methods from "../Detail/Methods/Methods";
 import Delivery from "../Detail/LayoutDelivery/Delivery";
 import MoreDetail from "../Detail/MoreDetail/MoreDetail";
-import Zoom from "react-medium-image-zoom";
-import "react-medium-image-zoom/dist/styles.css";
+import ListImage from "../ListImage/ListImage";
+import LinkCheckOut from "../ListImage/LinkCheckout/LinkCheckout";
+import useScroll from "../hook/use-scroll";
 const DetailItem = () => {
   const params = useParams();
   const dispatch = useDispatch();
@@ -34,6 +40,7 @@ const DetailItem = () => {
   const [isCopied, setIsCopied] = useState(false);
   const route = useRouteMatch();
   const inputRef = useRef();
+  const isValid = useScroll(100);
   useEffect(() => {
     const transformParams = params.name.split("-");
     const nameProduct = transformParams.join(" ");
@@ -103,19 +110,7 @@ const DetailItem = () => {
         <Container className={styles.container}>
           <Row className={`${styles.row} justify-content-around`}>
             <Col xs={12} sm={12} md={6} lg={5} className={styles.image}>
-              <Zoom
-                overlayBgColorEnd="rgba(0,0,0, .7)"
-                transitionDuration={"350"}
-                className={styles["zoom-img"]}
-                zoomZindex='25'
-                zoomMargin={100}
-              >
-                <img
-                  src={p1}
-                  alt=""
-                  style={{ width: "100%", height: "auto" }}
-                />
-              </Zoom>
+              <ListImage images={[p1, p2, p3, p4]} />
             </Col>
             <Col
               xs={12}
@@ -182,6 +177,9 @@ const DetailItem = () => {
           <MoreDetail />
         </Container>
       </LayoutTop>
+      <CSSTransition timeout={700} classNames='go-up' unmountOnExit mountOnEnter in={isValid}>
+        <LinkCheckOut url={p1} />
+      </CSSTransition>
       <CSSTransition
         in={changeLayout}
         unmountOnExit

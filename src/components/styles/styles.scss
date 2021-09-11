@@ -50,6 +50,11 @@ body[data-theme='dark']{
     --wish-list-cumb: #fff;
     --btn-border-square: #cd783e;
 }
+input[type='number']{
+    &::-webkit-outer-spin-button, &::-webkit-inner-spin-button{
+        display: none;
+    }
+}
 .text{
     padding: $lg-pd;
     line-height: 40px;
@@ -158,6 +163,14 @@ body[data-theme='dark']{
     opacity: 0;
     transform: translate(-50%, -100%);
     transition: all .8s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+.swiper__card{
+    .swiper-slide{
+        opacity: .5;
+    }
+    .swiper-slide-thumb-active{
+        opacity: 1;
+    }
 }
 @keyframes active-pagination {
     0%{
