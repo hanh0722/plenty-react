@@ -2,7 +2,6 @@ import { useState } from "react";
 
 const useQuantity = (defaultQuantity) => {
     const [quantity, setQuantity] = useState(defaultQuantity ? +defaultQuantity : 1);
-
     const incrementHandler = () => {
         if(quantity >= 100){
             return;
