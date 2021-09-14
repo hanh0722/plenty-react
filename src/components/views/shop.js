@@ -1,6 +1,5 @@
 import React from "react";
 import BreadCrumb from "../BreadCrumb/BreadCrumb";
-import LayoutTop from "../layout/LayoutTop/LayoutTop";
 import { Link, useRouteMatch } from "react-router-dom";
 import { HOME_PAGE } from "../link/link";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -13,15 +12,13 @@ import nonAccentVietnamese from "../removeUnicode/removeUnicode";
 const Shop = () => {
   const route = useRouteMatch();
   return (
-    <LayoutTop>
+    <>
       <BreadCrumb>
         <h2>Products</h2>
-        <div className='pt-3'>
-          <Link to={HOME_PAGE}>
-            Home <FontAwesomeIcon icon={faAngleRight} />
-          </Link>
-          <Link to={route.path}>Products</Link>
-        </div>
+        <Link to={HOME_PAGE}>
+          Home <FontAwesomeIcon icon={faAngleRight} />
+        </Link>
+        <Link to={route.path}>Products</Link>
       </BreadCrumb>
       <Container>
         <Row>
@@ -40,7 +37,7 @@ const Shop = () => {
           })}
         </Row>
       </Container>
-    </LayoutTop>
+    </>
   );
 };
 

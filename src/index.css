@@ -1,75 +1,87 @@
-*, *::after, *::before{
+*,
+*::after,
+*::before {
   padding: 0;
   margin: 0;
   box-sizing: border-box;
-  font-family: 'Poppins', sans-serif;;
+  font-family: "Poppins", sans-serif;
 }
-html,body{
+html,
+body {
   overflow-x: hidden;
-  transition: all .2s cubic-bezier(0.785, 0.135, 0.15, 0.86);
+  transition: all 0.2s cubic-bezier(0.785, 0.135, 0.15, 0.86);
 }
-p, h2, h1, h3, h4, h5, h6{
+p,
+h2,
+h1,
+h3,
+h4,
+h5,
+h6 {
   margin: 0 !important;
 }
-.error__text{
+.error__text {
   padding-top: 20px;
   font-size: 14px;
   color: red;
 }
-.slide-enter{
+.slide-enter {
   opacity: 0;
   transform: translateY(-50%);
 }
-.go-up-enter{
-  bottom: 100%;
+.go-up-enter {
   opacity: 0;
+  transform: translateY(100%);
 }
-.go-up-enter-active{
-  bottom: 0;
+.go-up-enter-active {
   opacity: 1;
-  transition: all .7s ease-in-out;
+  transform: translateY(0);
+  transition: all 0.7s ease-in-out;
 }
-.go-up-exit{
-  bottom: 0;
+.go-up-exit {
   opacity: 1;
+  transform: translateY(0);
 }
-.go-up-exit-active{
-  bottom: 100%;
+.go-up-exit-active {
+  transform: translateY(100%);
   opacity: 0;
-  transition: all .7s ease-in-out;
+  transition: all 0.7s ease-in-out;
 }
-.slide-enter-active{
+.slide-enter-active {
   opacity: 1;
-  transition: all .5s;
+  transition: all 0.5s;
   transform: translateY(0%);
 }
-.slide-exit{
+.slide-exit {
   opacity: 1;
   transform: translateY(0%);
 }
-.slide-exit-active{
+.slide-exit-active {
   opacity: 0;
   transform: translateY(-50%);
-  transition: all .5s;
+  transition: all 0.5s;
 }
-.invalid{
+.invalid {
   border-color: red;
 }
-a{
+a {
   text-decoration: none;
 }
-.button{
+.button {
   background: #cd783e !important;
   color: white !important;
 }
-.error__text span{
+.error__text span {
   color: var(--black);
   font-weight: bold;
 }
-.error__input, .error__input input{
+.error__input,
+.error__input input {
   border-color: red !important;
 }
-.none{
+.none {
   display: none !important;
 }
-
+.MuiInput-underline:after{
+  border-color: var(--btn-quantity) !important;
+}

@@ -1,5 +1,5 @@
 import React, { useState, useContext } from "react";
-import { NavLink } from "react-router-dom";
+import { Link, NavLink } from "react-router-dom";
 import styles from "./Navigation.module.scss";
 import logo from "../image/logo.png";
 import logoDarkTheme from "../image/logo-dark.png";
@@ -10,7 +10,6 @@ import ReactDOM from "react-dom";
 import Overlay from "../overlay/Overlay";
 import LayoutList from "../layout/LayoutList";
 import Thumb from "../Thumb/Thumb";
-import { Button } from "@material-ui/core";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faSearch,
@@ -22,6 +21,8 @@ import DarkModeBtn from "../DarkModeBtn/DarkModeBtn";
 import { DarkModeContext } from "../darkmode-context/darkmode-content";
 import { CartActions } from "../store/cart";
 import Breakpoints from "../Breakpoints/Breakpoints";
+import FeatureMobile from "./FeatureMobile/FeatureMobile";
+import { SIGN_IN_PAGE } from "../link/link";
 const dataToolTip = ["Search", "Account", "WishList", "Cart"];
 const Icon = [faSearch, faUser, faHeart, faShoppingCart];
 const nestedPath = [
@@ -40,14 +41,14 @@ const Navigation = ({ isDowned }) => {
     dispatch(hamburgerActions.setClickedHandler());
   };
   const state = useSelector((state) => state.hamburger.isClicked);
-  const cart = useSelector(state => state.cart.cart);
-  const wishlist = useSelector(state => state.wishlist.wishlist);
+  const cart = useSelector((state) => state.cart.cart);
+  const wishlist = useSelector((state) => state.wishlist.wishlist);
   const setShowedUpHandler = () => {
     setShowedUp((prevState) => {
       return (prevState = !prevState);
     });
   };
-  
+
   return (
     <>
       <nav className={`${isDowned && styles["nav__top"]} ${styles.nav}`}>
@@ -101,15 +102,7 @@ const Navigation = ({ isDowned }) => {
                 <li>Blogs</li>
               </NavLink>
             </div>
-            <div className={styles["signin__btn"]}>
-              <Button className="mt-3 mb-3" variant="contained">
-                Log in
-              </Button>
-              <Button className={styles.register} variant="outlined">
-                Register
-              </Button>
-            </div>
-            <DarkModeBtn className={styles["btn__mb"]} />
+            {window.innerWidth <= 991 && <FeatureMobile />}
           </header>
           <div className={styles.icons}>
             {Icon.map((items, index) => {
@@ -124,39 +117,48 @@ const Navigation = ({ isDowned }) => {
                   </li>
                 );
               }
-              if(index === 2){
+              if (index === 2) {
                 return (
                   <li key={index}>
                     <FontAwesomeIcon icon={items} />
                     <Thumb className={styles.tooltip}>
                       {dataToolTip[index]}
                     </Thumb>
-                    {
-                      wishlist.length > 0 && <Breakpoints>{wishlist.reduce((acc, item) => {
-                        return acc + item.quantity;
-                      }, 0)}</Breakpoints>
-                    }
+                    {wishlist.length > 0 && (
+                      <Breakpoints>
+                        {wishlist.reduce((acc, item) => {
+                          return acc + item.quantity;
+                        }, 0)}
+                      </Breakpoints>
+                    )}
                   </li>
                 );
               }
               if (index === 3) {
                 return (
-                  <li onClick={() => dispatch(CartActions.showCartHandler())} key={index}>
+                  <li
+                    onClick={() => dispatch(CartActions.showCartHandler())}
+                    key={index}
+                  >
                     <FontAwesomeIcon icon={items} />
                     <Thumb className={styles.tooltip}>
                       {dataToolTip[index]}
                     </Thumb>
-                    {cart.length > 0 && <Breakpoints>
-                      {cart.reduce((acc, item) => {
-                        return acc + item.quantity;
-                      }, 0)}
-                    </Breakpoints>}
+                    {cart.length > 0 && (
+                      <Breakpoints>
+                        {cart.reduce((acc, item) => {
+                          return acc + item.quantity;
+                        }, 0)}
+                      </Breakpoints>
+                    )}
                   </li>
                 );
               }
               return (
                 <li key={index}>
-                  <FontAwesomeIcon icon={items} />
+                  <Link to={SIGN_IN_PAGE}>
+                    <FontAwesomeIcon icon={items} />
+                  </Link>
                   <Thumb className={styles.tooltip}>{dataToolTip[index]}</Thumb>
                 </li>
               );

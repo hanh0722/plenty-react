@@ -1,0 +1,93 @@
+@import '../../constant/variable';
+.form{
+    max-width: 400px;
+    margin: 0 auto;
+    line-height: 40px;
+    padding: $lg-pd;
+    box-shadow: var(--shadow);
+    border-radius: 10px;
+    margin-bottom: 50px;
+    .input{
+        padding-bottom: 20px;
+        width: 100%;
+        input{
+            background: transparent;
+            width: 100%;
+            padding-left: 35px;
+            &::placeholder{
+                font-size: 12px;
+            }
+            color: var(--black);
+            font-size: $fs-sm;
+
+        }
+        label{
+            font-size: 14px;
+            display: block;
+            padding-bottom: 5px;
+        }
+    }
+    a{
+        text-decoration: none;
+        display: block;
+        padding-bottom: 10px;
+        text-align: end;
+        font-size: $fs-sm;
+        color: var(--black);
+    }
+    .button{
+        button{
+            background: var(--color-button);
+            color: $white;
+        }
+    }
+    .box{
+        position: relative;
+        svg{
+            position: absolute;
+            top: 50%;
+            left: 10px;
+            transform: translateY(-50%);
+            font-size: 12px;
+        }
+    }
+    .options{
+        padding-top: 25px;
+        text-align: center;
+        p{
+            font-size: $fs-sm;
+            font-weight: normal;
+        }
+        span{
+            width: 35px;
+            height: 35px;
+            font-size: $fs-sm;
+            color: $white;
+            &:nth-of-type(2){
+                margin: 0 15px;
+                background: var(--google-logo);
+            }
+            &:first-child{
+                background: var(--facebook-logo);
+            }
+            &:last-child{
+                background: var(--twitter-logo);
+            }
+            border-radius: 50%;
+            display: inline-block;
+            box-shadow: var(--shadow);
+            cursor: pointer;
+        }
+    }
+}
+body[data-theme='dark']{
+    .form{
+        border: 1px solid $white;
+    }
+}
+
+@media screen and (max-width: 576px) {
+    .form{
+        width: 90%;
+    }
+}
