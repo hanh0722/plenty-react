@@ -13,10 +13,19 @@ import Footer from "./components/Footer/Footer";
 import Aos from "aos";
 import "aos/dist/aos.css";
 import Shop from "./components/views/shop";
-import { DETAIL, HOME_PAGE, SHOP, SIGN_IN_PAGE } from "./components/link/link";
+import {
+  BLOG_PAGE,
+  DETAIL,
+  HOME_PAGE,
+  REGISTER_PAGE,
+  SHOP,
+  SIGN_IN_PAGE,
+} from "./components/link/link";
 import DetailItem from "./components/views/DetailItem";
 import SignIn from "./components/views/SignIn";
 import LayoutTop from "./components/layout/LayoutTop/LayoutTop";
+import Blog from "./components/views/Blog";
+import Register from "./components/views/Register";
 const App = () => {
   const [navigation, setNavigation] = useState(false);
   const location = useLocation();
@@ -65,6 +74,8 @@ const App = () => {
           <Route path={SHOP} component={Shop} exact />
           <Route path={DETAIL} component={DetailItem} />
           <Route path={SIGN_IN_PAGE} component={SignIn} />
+          <Route path={BLOG_PAGE} component={Blog} />
+          <Route path={REGISTER_PAGE} component={Register} />
         </Switch>
         <Footer />
       </LayoutTop>

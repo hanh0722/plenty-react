@@ -1,4 +1,5 @@
 import React from "react";
+import Contact from "../Contact/Contact";
 import Landing from "../Landing/Landing";
 import ListTree from "../ListTree/ListTree";
 import Main from "../Main/Main";
@@ -16,6 +17,7 @@ const Index = () => {
       <Package />
       <PageItems />
       <Service />
+      <Contact/>
     </>
   );
 };

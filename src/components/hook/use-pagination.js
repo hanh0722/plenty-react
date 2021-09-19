@@ -1,10 +1,6 @@
-import React, {useEffect, useState} from 'react';
+import React, { useState } from "react";
 
-const usePagination = () => {
-    const [product, setProducts] = useState([]);
-
-    useEffect(() => {
-        
-    }, []);
-    
-}
+const usePagination = (itemPerPage, limit) => {
+  const [currentPage, setCurrentPage] = useState(1);
+  const [limitItem, setLimitItem] = useState(limit);
+};

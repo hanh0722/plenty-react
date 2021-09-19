@@ -24,6 +24,7 @@ h6 {
   padding-top: 20px;
   font-size: 14px;
   color: red;
+  line-height: 25px;
 }
 .slide-enter {
   opacity: 0;
@@ -62,7 +63,7 @@ h6 {
   transition: all 0.5s;
 }
 .invalid {
-  border-color: red;
+  border-color: red !important;
 }
 a {
   text-decoration: none;

@@ -2,7 +2,6 @@ import React from "react";
 import { Button } from "@material-ui/core";
 import styles from "./Form.module.scss";
 import { Link } from "react-router-dom";
-import NormalInput from "../../input/NormalInput/NorInput";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faLock } from "@fortawesome/free-solid-svg-icons";
 import { faUser } from "@fortawesome/free-regular-svg-icons";
@@ -13,6 +12,7 @@ import {
 } from "@fortawesome/free-brands-svg-icons";
 import checkValidPassword from "../CheckValidPassword/CheckValidPassword";
 import Input from "../Input/Input";
+import { REGISTER_PAGE } from "../../link/link";
 const icons = [faFacebookF, faGoogle, faTwitter];
 const LoginForm = () => {
   const submitHandler = (event) => {
@@ -34,6 +34,7 @@ const LoginForm = () => {
           id: "email",
           required: true,
           autoComplete: "off",
+          thumbcontent: "Enter your valid email",
         }}
         label="Email"
         error="Email is not valid!"
@@ -50,6 +51,8 @@ const LoginForm = () => {
           id: "password",
           required: true,
           autoComplete: "off",
+          thumbcontent:
+            "At least 8 characters long, one uppercase, lowercase and special character",
         }}
       >
         <FontAwesomeIcon icon={faUser} />
@@ -60,7 +63,7 @@ const LoginForm = () => {
           Sign In
         </Button>
       </div>
-      <Link className="pt-3 text-center" to="/">
+      <Link className="pt-3 text-center" to={REGISTER_PAGE}>
         Don't have account? Sign up
       </Link>
       <div className={styles.options}>

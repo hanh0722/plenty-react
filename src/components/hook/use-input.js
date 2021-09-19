@@ -3,11 +3,13 @@ import {useReducer} from 'react';
 const typeInput = {
     CHANGE_HANDLER: 'CHANGE_INPUT',
     TOUCHED_HANDLER: 'TOUCHED_INPUT',
-    RESET_INPUT: 'RESET_INPUT'
+    RESET_INPUT: 'RESET_INPUT',
+    FOCUS_INPUT: 'FOCUS_INPUT'
 }
 const initialState = {
     isTouched: false,
-    value: ''
+    value: '',
+    isFocused: false
 }
 const reducerInputFn = (state, action) =>{
     switch(action.type){
@@ -27,6 +29,12 @@ const reducerInputFn = (state, action) =>{
             return {
                 isTouched: false,
                 value: ''
+            }
+        }
+        case typeInput.FOCUS_INPUT: {
+            return {
+                ...state,
+                isFocused: true
             }
         }
         default:
@@ -53,13 +61,20 @@ const useInput = (validHandler) =>{
             type: typeInput.RESET_INPUT
         })
     }
+    const focusInputHandler = () => {
+        dispatch({
+            type: typeInput.FOCUS_INPUT
+        })
+    }
     return {
         isTouched: state.isTouched,
         value: state.value,
         changeInputHandler,
         valid,
         touchedInputHandler,
-        resetHandler
+        resetHandler,
+        focusInputHandler,
+        isFocused: state.isFocused
     }
 }
 

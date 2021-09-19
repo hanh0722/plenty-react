@@ -4,7 +4,8 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faTimes } from "@fortawesome/free-solid-svg-icons";
 import Input from "../UI/Input/Input";
 import classes from './FormContact.module.scss';
-import {Button} from '@material-ui/core'
+import {Button} from '@material-ui/core';
+
 const FormContact = ({onClick}) => {
   return (
     <>

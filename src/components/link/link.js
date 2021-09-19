@@ -3,7 +3,8 @@ export const SHOP = '/shop';
 export const SIGN_IN_PAGE = '/sign-in';
 export const WISH_LIST_PAGE = '/wish-list';
 export const CART_PAGE = '/cart';
-
+export const BLOG_PAGE = '/blogs';
+export const REGISTER_PAGE = '/register';
 export const PRODUCTS = {
     INDOOR: '/products/indoor',
     OUTDOOR: '/products/outdoor',
