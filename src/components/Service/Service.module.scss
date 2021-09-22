@@ -48,6 +48,9 @@
     color: var(--gray);
     text-decoration: line-through;
 }
+.blocks{
+    margin-top: -8rem;
+}
 @media screen and (max-width: 768px) {
     .block-introduction{
         font-size: $fs-sm;

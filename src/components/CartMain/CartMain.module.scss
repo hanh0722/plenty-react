@@ -66,6 +66,11 @@
     z-index: 3;
     background: var(--backdrop);
 }
+body[data-theme='dark']{
+    .coupon{
+        border: 1px solid var(--black);
+    }
+}
 @media screen and (max-width: 1320px) {
     .cart{
         width: 35%;

@@ -1,0 +1,50 @@
+@import '../../constant/variable';
+.image--container{
+    overflow: hidden;
+    .image{
+        width: 100%;
+        img{
+            width: 100%;
+            height: auto;
+            transition: all .5s cubic-bezier(0.075, 0.82, 0.165, 1);
+            &:hover{
+                transform: scale(1.1);
+            }
+        }
+    }
+}
+.block--content{
+    padding-top: 20px;
+    line-height: 25px;
+    a{
+        text-transform: capitalize;
+        font-weight: bold;
+        margin: $sm-mg 0 !important;
+        font-size: $fs-sm;
+    }
+    p, a{
+        text-decoration: none;
+        color: var(--black);
+        overflow: hidden;
+        text-overflow: ellipsis;
+        display: -webkit-box;
+        -webkit-line-clamp: 2;
+        -webkit-box-orient: vertical;
+    }
+    p{
+        font-size: 13px;
+        -webkit-line-clamp: 1;
+    }
+    .type{
+        font-weight: 600;
+        text-transform: capitalize;
+    }
+    button{
+        margin-top: 20px;
+        border: 2px solid var(--btn-quantity);
+        &:hover{
+            background: var(--btn-hover);
+            color: $white;
+        }
+    }
+}

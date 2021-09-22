@@ -4,6 +4,7 @@ const NormalInput = forwardRef((props, ref) => {
     return(
         <div className={`${styles.input} ${props.className}`}>
             <input ref={ref} {...props.input}/>
+            {props.children}
         </div>
     )
 })
