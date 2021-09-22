@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { Button } from "@material-ui/core";
 import styles from "../LoginForm/Form.module.scss";
 import { Link } from "react-router-dom";
@@ -12,7 +12,9 @@ import { faUser } from "@fortawesome/free-regular-svg-icons";
 import checkValidPassword from "../CheckValidPassword/CheckValidPassword";
 import Input from "../Input/Input";
 import { SIGN_IN_PAGE } from "../../link/link";
+import useFetch from "../../hook/use-fetch";
 const RegisterForm = () => {
+
   const submitHandler = (event) => {
     event.preventDefault();
   };
@@ -34,7 +36,7 @@ const RegisterForm = () => {
         }}
         label="Name"
         error="Name is empty!"
-      > 
+      >
         <FontAwesomeIcon icon={faSignature} />
       </Input>
       <Input
@@ -48,6 +50,7 @@ const RegisterForm = () => {
           required: true,
           autoComplete: "off",
           thumbcontent: "Enter your valid email",
+          onChange: (event) => console.log(event.target.value),
         }}
         label="Email"
         error="Email is not valid!"

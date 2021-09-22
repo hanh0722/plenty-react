@@ -14,6 +14,12 @@ const Input = (props) => {
     isFocused,
     focusInputHandler,
   } = useInput((value) => props.functionCondition(value));
+  const changeInputHandlerFn = (event) => {
+    changeInputHandler(event);
+    if(props.input.onChange){
+      props.input.onChange(event);
+    }
+  }
   return (
     <>
       <div className={styles.input}>
@@ -33,7 +39,7 @@ const Input = (props) => {
             input={{
               ...props.input,
               value: value,
-              onChange: changeInputHandler,
+              onChange: changeInputHandlerFn,
               onBlur: touchedInputHandler,
               onFocus: focusInputHandler,
             }}

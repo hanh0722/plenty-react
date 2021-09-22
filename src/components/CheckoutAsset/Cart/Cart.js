@@ -12,7 +12,6 @@ import useToggle from "../../hook/use-toggle";
 import { CSSTransition } from "react-transition-group";
 import "./Transition.scss";
 import { Button } from "@material-ui/core";
-import Voucher from "./Voucher/Voucher";
 import NorInput from "../../input/NormalInput/NorInput";
 import useInput from "../../hook/use-input";
 const Cart = () => {
