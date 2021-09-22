@@ -1,7 +1,7 @@
 import React from "react";
 import { Button } from "@material-ui/core";
 import styles from "./Form.module.scss";
-import { Link } from "react-router-dom";
+import { Link, useRouteMatch } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faLock } from "@fortawesome/free-solid-svg-icons";
 import { faUser } from "@fortawesome/free-regular-svg-icons";
@@ -15,6 +15,7 @@ import Input from "../Input/Input";
 import { REGISTER_PAGE } from "../../link/link";
 const icons = [faFacebookF, faGoogle, faTwitter];
 const LoginForm = () => {
+  const route = useRouteMatch();
   const submitHandler = (event) => {
     event.preventDefault();
   };
@@ -57,7 +58,7 @@ const LoginForm = () => {
       >
         <FontAwesomeIcon icon={faUser} />
       </Input>
-      <Link to="/">Forget password?</Link>
+      <Link to={`${route.path}/reset`}>Forget password?</Link>
       <div className={styles.button}>
         <Button className="w-100" variant="contained" type="submit">
           Sign In

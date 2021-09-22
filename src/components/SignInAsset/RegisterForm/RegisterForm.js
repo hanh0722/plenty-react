@@ -34,7 +34,7 @@ const RegisterForm = () => {
         }}
         label="Name"
         error="Name is empty!"
-      >
+      > 
         <FontAwesomeIcon icon={faSignature} />
       </Input>
       <Input

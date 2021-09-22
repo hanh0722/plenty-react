@@ -15,9 +15,12 @@ import "aos/dist/aos.css";
 import Shop from "./components/views/shop";
 import {
   BLOG_PAGE,
+  CHECK_OUT_PAGE,
   DETAIL,
   HOME_PAGE,
+  PRODUCT_LIST,
   REGISTER_PAGE,
+  RESET_PASSWORD,
   SHOP,
   SIGN_IN_PAGE,
 } from "./components/link/link";
@@ -26,6 +29,9 @@ import SignIn from "./components/views/SignIn";
 import LayoutTop from "./components/layout/LayoutTop/LayoutTop";
 import Blog from "./components/views/Blog";
 import Register from "./components/views/Register";
+import Reset from "./components/views/Reset";
+import Checkout from "./components/views/Checkout";
+import TypeProduct from "./components/views/TypeProduct";
 const App = () => {
   const [navigation, setNavigation] = useState(false);
   const location = useLocation();
@@ -73,9 +79,12 @@ const App = () => {
           <Route path={HOME_PAGE} exact component={Index} />
           <Route path={SHOP} component={Shop} exact />
           <Route path={DETAIL} component={DetailItem} />
-          <Route path={SIGN_IN_PAGE} component={SignIn} />
+          <Route path={SIGN_IN_PAGE} component={SignIn} exact />
+          <Route path={PRODUCT_LIST} component={TypeProduct} />
+          <Route path={RESET_PASSWORD} component={Reset} />
           <Route path={BLOG_PAGE} component={Blog} />
           <Route path={REGISTER_PAGE} component={Register} />
+          <Route path={CHECK_OUT_PAGE} component={Checkout} />
         </Switch>
         <Footer />
       </LayoutTop>

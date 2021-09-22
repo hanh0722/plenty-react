@@ -45,7 +45,7 @@ const ListTree = () => {
   };
   return (
     <Content>
-      <Container>
+      <Container aos='fade-up'>
         <h3 className={`text-center ${styles.title}`}>Perfect Plants</h3>
         <ul className={styles.options}>
           <li
@@ -68,6 +68,7 @@ const ListTree = () => {
           </li>
         </ul>
         <Swiper
+
           className={styles.swiper}
           breakpoints={{
             200: {

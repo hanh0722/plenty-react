@@ -21,6 +21,11 @@
         }
     }
 }
+body[data-theme='dark']{
+    .box{
+        border: 1px solid var(--black);
+    }
+}
 .title{
     span{
         margin-left: 15px;
