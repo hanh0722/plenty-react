@@ -1,0 +1,35 @@
+.page{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: calc(100vh - 170px);
+    .icon{
+        svg{
+            font-size: 100px;
+        }
+    }
+    .content{
+        line-height: 40px;
+        h4{
+            font-size: 80px;
+            font-weight: bold;
+            letter-spacing: 10px;
+            padding: 40px 0;
+            color: var(--wish-list-cumb);
+        }
+        p{
+            font-size: 20px;
+        }
+        button{
+            padding: 6px 16px;
+            margin-top: 20px;
+            background: var(--color-button);
+            color: white;
+            box-shadow: var(--shadow);
+            &:hover{
+                box-shadow: 0px 2px 8px rgba($color: #000000, $alpha: .3);
+            }
+        }
+    }
+}

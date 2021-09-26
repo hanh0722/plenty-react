@@ -32,6 +32,7 @@ import Register from "./components/views/Register";
 import Reset from "./components/views/Reset";
 import Checkout from "./components/views/Checkout";
 import TypeProduct from "./components/views/TypeProduct";
+import NotFound from "./components/views/NotFound";
 const App = () => {
   const [navigation, setNavigation] = useState(false);
   const location = useLocation();
@@ -85,6 +86,7 @@ const App = () => {
           <Route path={BLOG_PAGE} component={Blog} />
           <Route path={REGISTER_PAGE} component={Register} />
           <Route path={CHECK_OUT_PAGE} component={Checkout} />
+          <Route path="*" component={NotFound} />
         </Switch>
         <Footer />
       </LayoutTop>

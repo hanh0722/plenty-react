@@ -1,5 +1,5 @@
 import React from "react";
-import { Link, useRouteMatch } from "react-router-dom";
+import { Link } from "react-router-dom";
 import styles from "./Product.module.scss";
 import { Button } from "@material-ui/core";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -7,7 +7,6 @@ import { faStar } from "@fortawesome/free-regular-svg-icons";
 import { useDispatch } from "react-redux";
 import { CartActions } from "../store/cart";
 const Product = (props) => {
-  const route = useRouteMatch();
   const dispatch = useDispatch();
   const addCartHandler = () => {
     dispatch(
@@ -38,7 +37,7 @@ const Product = (props) => {
         </div>
       </div>
       <div className={styles.item}>
-        <Link to={`${route.path}/${props.link}`}>{props.name}</Link>
+        <Link to={`${props.link}`}>{props.name}</Link>
         <p>${props.price}</p>
       </div>
     </div>
