@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import { Button } from "@material-ui/core";
 import styles from "../LoginForm/Form.module.scss";
 import { Link } from "react-router-dom";
@@ -12,7 +12,6 @@ import { faUser } from "@fortawesome/free-regular-svg-icons";
 import checkValidPassword from "../CheckValidPassword/CheckValidPassword";
 import Input from "../Input/Input";
 import { SIGN_IN_PAGE } from "../../link/link";
-import useFetch from "../../hook/use-fetch";
 const RegisterForm = () => {
 
   const submitHandler = (event) => {

@@ -30,10 +30,11 @@ import ListImage from "../ListImage/ListImage";
 import LinkCheckOut from "../ListImage/LinkCheckout/LinkCheckout";
 import useScroll from "../hook/use-scroll";
 import useQuantity from "../hook/use-quantity";
+import useToggle from "../hook/use-toggle";
+import Related from "../Detail/Related/Related";
 const DetailItem = () => {
   const params = useParams();
   const dispatch = useDispatch();
-  const [changeLayout, setChangeLayout] = useState(false);
   const [product, setProduct] = useState({});
   const [content, setContent] = useState(null);
   const [isCopied, setIsCopied] = useState(false);
@@ -52,9 +53,10 @@ const DetailItem = () => {
       setProduct(getDataDummy);
     }, 500);
   }, [params.name]);
-  useEffect(() => {
-    // update the value of copyboard
-  }, []);
+  // useEffect(() => {
+  //   // update the value of copyboard
+  // }, []);
+  const { toggle, changeToggleHandler } = useToggle(false);
   const addCartHandler = () => {
     dispatch(CartActions.showCartHandler());
     dispatch(
@@ -66,9 +68,6 @@ const DetailItem = () => {
         price: product.price,
       })
     );
-  };
-  const changeLayoutHandler = () => {
-    setChangeLayout(false);
   };
   const getCopyHandler = () => {
     navigator.clipboard.writeText(inputRef.current.value);
@@ -142,7 +141,7 @@ const DetailItem = () => {
               </div>
             </div>
             <div className={`${styles.space} w-100`}>
-              <Link to="/">
+              <Link to="/checkout">
                 <Button className="w-100" variant="contained">
                   Buy it now!
                 </Button>
@@ -150,12 +149,13 @@ const DetailItem = () => {
             </div>
             <Methods
               setContent={setContent}
-              setChangeLayout={setChangeLayout}
+              setChangeLayout={changeToggleHandler}
             />
             <Delivery />
           </Col>
         </Row>
         <MoreDetail />
+        <Related/>
       </Container>
       <CSSTransition
         timeout={700}
@@ -167,7 +167,7 @@ const DetailItem = () => {
         <LinkCheckOut url={p1} />
       </CSSTransition>
       <CSSTransition
-        in={changeLayout}
+        in={toggle}
         unmountOnExit
         mountOnEnter
         timeout={800}
@@ -177,7 +177,7 @@ const DetailItem = () => {
           <FixLayout>
             {content === "share" && (
               <BoxInput
-                onClick={changeLayoutHandler}
+                onClick={changeToggleHandler}
                 input={{
                   type: "text",
                   defaultValue: window.location.href,
@@ -187,12 +187,12 @@ const DetailItem = () => {
                 isCopied={isCopied}
               />
             )}
-            {content === "ask" && <FormContact onClick={changeLayoutHandler} />}
+            {content === "ask" && <FormContact onClick={changeToggleHandler} />}
           </FixLayout>
           {ReactDOM.createPortal(
             <Overlay
               onClick={() => {
-                changeLayoutHandler();
+                changeToggleHandler();
                 setIsCopied(false);
               }}
               style={{ zIndex: "20" }}
