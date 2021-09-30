@@ -6,7 +6,8 @@ export const CART_PAGE = '/cart';
 export const BLOG_PAGE = '/blogs';
 export const REGISTER_PAGE = '/register';
 export const RESET_PASSWORD = '/sign-in/reset';
-export const CHECK_OUT_PAGE = '/checkout'
+export const CHECK_OUT_PAGE = '/checkout';
+export const VERIFY_ACCOUNT = '/register/:token';
 export const PRODUCTS = {
     INDOOR: '/products/indoor',
     OUTDOOR: '/products/outdoor',

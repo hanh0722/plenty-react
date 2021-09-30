@@ -1,0 +1,15 @@
+@import '../constant/variable';
+.form--verify{
+    max-width: 450px;
+    margin: 0 auto;
+}
+.title{
+    padding-bottom: $lg-pd;
+    font-size: 25px;
+}
+.submit{
+    margin-top: $lg-mg !important;
+    width: 50%;
+    background: var(--btn-hover) !important;
+    color: $white;
+}

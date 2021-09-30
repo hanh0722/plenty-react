@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useRef } from "react";
+import React, { useEffect, useState, useRef, useMemo } from "react";
 import { Link, useParams, useRouteMatch } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faAngleRight } from "@fortawesome/free-solid-svg-icons";
@@ -6,11 +6,6 @@ import { HOME_PAGE } from "../link/link";
 import BreadCrumb from "../BreadCrumb/BreadCrumb";
 import DUMMY_DATA from "../DummyData/DUMMY_DATA";
 import { Col, Container, Row } from "react-bootstrap";
-//
-import p1 from "../image/indoor-1.jpeg";
-import p2 from "../image/indoor-2.jpeg";
-import p3 from "../image/indoor-3.jpeg";
-import p4 from "../image/indoor-4.jpeg";
 // fake image data
 import styles from "../styles/DetailItem.module.scss";
 import { faStar } from "@fortawesome/free-regular-svg-icons";
@@ -32,6 +27,7 @@ import useScroll from "../hook/use-scroll";
 import useQuantity from "../hook/use-quantity";
 import useToggle from "../hook/use-toggle";
 import Related from "../Detail/Related/Related";
+
 const DetailItem = () => {
   const params = useParams();
   const dispatch = useDispatch();
@@ -41,6 +37,16 @@ const DetailItem = () => {
   const route = useRouteMatch();
   const inputRef = useRef();
   const isValid = useScroll(100);
+  // for testing image, fake image
+  const images = useMemo(() => {
+    const image = [
+      "http://localhost:8080/image/indoor-1.jpeg",
+      "http://localhost:8080/image/indoor-2.jpeg",
+      "http://localhost:8080/image/indoor-3.jpeg",
+      "http://localhost:8080/image/indoor-4.jpeg",
+    ];
+    return image;
+  }, []);
   const { incrementHandler, decrementHandler, quantity, setQuantity } =
     useQuantity(1);
   useEffect(() => {
@@ -79,6 +85,7 @@ const DetailItem = () => {
   return (
     <>
       <BreadCrumb>
+        <h2>{product.name}</h2>
         <Link to={HOME_PAGE}>
           Home <FontAwesomeIcon icon={faAngleRight} />
         </Link>
@@ -90,7 +97,7 @@ const DetailItem = () => {
       <Container className={styles.container}>
         <Row className={`${styles.row} justify-content-around`}>
           <Col xs={12} sm={12} md={6} lg={5} className={styles.image}>
-            <ListImage images={[p1, p2, p3, p4]} />
+            <ListImage images={images} />
           </Col>
           <Col
             xs={12}
@@ -155,7 +162,7 @@ const DetailItem = () => {
           </Col>
         </Row>
         <MoreDetail />
-        <Related/>
+        <Related />
       </Container>
       <CSSTransition
         timeout={700}
@@ -164,7 +171,7 @@ const DetailItem = () => {
         mountOnEnter
         in={isValid}
       >
-        <LinkCheckOut url={p1} />
+        <LinkCheckOut url={'http://localhost:8080/image/indoor-1.jpeg'} />
       </CSSTransition>
       <CSSTransition
         in={toggle}

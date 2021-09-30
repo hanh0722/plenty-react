@@ -1,13 +1,22 @@
 @import '../constant/variable';
-.container{
-    padding-top: 100px;
+
+.background{
+    background: var(--beigh);
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    top: 0;
+    transform: skewY(8deg);
+    transform-origin: 100%;
+    object-fit: cover;
+
 }
-
-
 @media screen and (max-width: 768px) {
 
     .container{
-        padding: 60px 0 0 0;
         margin: 0;
         max-width: 100%;
     }
