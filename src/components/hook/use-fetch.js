@@ -11,18 +11,20 @@ const reducerFn = (state, action) => {
     case Type.LOADING:
       return {
         ...state,
-        isLoading: true,
+        loading: true,
       };
     case Type.ERROR: {
       return {
         ...state,
         error: action.payload,
+        loading: false
       };
     }
     case Type.SUCCESS: {
       return {
         ...state,
         data: action.payload,
+        loading: false
       };
     }
     default:
@@ -41,7 +43,11 @@ const useFetch = () => {
         ...routeConfig.options,
       });
       if (!response.ok) {
-        throw new Error(routeConfig.message);
+        let message = 'Something went wrong, please try again';
+        if(routeConfig.message){
+          message = routeConfig.message;
+        }
+        throw new Error(message);
       }
       const data = await response.json();
       dispatch({

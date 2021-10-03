@@ -6,12 +6,15 @@ import { Row } from "react-bootstrap";
 import styles from "./Main.module.scss";
 const Main = () => {
   return (
+    <>
     <Container className={styles.container}>
+    <div className={styles.background}></div>
       <Row className={`justify-content-between align-items-center flex-row-reverse ${styles.line}`}>
         <Banner />
         <ContentBanner />
       </Row>
     </Container>
+    </>
   );
 };
 

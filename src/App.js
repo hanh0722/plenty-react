@@ -23,6 +23,7 @@ import {
   RESET_PASSWORD,
   SHOP,
   SIGN_IN_PAGE,
+  VERIFY_ACCOUNT,
 } from "./components/link/link";
 import DetailItem from "./components/views/DetailItem";
 import SignIn from "./components/views/SignIn";
@@ -33,6 +34,8 @@ import Reset from "./components/views/Reset";
 import Checkout from "./components/views/Checkout";
 import TypeProduct from "./components/views/TypeProduct";
 import NotFound from "./components/views/NotFound";
+import VerifyAccount from "./components/views/VerifyAccount";
+// import Test from "./components/Test/Test";
 const App = () => {
   const [navigation, setNavigation] = useState(false);
   const location = useLocation();
@@ -84,8 +87,10 @@ const App = () => {
           <Route path={PRODUCT_LIST} component={TypeProduct} />
           <Route path={RESET_PASSWORD} component={Reset} />
           <Route path={BLOG_PAGE} component={Blog} />
-          <Route path={REGISTER_PAGE} component={Register} />
+          <Route path={REGISTER_PAGE} component={Register} exact />
+          <Route path={VERIFY_ACCOUNT} component={VerifyAccount} />
           <Route path={CHECK_OUT_PAGE} component={Checkout} />
+          {/* <Route path="/test" component={Test} /> */}
           <Route path="*" component={NotFound} />
         </Switch>
         <Footer />
