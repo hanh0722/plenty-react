@@ -5,6 +5,7 @@ const initialState = {
   loading: false,
   error: null,
   data: null,
+  status: 200
 };
 const reducerFn = (state, action) => {
   switch (action.type) {
@@ -16,8 +17,9 @@ const reducerFn = (state, action) => {
     case Type.ERROR: {
       return {
         ...state,
-        error: action.payload,
-        loading: false
+        error: action.payload.message,
+        loading: false,
+        status: action.payload.status
       };
     }
     case Type.SUCCESS: {
@@ -47,7 +49,9 @@ const useFetch = () => {
         if(routeConfig.message){
           message = routeConfig.message;
         }
-        throw new Error(message);
+        const error = new Error(message);
+        error.statusCode = response.status;
+        throw error;
       }
       const data = await response.json();
       dispatch({
@@ -57,7 +61,10 @@ const useFetch = () => {
     } catch (err) {
       dispatch({
         type: Type.ERROR,
-        payload: err.message,
+        payload: {
+          message: err.message,
+          status: err.statusCode
+        },
       });
     }
   }, []);
@@ -66,7 +73,8 @@ const useFetch = () => {
       isLoading: state.loading,
       error: state.error,
       data: state.data,
-      getDataFromServerHandler: getDataFromServerHandler
+      getDataFromServerHandler: getDataFromServerHandler,
+      status: state.status
   }
 };
 

@@ -1,6 +1,7 @@
-import React from "react";
+import React, { useMemo, useState } from "react";
 import { Button } from "@material-ui/core";
 import styles from "../LoginForm/Form.module.scss";
+import classes from './Register.module.scss';
 import { Link } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
@@ -12,10 +13,29 @@ import { faUser } from "@fortawesome/free-regular-svg-icons";
 import checkValidPassword from "../CheckValidPassword/CheckValidPassword";
 import Input from "../Input/Input";
 import { SIGN_IN_PAGE } from "../../link/link";
-const RegisterForm = () => {
-
+import {isEmail, isPassword, isStringValid} from '../../helper/validationInput';
+const RegisterForm = ({onRegister}) => {
+  const [name, setName] = useState('');
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const [phone, setPhone] = useState('');
+  let isValid = useMemo(() => {
+    if(!isEmail(email) || !isStringValid(name, 0) || !isStringValid(phone, 9) || !isPassword(password)){
+      return false;
+    }
+    return true;
+  }, [email, name, password, phone]);
   const submitHandler = (event) => {
     event.preventDefault();
+    if(!isValid){
+      return;
+    }
+    onRegister({
+      name,
+      email,
+      password,
+      phone
+    })
   };
   return (
     <form
@@ -29,6 +49,7 @@ const RegisterForm = () => {
           type: "text",
           placeholder: "Type your name...",
           id: "name",
+          onChange: (event) => setName(event.target.value),
           required: true,
           autoComplete: "off",
           thumbcontent: "Enter your name",
@@ -49,7 +70,7 @@ const RegisterForm = () => {
           required: true,
           autoComplete: "off",
           thumbcontent: "Enter your valid email",
-          onChange: (event) => console.log(event.target.value),
+          onChange: (event) => setEmail(event.target.value),
         }}
         label="Email"
         error="Email is not valid!"
@@ -62,6 +83,7 @@ const RegisterForm = () => {
         error="Password needs at least 8 characters long, one uppercase, one lowercase and one special character!"
         input={{
           type: "password",
+          onChange: event => setPassword(event.target.value),
           placeholder: "Type your password...",
           id: "password",
           required: true,
@@ -80,6 +102,7 @@ const RegisterForm = () => {
           type: "text",
           placeholder: "Type your mobile phone...",
           id: "phone",
+          onChange: event => setPhone(event.target.value),
           required: true,
           autoComplete: "off",
           minLength: 10,
@@ -89,8 +112,8 @@ const RegisterForm = () => {
       >
         <FontAwesomeIcon icon={faMobileAlt} />
       </Input>
-      <div className={styles.button}>
-        <Button className="w-100" variant="contained" type="submit">
+      <div className={`${styles.button} ${classes.dark}`}>
+        <Button disabled={!isValid} className={`w-100 ${!isValid && classes.disabled}`} variant="contained" type="submit">
           Register
         </Button>
       </div>

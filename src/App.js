@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useCallback, useEffect, useState } from "react";
 import Navigation from "./components/Navigation/Navigation";
 import "bootstrap/dist/css/bootstrap.min.css";
 import SearchBar from "./components/SearchBar/SearchBar";
@@ -41,6 +41,22 @@ const App = () => {
   const location = useLocation();
   const state = useSelector((state) => state.hamburger.isShowed);
   const dispatch = useDispatch();
+  const getScrollHandler = useCallback(() => {
+    let newValue;
+    let oldValue;
+    newValue = window.pageYOffset;
+    if (newValue > 50) {
+      dispatch(buttonTopActions.setVisibleHandler());
+    } else {
+      dispatch(buttonTopActions.setHiddenHandler());
+    }
+    if (oldValue < newValue && newValue > 50) {
+      setNavigation(true);
+    } else {
+      setNavigation(false);
+    }
+    oldValue = newValue;
+  }, [dispatch]);
   useEffect(() => {
     Aos.init({
       once: true,
@@ -48,24 +64,8 @@ const App = () => {
       offset: 250,
       delay: 600,
     });
-    let oldValue = 0;
-    let newValue = 0;
-    const getScrollHandler = () => {
-      newValue = window.pageYOffset;
-      if (newValue > 50) {
-        dispatch(buttonTopActions.setVisibleHandler());
-      } else {
-        dispatch(buttonTopActions.setHiddenHandler());
-      }
-      if (oldValue < newValue && newValue > 50) {
-        setNavigation(true);
-      } else {
-        setNavigation(false);
-      }
-      oldValue = newValue;
-    };
     window.addEventListener("scroll", getScrollHandler);
-  }, [dispatch]);
+  }, [dispatch, getScrollHandler]);
   useEffect(() => {
     upToTopHandler();
   }, [location.pathname]);

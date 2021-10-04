@@ -1,10 +1,10 @@
-import React from "react";
+import React, { forwardRef } from "react";
 import NormalInput from "../../input/NormalInput/NorInput";
 import styles from "../LoginForm/Form.module.scss";
 import useInput from "../../hook/use-input";
 import Thumb from "../../Thumb/Thumb";
 import { CSSTransition } from "react-transition-group";
-const Input = (props) => {
+const Input = forwardRef((props, ref) => {
   const {
     changeInputHandler,
     value,
@@ -36,6 +36,7 @@ const Input = (props) => {
           )}
           {props.children}
           <NormalInput
+            ref={ref}
             input={{
               ...props.input,
               value: value,
@@ -60,6 +61,6 @@ const Input = (props) => {
       </div>
     </>
   );
-};
+});
 
 export default React.memo(Input);

@@ -1,5 +1,6 @@
 @import '../constant/variable';
 :root{
+    --disabled: rgba(0, 0, 0, .26);
     --black: #000000;
     --white: #fff;
     --beigh: #fbf5ef;
@@ -35,6 +36,7 @@
 body[data-theme='dark']{
     color: var(--black);
     background: var(--white);
+    --disabled: rgba(0, 0, 0, .26);
     --black: #fff;
     --white: #000000;
     --beigh: #000;

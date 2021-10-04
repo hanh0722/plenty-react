@@ -3,6 +3,8 @@ const authLinks = `${serverUrl}/api/auth`;
 const urlCheckVerify = (id, token) => {
     return `${authLinks}/verify?id=${id}&token=${token}`
 }
+const registerUrl = `${serverUrl}/api/auth/register`;
 export {
-    urlCheckVerify
+    urlCheckVerify,
+    registerUrl
 }

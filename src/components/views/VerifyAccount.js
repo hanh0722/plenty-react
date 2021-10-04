@@ -28,7 +28,6 @@ const VerifyAccount = () => {
       }
     });
   };
-  console.log(data, error, isLoading);
   return (
     <>
       <HeaderPage
