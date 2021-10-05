@@ -1,5 +1,5 @@
 import React from 'react';
-import useInput from '../../hook/use-input';
+import useInput from '../../../hook/use-input';
 const Input = (props) => {
     const {valid, isTouched, changeInputHandler, touchedInputHandler} = useInput(value => value.trim().length > 0);
     return(

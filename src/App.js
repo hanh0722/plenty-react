@@ -4,7 +4,7 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import SearchBar from "./components/SearchBar/SearchBar";
 import { useSelector, useDispatch } from "react-redux";
 import { Route, Switch, useLocation } from "react-router-dom";
-import Index from "./components/views";
+import Index from './views/index';
 import CartMain from "./components/CartMain/CartMain";
 import "./components/styles/styles.scss";
 import ButtonTop from "./components/ButtonTop/ButtonTop";
@@ -12,7 +12,7 @@ import { buttonTopActions } from "./components/store/button-top";
 import Footer from "./components/Footer/Footer";
 import Aos from "aos";
 import "aos/dist/aos.css";
-import Shop from "./components/views/shop";
+import Shop from "./views/shop";
 import {
   BLOG_PAGE,
   CHECK_OUT_PAGE,
@@ -25,16 +25,16 @@ import {
   SIGN_IN_PAGE,
   VERIFY_ACCOUNT,
 } from "./components/link/link";
-import DetailItem from "./components/views/DetailItem";
-import SignIn from "./components/views/SignIn";
+import DetailItem from "./views/DetailItem";
+import SignIn from "./views/SignIn";
 import LayoutTop from "./components/layout/LayoutTop/LayoutTop";
-import Blog from "./components/views/Blog";
-import Register from "./components/views/Register";
-import Reset from "./components/views/Reset";
-import Checkout from "./components/views/Checkout";
-import TypeProduct from "./components/views/TypeProduct";
-import NotFound from "./components/views/NotFound";
-import VerifyAccount from "./components/views/VerifyAccount";
+import Blog from "./views/Blog";
+import Register from "./views/Register";
+import Reset from "./views/Reset";
+import Checkout from "./views/Checkout";
+import TypeProduct from "./views/TypeProduct";
+import NotFound from "./views/NotFound";
+import VerifyAccount from "./views/VerifyAccount";
 // import Test from "./components/Test/Test";
 const App = () => {
   const [navigation, setNavigation] = useState(false);

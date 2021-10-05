@@ -32,6 +32,7 @@
     --google-logo: #d61c1ce0;
     --twitter-logo: #6DBDD0;
     --triangle-border: #cd783e;
+    --orange: #cd783e;
 }
 body[data-theme='dark']{
     color: var(--black);
@@ -57,6 +58,7 @@ body[data-theme='dark']{
     --wish-list-cumb: #fff;
     --btn-border-square: #cd783e;
     --shadow: 0px 2px 8px rgba(255, 255, 255, .16);
+    --orange: #fff;
 }
 input[type='number']{
     &::-webkit-outer-spin-button, &::-webkit-inner-spin-button{

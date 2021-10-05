@@ -4,7 +4,7 @@ import NormalInput from "../input/NormalInput/NorInput";
 import { Button } from "@material-ui/core";
 import { CSSTransition } from "react-transition-group";
 import "../CSSTransition/CSSTransition.scss";
-import useInput from "../hook/use-input";
+import useInput from "../../hook/use-input";
 const ApplyVoucher = ({ showVoucher }) => {
   const {
     isTouched,

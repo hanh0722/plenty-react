@@ -5,7 +5,7 @@ const initialState = {
   loading: false,
   error: null,
   data: null,
-  status: 200
+  status: 200,
 };
 const reducerFn = (state, action) => {
   switch (action.type) {
@@ -19,14 +19,20 @@ const reducerFn = (state, action) => {
         ...state,
         error: action.payload.message,
         loading: false,
-        status: action.payload.status
+        status: action.payload.status,
       };
     }
     case Type.SUCCESS: {
       return {
         ...state,
         data: action.payload,
-        loading: false
+        loading: false,
+      };
+    }
+    case Type.RESET: {
+      return {
+        ...initialState,
+        status: state.status
       };
     }
     default:
@@ -45,8 +51,8 @@ const useFetch = () => {
         ...routeConfig.options,
       });
       if (!response.ok) {
-        let message = 'Something went wrong, please try again';
-        if(routeConfig.message){
+        let message = "Something went wrong, please try again";
+        if (routeConfig.message) {
           message = routeConfig.message;
         }
         const error = new Error(message);
@@ -63,19 +69,22 @@ const useFetch = () => {
         type: Type.ERROR,
         payload: {
           message: err.message,
-          status: err.statusCode
+          status: err.statusCode,
         },
       });
     }
   }, []);
-
+  const resetAllHandler = () => {
+    dispatch({ type: Type.RESET });
+  };
   return {
-      isLoading: state.loading,
-      error: state.error,
-      data: state.data,
-      getDataFromServerHandler: getDataFromServerHandler,
-      status: state.status
-  }
+    isLoading: state.loading,
+    error: state.error,
+    data: state.data,
+    getDataFromServerHandler: getDataFromServerHandler,
+    status: state.status,
+    resetAllHandler: resetAllHandler
+  };
 };
 
 export default useFetch;

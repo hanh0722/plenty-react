@@ -1,7 +1,7 @@
 import React from "react";
 import styles from "./LinkCheckOut.module.scss";
 import { Button } from "@material-ui/core";
-import useQuantity from "../../hook/use-quantity";
+import useQuantity from "../../../hook/use-quantity";
 const LinkCheckOut = ({ url }) => {
   const { incrementHandler, decrementHandler, quantity, setQuantity } =
     useQuantity();

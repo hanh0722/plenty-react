@@ -4,11 +4,11 @@ import BoxVerify from "./BoxVerify/BoxVerify";
 import styles from "./Verify.module.scss";
 import { Button } from "@material-ui/core";
 import { Redirect, useLocation } from "react-router-dom";
-import useFetch from "../hook/use-fetch";
+import useFetch from "../../hook/use-fetch";
 import Loading from "../Loading/Loading";
 import Error from "../Error/Error";
 import ReactDOM from "react-dom";
-import useInterval from "../hook/use-interval";
+import useInterval from "../../hook/use-interval";
 import { urlCheckVerify } from "../../config/url";
 const Verify = (props) => {
   const location = useLocation();

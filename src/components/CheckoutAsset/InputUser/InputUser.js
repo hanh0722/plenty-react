@@ -1,6 +1,6 @@
 import React from "react";
 import NormalInput from "../../input/NormalInput/NorInput";
-import useInput from "../../hook/use-input";
+import useInput from "../../../hook/use-input";
 import styles from "./InputUser.module.scss";
 import { CSSTransition } from "react-transition-group";
 

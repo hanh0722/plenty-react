@@ -1,6 +1,6 @@
 import React from 'react';
-import Header from '../Blog/Header/Header';
-import ViewBlog from '../Blog/ViewBlog/ViewBlog';
+import Header from '../components/Blog/Header/Header';
+import ViewBlog from '../components/Blog/ViewBlog/ViewBlog';
 const Blog = () => {
     return(
         <>

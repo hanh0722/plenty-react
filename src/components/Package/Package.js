@@ -12,7 +12,7 @@ import { Link } from "react-router-dom";
 import { CSSTransition } from "react-transition-group";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faFeatherAlt } from "@fortawesome/free-solid-svg-icons";
-import useToggle from "../hook/use-toggle";
+import useToggle from "../../hook/use-toggle";
 
 const Package = () => {
   const { toggle, changeToggleHandler } = useToggle(false);

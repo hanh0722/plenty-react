@@ -1,8 +1,8 @@
 import React from "react";
-import { SIGN_IN_PAGE } from "../link/link";
+import { SIGN_IN_PAGE } from "../components/link/link";
 import { useRouteMatch } from "react-router-dom";
-import ForgetPassword from "../SignInAsset/ForgetPassword/ForgetPassword";
-import HeaderPage from "../HeaderPage/HeaderPage";
+import ForgetPassword from "../components/SignInAsset/ForgetPassword/ForgetPassword";
+import HeaderPage from "../components/HeaderPage/HeaderPage";
 const Reset = () => {
   const route = useRouteMatch();
   return (

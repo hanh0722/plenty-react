@@ -14,7 +14,8 @@ import checkValidPassword from "../CheckValidPassword/CheckValidPassword";
 import Input from "../Input/Input";
 import { SIGN_IN_PAGE } from "../../link/link";
 import {isEmail, isPassword, isStringValid} from '../../helper/validationInput';
-const RegisterForm = ({onRegister}) => {
+import Spinner from '../../Loading/Spinner/Spinner';
+const RegisterForm = ({onRegister, isLoading}) => {
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
@@ -117,6 +118,7 @@ const RegisterForm = ({onRegister}) => {
           Register
         </Button>
       </div>
+      {isLoading && <Spinner/>}
       <Link className="pt-3 text-center" to={SIGN_IN_PAGE}>
         Have an account? Sign in
       </Link>

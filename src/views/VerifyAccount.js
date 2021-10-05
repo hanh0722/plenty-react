@@ -1,9 +1,9 @@
 import React, { useState } from "react";
 import { useLocation } from "react-router-dom";
-import HeaderPage from "../HeaderPage/HeaderPage";
-import Verify from "../Verify/Verify";
+import HeaderPage from "../components/HeaderPage/HeaderPage";
+import Verify from "../components/Verify/Verify";
 import useFetch from "../hook/use-fetch";
-import { urlCheckVerify } from "../../config/url";
+import { urlCheckVerify } from '../config/url';
 const VerifyAccount = () => {
   const [errorOTP, setErrorOTP] = useState(null);
   const { getDataFromServerHandler, data, error, isLoading } = useFetch();
@@ -12,6 +12,9 @@ const VerifyAccount = () => {
   const token = params.get('token');
   const id = params.get('id');
   const verifyHandler = (data) => {
+    if(!token && !id){
+      return;
+    }
     setErrorOTP(null);
     if (data.length < 4) {
       return setErrorOTP(true);
@@ -28,6 +31,7 @@ const VerifyAccount = () => {
       }
     });
   };
+  console.log(data, error, isLoading);
   return (
     <>
       <HeaderPage

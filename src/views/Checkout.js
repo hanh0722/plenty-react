@@ -1,7 +1,7 @@
 import React from "react";
-import HeaderPage from "../HeaderPage/HeaderPage";
+import HeaderPage from "../components/HeaderPage/HeaderPage";
 import { useRouteMatch } from "react-router-dom";
-import CheckoutPage from "../CheckoutAsset/Checkout/Checkout";
+import CheckoutPage from "../components/CheckoutAsset/Checkout/Checkout";
 const Checkout = () => {
   const route = useRouteMatch();
   const pathsItem = [

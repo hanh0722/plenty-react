@@ -1,7 +1,7 @@
 import React, { forwardRef } from "react";
 import NormalInput from "../../input/NormalInput/NorInput";
 import styles from "../LoginForm/Form.module.scss";
-import useInput from "../../hook/use-input";
+import useInput from "../../../hook/use-input";
 import Thumb from "../../Thumb/Thumb";
 import { CSSTransition } from "react-transition-group";
 const Input = forwardRef((props, ref) => {
