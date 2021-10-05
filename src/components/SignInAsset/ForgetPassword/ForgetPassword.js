@@ -4,7 +4,7 @@ import classes from "./ForgetPassword.module.scss";
 import NormalInput from "../../input/NormalInput/NorInput";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faEnvelope } from "@fortawesome/free-regular-svg-icons";
-import useInput from "../../hook/use-input";
+import useInput from "../../../hook/use-input";
 import { CSSTransition } from "react-transition-group";
 const ForgetPassword = () => {
   const { value, valid, touchedInputHandler, isTouched, changeInputHandler } =

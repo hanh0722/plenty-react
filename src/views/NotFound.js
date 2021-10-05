@@ -1,11 +1,11 @@
 import React from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faFrown } from "@fortawesome/free-regular-svg-icons";
-import styles from "../NotFound/NotFound.module.scss";
-import Container from "../layout/container/Container";
+import styles from "../components/NotFound/NotFound.module.scss";
+import Container from "../components/layout/container/Container";
 import { Button } from "@material-ui/core";
 import { Link } from "react-router-dom";
-import {HOME_PAGE} from '../link/link';
+import {HOME_PAGE} from '../components/link/link';
 const NotFound = () => {
   return (
     <>

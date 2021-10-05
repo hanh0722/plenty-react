@@ -1,5 +1,6 @@
 @import '../constant/variable';
 :root{
+    --disabled: rgba(0, 0, 0, .26);
     --black: #000000;
     --white: #fff;
     --beigh: #fbf5ef;
@@ -31,10 +32,12 @@
     --google-logo: #d61c1ce0;
     --twitter-logo: #6DBDD0;
     --triangle-border: #cd783e;
+    --orange: #cd783e;
 }
 body[data-theme='dark']{
     color: var(--black);
     background: var(--white);
+    --disabled: rgba(0, 0, 0, .26);
     --black: #fff;
     --white: #000000;
     --beigh: #000;
@@ -55,6 +58,7 @@ body[data-theme='dark']{
     --wish-list-cumb: #fff;
     --btn-border-square: #cd783e;
     --shadow: 0px 2px 8px rgba(255, 255, 255, .16);
+    --orange: #fff;
 }
 input[type='number']{
     &::-webkit-outer-spin-button, &::-webkit-inner-spin-button{

@@ -1,7 +1,7 @@
 import React from "react";
 import Input from "../input/Input";
 import styles from "./SearchBar.module.scss";
-import useInput from "../hook/use-input";
+import useInput from "../../hook/use-input";
 import CloseButton from "../UI/CloseButton";
 import { CSSTransition } from "react-transition-group";
 import { useDispatch } from "react-redux";
