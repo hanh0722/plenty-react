@@ -1,6 +1,6 @@
 import React from "react";
 import styles from "./LineCart.module.scss";
-import p1 from "../../../image/indoor-3.jpeg";
+import p1 from "../../../../image/indoor-3.jpeg";
 const LineCart = () => {
   return (
     <div className={styles["item--cart"]}>

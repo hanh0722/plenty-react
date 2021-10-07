@@ -6,12 +6,12 @@ const DUMMY_LIST = [
   {
     name: "PEPEROMIA OBTUSIFOLIA",
     price: "75",
-    imageUrl: require("../../image/indoor-2.jpeg").default,
+    imageUrl: require("../../../image/indoor-2.jpeg").default,
   },
   {
     name: "FICUS TINEKE",
     price: "39.99",
-    imageUrl: require("../../image/indoor-3.jpeg").default,
+    imageUrl: require("../../../image/indoor-3.jpeg").default,
   }
 ];
 const Sale = () => {

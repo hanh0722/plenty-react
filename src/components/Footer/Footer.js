@@ -1,7 +1,7 @@
 import React, {useContext} from "react";
 import styles from "./Footer.module.scss";
-import logo from "../image/logo.png";
-import logoDarkTheme from '../image/logo-dark.png';
+import logo from "../../image/logo.png";
+import logoDarkTheme from '../../image/logo-dark.png';
 import { Link } from "react-router-dom";
 import { DarkModeContext } from "../darkmode-context/darkmode-content";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";

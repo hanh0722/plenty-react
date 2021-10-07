@@ -1,9 +1,11 @@
 @import '../constant/variable';
 :root{
+    overflow-x: hidden;
     --disabled: rgba(0, 0, 0, .26);
     --black: #000000;
     --white: #fff;
     --beigh: #fbf5ef;
+    --brown: #cd783e;
     --brown-light: #CB905E;
     --brown-dark: #D08A47;
     --brown-darker: #db995c;
@@ -40,6 +42,7 @@ body[data-theme='dark']{
     --disabled: rgba(0, 0, 0, .26);
     --black: #fff;
     --white: #000000;
+    --brown: #fff;
     --beigh: #000;
     --brown-light: #33363b;
     --brown-dark: #33363b;

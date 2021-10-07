@@ -12,7 +12,7 @@ const HeaderPage = (props) => {
       </Link>
       {props.paths.map((path, index) => {
         return (
-          <Link key={path} to={path.link}>
+          <Link key={index} to={path.link}>
             {path.name}
             {props.paths.length - 1 !== index && (
               <FontAwesomeIcon icon={faAngleRight} />

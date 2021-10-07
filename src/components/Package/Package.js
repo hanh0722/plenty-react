@@ -3,7 +3,7 @@ import { Col, Row } from "react-bootstrap";
 import Container from "../layout/container/Container";
 import Content from "../layout/Content/Content";
 import Sale from "./Sale/Sale";
-import p1 from "../image/banner-2.jpeg";
+import p1 from "../../image/banner-2.jpeg";
 import BannerImages from "../layout/Banner-images/BannerImages";
 import SmallButton from "../SmallButton/SmallButton";
 import Information from "./Information/Information";
@@ -40,7 +40,7 @@ const Package = () => {
                   <Information style={{ top: "33%", right: "28%" }}>
                     <div className={styles.image}>
                       <img
-                        src={require("../image/indoor-1.jpeg").default}
+                        src={require("../../image/indoor-1.jpeg").default}
                         alt=""
                       />
                     </div>

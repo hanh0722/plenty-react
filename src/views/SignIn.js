@@ -1,22 +1,50 @@
 import React from "react";
-import BreadCrumb from "../components/BreadCrumb/BreadCrumb";
-import { Link, useRouteMatch } from "react-router-dom";
-import { HOME_PAGE } from "../components/link/link";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faAngleRight } from "@fortawesome/free-solid-svg-icons";
+import { useRouteMatch } from "react-router-dom";
 import LoginForm from "../components/SignInAsset/LoginForm/LoginForm";
+import HeaderPage from "../components/HeaderPage/HeaderPage";
+import useFetch from "../hook/use-fetch";
+import checkValidPassword from "../components/SignInAsset/CheckValidPassword/CheckValidPassword";
+import { loginUrl } from "../config/url";
 const SignIn = () => {
   const route = useRouteMatch();
+  const {
+    getDataFromServerHandler,
+    data: dataSignIn,
+    error,
+    isLoading,
+  } = useFetch();
+  const getUserFromInput = (userData) => {
+    console.log(userData);
+    if (
+      !userData.email.includes("@") ||
+      !checkValidPassword(userData.password)
+    ) {
+      return;
+    }
+    getDataFromServerHandler({
+      url: loginUrl,
+      options: {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(userData)
+      }
+    });
+  };
+  console.log(dataSignIn, error, isLoading);
   return (
     <>
-      <BreadCrumb>
-        <h2>Log In</h2>
-        <Link to={HOME_PAGE}>
-          Home <FontAwesomeIcon icon={faAngleRight} />{" "}
-        </Link>
-        <Link to={route.path}>Sign In</Link>
-      </BreadCrumb>
-      <LoginForm/>
+      <HeaderPage
+        title="Login"
+        paths={[
+          {
+            link: route.path,
+            name: "Sign In",
+          },
+        ]}
+      />
+      <LoginForm getUserData={getUserFromInput} />
     </>
   );
 };

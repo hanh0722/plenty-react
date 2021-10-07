@@ -3,8 +3,8 @@ import Navigation from "./components/Navigation/Navigation";
 import "bootstrap/dist/css/bootstrap.min.css";
 import SearchBar from "./components/SearchBar/SearchBar";
 import { useSelector, useDispatch } from "react-redux";
-import { Route, Switch, useLocation } from "react-router-dom";
-import Index from './views/index';
+import { Route, Switch, useLocation, Redirect } from "react-router-dom";
+import Index from "./views/index";
 import CartMain from "./components/CartMain/CartMain";
 import "./components/styles/styles.scss";
 import ButtonTop from "./components/ButtonTop/ButtonTop";
@@ -18,6 +18,9 @@ import {
   CHECK_OUT_PAGE,
   DETAIL,
   HOME_PAGE,
+  NOT_FOUND,
+  PAGE_SUCCESS_REGISTER,
+  PAGE_VERIFY_FIRST,
   PRODUCT_LIST,
   REGISTER_PAGE,
   RESET_PASSWORD,
@@ -35,6 +38,8 @@ import Checkout from "./views/Checkout";
 import TypeProduct from "./views/TypeProduct";
 import NotFound from "./views/NotFound";
 import VerifyAccount from "./views/VerifyAccount";
+import RegisterOTP from "./views/RegisterOTP";
+import SuccessVerified from "./views/SuccessVerified";
 // import Test from "./components/Test/Test";
 const App = () => {
   const [navigation, setNavigation] = useState(false);
@@ -88,10 +93,13 @@ const App = () => {
           <Route path={RESET_PASSWORD} component={Reset} />
           <Route path={BLOG_PAGE} component={Blog} />
           <Route path={REGISTER_PAGE} component={Register} exact />
+          <Route path={PAGE_VERIFY_FIRST} component={RegisterOTP} />
           <Route path={VERIFY_ACCOUNT} component={VerifyAccount} />
+          <Route path={PAGE_SUCCESS_REGISTER} component={SuccessVerified} />
           <Route path={CHECK_OUT_PAGE} component={Checkout} />
           {/* <Route path="/test" component={Test} /> */}
-          <Route path="*" component={NotFound} />
+          <Route path={NOT_FOUND} component={NotFound} />
+          <Redirect from="*" to={NOT_FOUND} />
         </Switch>
         <Footer />
       </LayoutTop>

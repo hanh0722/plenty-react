@@ -10,6 +10,7 @@ import Error from "../Error/Error";
 import ReactDOM from "react-dom";
 import useInterval from "../../hook/use-interval";
 import { urlCheckVerify } from "../../config/url";
+import Ripple from "../Loading/Ripple/Ripple";
 const Verify = (props) => {
   const location = useLocation();
   const firstInputRef = useRef();
@@ -83,7 +84,9 @@ const Verify = (props) => {
               >
                 Submit
               </Button>
-              {props.errorOTP && <p className='error__text'>OTP must be 4 number!</p>}
+              {props.loadingOTP && <Ripple className="pt-3"/>}
+              {props.errorOTP && <p className='error__text'>Your OTP is wrong!</p>}
+              {props.checkErrorOTP && <p className='error__text'>OTP must be 4 numbers</p>}
             </form>
           </>
         )}

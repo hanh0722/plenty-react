@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import Container from "../layout/container/Container";
 import Content from "../layout/Content/Content";
 import styles from "./PageItems.module.scss";
-import p1 from "../image/banner-3.jpeg";
+import p1 from "../../image/banner-3.jpeg";
 const PageItems = () => {
   return (
     <Content>
