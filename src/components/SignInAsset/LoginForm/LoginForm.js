@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useRef } from "react";
 import { Button } from "@material-ui/core";
 import styles from "./Form.module.scss";
 import { Link, useRouteMatch } from "react-router-dom";
@@ -13,11 +13,20 @@ import {
 import checkValidPassword from "../CheckValidPassword/CheckValidPassword";
 import Input from "../Input/Input";
 import { REGISTER_PAGE } from "../../link/link";
+import CheckBox from "../../CheckBox/CheckBox";
+import useToggle from "../../../hook/use-toggle";
 const icons = [faFacebookF, faGoogle, faTwitter];
-const LoginForm = () => {
+const LoginForm = ({getUserData}) => {
   const route = useRouteMatch();
+  const emailRef = useRef();
+  const passwordRef = useRef();
+  const { toggle, changeToggleHandler } = useToggle(false);
   const submitHandler = (event) => {
     event.preventDefault();
+    getUserData({
+      email: emailRef.current.value,
+      password: passwordRef.current.value
+    })
   };
   return (
     <form
@@ -26,6 +35,7 @@ const LoginForm = () => {
       autoComplete="off"
     >
       <Input
+        ref={emailRef}
         functionCondition={(valueEmail) =>
           valueEmail.trim().length > 0 && valueEmail.includes("@")
         }
@@ -43,11 +53,12 @@ const LoginForm = () => {
         <FontAwesomeIcon icon={faLock} />
       </Input>
       <Input
+        ref={passwordRef}
         functionCondition={(valuePassword) => checkValidPassword(valuePassword)}
         label="Password"
         error="Password needs at least 8 characters long, one uppercase, one lowercase and one special character!"
         input={{
-          type: "password",
+          type: toggle ? "text" : "password",
           placeholder: "Type your password...",
           id: "password",
           required: true,
@@ -58,6 +69,10 @@ const LoginForm = () => {
       >
         <FontAwesomeIcon icon={faUser} />
       </Input>
+      <div className={`d-flex align-items-center ${styles["tick--box"]}`}>
+        <p>Show password</p>
+        <CheckBox isCheck={toggle} onClick={changeToggleHandler} />
+      </div>
       <Link to={`${route.path}/reset`}>Forget password?</Link>
       <div className={styles.button}>
         <Button className="w-100" variant="contained" type="submit">

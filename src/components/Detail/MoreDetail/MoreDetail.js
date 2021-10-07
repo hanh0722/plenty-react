@@ -1,6 +1,6 @@
 import React from "react";
 import styles from "./MoreDetail.module.scss";
-import p1 from "../../image/indoor-1.jpeg";
+import p1 from "../../../image/indoor-1.jpeg";
 import { Row, Col } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
 import { styleDetailActions } from "../../store/style-detail";

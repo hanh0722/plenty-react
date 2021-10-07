@@ -104,6 +104,13 @@
     opacity: 1;
   }
 }
+.tick--box{
+  p{
+    font-size: $fs-sm;
+    padding-right: $sm-pd;
+  }
+  line-height: normal;
+}
 body[data-theme="dark"] {
   .form {
     border: 1px solid $white;

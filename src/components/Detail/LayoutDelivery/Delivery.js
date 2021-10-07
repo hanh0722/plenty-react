@@ -1,6 +1,6 @@
 import React from "react";
 import styles from "./Delivery.module.scss";
-import p1 from "../../image/list-card.png";
+import p1 from "../../../image/list-card.png";
 import getDate from "../GetDateDeliver/GetDateDeliver";
 const Delivery = (props) => {
   return (

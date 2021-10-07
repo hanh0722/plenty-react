@@ -4,7 +4,13 @@ const urlCheckVerify = (id, token) => {
     return `${authLinks}/verify?id=${id}&token=${token}`
 }
 const registerUrl = `${serverUrl}/api/auth/register`;
+const urlGetInforUser = (id) => {
+    return `${serverUrl}/api/user/info/${id}`
+}
+const loginUrl = `${serverUrl}/api/auth/login`;
 export {
     urlCheckVerify,
-    registerUrl
+    registerUrl,
+    urlGetInforUser,
+    loginUrl
 }

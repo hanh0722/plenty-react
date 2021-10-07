@@ -1,4 +1,4 @@
-import React, { useEffect, useMemo, useState } from "react";
+import React, { useEffect } from "react";
 import Header from "../components/SignInAsset/RegisterForm/Header/Header";
 import RegisterForm from "../components/SignInAsset/RegisterForm/RegisterForm";
 import useFetch from "../hook/use-fetch";
@@ -12,6 +12,7 @@ import "../components/styles/animation-transition.scss";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faTimes } from "@fortawesome/free-solid-svg-icons";
 import styles from "../components/SignInAsset/RegisterForm/Register.module.scss";
+import { PAGE_VERIFY_FIRST } from "../components/link/link";
 const Register = () => {
   const history = useHistory();
   const {
@@ -35,7 +36,8 @@ const Register = () => {
   };
   useEffect(() => {
     if (data && !isLoading && !error) {
-      history.push("/");
+      history.push(`${PAGE_VERIFY_FIRST}?id=${data._id}`);
+      console.log(data);
       // change to send information
     }
   }, [data, error, history, isLoading]);

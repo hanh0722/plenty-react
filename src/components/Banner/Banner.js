@@ -1,5 +1,5 @@
 import React from "react";
-import banner from "../image/banner.jpeg";
+import banner from "../../image/banner.jpeg";
 import { Col } from "react-bootstrap";
 import BannerImages from "../layout/Banner-images/BannerImages";
 const Banner = () => {

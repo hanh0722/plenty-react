@@ -1,8 +1,8 @@
 import React, { useState, useContext } from "react";
 import { Link, NavLink } from "react-router-dom";
 import styles from "./Navigation.module.scss";
-import logo from "../image/logo.png";
-import logoDarkTheme from "../image/logo-dark.png";
+import logo from "../../image/logo.png";
+import logoDarkTheme from "../../image/logo-dark.png";
 import Hamburger from "../hamburger/Hamburger";
 import { useDispatch, useSelector } from "react-redux";
 import { hamburgerActions } from "../store/hamburgerSlice";

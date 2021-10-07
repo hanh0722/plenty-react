@@ -2,7 +2,7 @@ import React from "react";
 import { Row, Col } from "react-bootstrap";
 import Container from "../layout/container/Container";
 import Content from "../layout/Content/Content";
-import banner from "../image/banner-1.jpeg";
+import banner from "../../image/banner-1.jpeg";
 import { Button } from "@material-ui/core";
 import BannerImages from "../layout/Banner-images/BannerImages";
 import styles from "./Landing.module.scss";

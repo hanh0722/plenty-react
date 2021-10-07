@@ -55,6 +55,7 @@ const useFetch = () => {
         if (routeConfig.message) {
           message = routeConfig.message;
         }
+        console.log(response);
         const error = new Error(message);
         error.statusCode = response.status;
         throw error;

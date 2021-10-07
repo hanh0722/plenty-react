@@ -2,7 +2,7 @@ import React from "react";
 import SingleBlog from "../SingleBlog/SingleBlog";
 import Grid from "../../UI/Grid/Grid";
 import Container from "../../layout/container/Container";
-import p1 from "../../image/1_540x.png";
+import p1 from "../../../image/1_540x.png";
 const ViewBlog = () => {
   return (
     <Container>
