@@ -52,12 +52,12 @@ const useFetch = () => {
       });
       if (!response.ok) {
         let message = "Something went wrong, please try again";
-        if (routeConfig.message) {
-          message = routeConfig.message;
+        const textErrorFromServer = await response.text();
+        if(textErrorFromServer){
+          message = textErrorFromServer;
         }
-        console.log(response);
         const error = new Error(message);
-        error.statusCode = response.status;
+        error.statusCode = response.status || 500;
         throw error;
       }
       const data = await response.json();
@@ -70,14 +70,14 @@ const useFetch = () => {
         type: Type.ERROR,
         payload: {
           message: err.message,
-          status: err.statusCode,
+          status: err.statusCode || 500,
         },
       });
     }
   }, []);
-  const resetAllHandler = () => {
+  const resetAllHandler = useCallback(() => {
     dispatch({ type: Type.RESET });
-  };
+  }, []);
   return {
     isLoading: state.loading,
     error: state.error,

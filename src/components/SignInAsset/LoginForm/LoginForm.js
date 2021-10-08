@@ -16,7 +16,7 @@ import { REGISTER_PAGE } from "../../link/link";
 import CheckBox from "../../CheckBox/CheckBox";
 import useToggle from "../../../hook/use-toggle";
 const icons = [faFacebookF, faGoogle, faTwitter];
-const LoginForm = ({getUserData}) => {
+const LoginForm = ({ getUserData, isLoading, errorLogin, status }) => {
   const route = useRouteMatch();
   const emailRef = useRef();
   const passwordRef = useRef();
@@ -25,8 +25,8 @@ const LoginForm = ({getUserData}) => {
     event.preventDefault();
     getUserData({
       email: emailRef.current.value,
-      password: passwordRef.current.value
-    })
+      password: passwordRef.current.value,
+    });
   };
   return (
     <form
@@ -78,6 +78,13 @@ const LoginForm = ({getUserData}) => {
         <Button className="w-100" variant="contained" type="submit">
           Sign In
         </Button>
+        {!isLoading && errorLogin && (
+          <p className="text-center error__text">
+            {(status === 422 || status === 404) && 'Your information is not valid!'}
+            {status === 500 && 'Something went wrong, please try again!'}
+            {status === 401 && 'Your account is not validated, please check your email we sent!'}
+          </p>
+        )}
       </div>
       <Link className="pt-3 text-center" to={REGISTER_PAGE}>
         Don't have account? Sign up

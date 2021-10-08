@@ -1,22 +1,22 @@
-import { useState, useEffect } from "react";
-
+import { useEffect } from "react";
+import useToggle from "./use-toggle";
 const useScroll = (defaultValue) => {
-  const [getToggle, setGetToggle] = useState(false);
+  const {toggle, setToggle} = useToggle(false);
   useEffect(() => {
     let oldValue = 0;
     let newValue = 0;
     const getScrollHandler = () => {
-      newValue = window.pageYOffset;
+      newValue = window.scrollY;
       if (oldValue < newValue && newValue > defaultValue) {
-        setGetToggle(true);
+        setToggle(true);
       } else {
-        setGetToggle(false);
+        setToggle(false);
       }
       oldValue = newValue;
     };
     window.addEventListener("scroll", getScrollHandler);
-  }, [defaultValue]);
-  return getToggle;
+  }, [defaultValue, setToggle]);
+  return toggle;
 };
 
 export default useScroll;

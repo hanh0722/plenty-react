@@ -48,7 +48,6 @@ const Navigation = ({ isDowned }) => {
       return (prevState = !prevState);
     });
   };
-
   return (
     <>
       <nav className={`${isDowned && styles["nav__top"]} ${styles.nav}`}>
