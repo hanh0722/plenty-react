@@ -1,4 +1,5 @@
 import React, { useCallback, useEffect, useState } from "react";
+import { timeOutSignIn } from "./components/helper/logoutAuto";
 import Navigation from "./components/Navigation/Navigation";
 import "bootstrap/dist/css/bootstrap.min.css";
 import SearchBar from "./components/SearchBar/SearchBar";
@@ -70,6 +71,7 @@ const App = () => {
       delay: 600,
     });
     window.addEventListener("scroll", getScrollHandler);
+    timeOutSignIn();
   }, [dispatch, getScrollHandler]);
   useEffect(() => {
     upToTopHandler();
