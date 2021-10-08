@@ -47,7 +47,7 @@ const SignIn = () => {
       localStorage.setItem("expiry/customer", expiry);
       history.push(HOME_PAGE);
     }
-  }, [dataSignIn, error, isLoading, history]);
+  }, [dataSignIn, error, isLoading, history, status]);
   return (
     <>
       <HeaderPage

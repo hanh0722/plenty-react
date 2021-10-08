@@ -6,7 +6,6 @@ import { HOME_PAGE } from "../components/link/link";
 import BreadCrumb from "../components/BreadCrumb/BreadCrumb";
 import DUMMY_DATA from "../components/DummyData/DUMMY_DATA";
 import { Col, Container, Row } from "react-bootstrap";
-// fake image data
 import styles from "../components/styles/DetailItem.module.scss";
 import { faStar } from "@fortawesome/free-regular-svg-icons";
 import { Button } from "@material-ui/core";

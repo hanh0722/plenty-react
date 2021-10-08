@@ -75,9 +75,9 @@ const useFetch = () => {
       });
     }
   }, []);
-  const resetAllHandler = () => {
+  const resetAllHandler = useCallback(() => {
     dispatch({ type: Type.RESET });
-  };
+  }, []);
   return {
     isLoading: state.loading,
     error: state.error,

@@ -15,7 +15,6 @@ import Input from "../Input/Input";
 import { REGISTER_PAGE } from "../../link/link";
 import CheckBox from "../../CheckBox/CheckBox";
 import useToggle from "../../../hook/use-toggle";
-import Spinner from "../../Loading/Spinner/Spinner";
 const icons = [faFacebookF, faGoogle, faTwitter];
 const LoginForm = ({ getUserData, isLoading, errorLogin, status }) => {
   const route = useRouteMatch();
@@ -83,6 +82,7 @@ const LoginForm = ({ getUserData, isLoading, errorLogin, status }) => {
           <p className="text-center error__text">
             {(status === 422 || status === 404) && 'Your information is not valid!'}
             {status === 500 && 'Something went wrong, please try again!'}
+            {status === 401 && 'Your account is not validated, please check your email we sent!'}
           </p>
         )}
       </div>
