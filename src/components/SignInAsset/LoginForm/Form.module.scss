@@ -116,6 +116,9 @@ body[data-theme="dark"] {
     border: 1px solid $white;
   }
 }
+.disabled{
+  background: var(--gray) !important;
+}
 @media screen and (max-width: 991px) {
   .form {
     .thumb {

@@ -51,12 +51,15 @@ const DetailItem = () => {
   useEffect(() => {
     const transformParams = params.name.split("-");
     const nameProduct = transformParams.join(" ");
-    setTimeout(() => {
+    const timeout = setTimeout(() => {
       const getDataDummy = DUMMY_DATA.find((item) => {
         return item.name.toLowerCase().toString() === nameProduct.toString();
       });
       setProduct(getDataDummy);
     }, 500);
+    return () => {
+      clearTimeout(timeout);
+    }
   }, [params.name]);
   // useEffect(() => {
   //   // update the value of copyboard

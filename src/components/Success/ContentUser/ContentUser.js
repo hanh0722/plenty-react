@@ -5,13 +5,12 @@ const ContentUser = ({email}) => {
     <div className={styles.container}>
       <p>
         We sent an email to <span>{email}</span> with an{" "}
-        <span>OTP 4 numbers</span>
+        <span>instruction</span>
       </p>
       <p>
-        Please check the link after email and enter OTP to activate your
-        account!
+        Please check the link after email and follow instruction
       </p>
-      <p className={styles.note}>Note: If you don't find the OTP, click all mail or spam/promotion to get OTP</p>
+      <p className={styles.note}>Note: If you don't find the email, click all mail or spam/promotion to get instruction</p>
     </div>
   );
 };

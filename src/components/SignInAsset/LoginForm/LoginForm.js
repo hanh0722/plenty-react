@@ -76,7 +76,8 @@ const LoginForm = ({ getUserData, isLoading, errorLogin, status }) => {
       <Link to={`${route.path}/reset`}>Forget password?</Link>
       <div className={styles.button}>
         <Button className="w-100" variant="contained" type="submit">
-          Sign In
+          {!isLoading && "Sign In"}
+          {isLoading && "Signing In"}
         </Button>
         {!isLoading && errorLogin && (
           <p className="text-center error__text">

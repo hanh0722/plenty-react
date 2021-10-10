@@ -32,7 +32,6 @@ const reducerFn = (state, action) => {
     case Type.RESET: {
       return {
         ...initialState,
-        status: state.status
       };
     }
     default:
@@ -50,17 +49,22 @@ const useFetch = () => {
       const response = await fetch(routeConfig.url, {
         ...routeConfig.options,
       });
-      if (!response.ok) {
-        let message = "Something went wrong, please try again";
-        const textErrorFromServer = await response.text();
-        if(textErrorFromServer){
-          message = textErrorFromServer;
-        }
-        const error = new Error(message);
-        error.statusCode = response.status || 500;
+      // if (!response.ok) {
+      //   let message = "Something went wrong, please try again";
+      //   const textErrorFromServer = await response.text();
+      //   if(textErrorFromServer){
+      //     message = textErrorFromServer;
+      //   }
+      //   const error = new Error(message);
+      //   error.statusCode = response.status || 500;
+      //   throw error;
+      // }
+      const data = await response.json();
+      if(response.status >= 400){
+        const error = new Error(data.message);
+        error.statusCode = data.code;
         throw error;
       }
-      const data = await response.json();
       dispatch({
         type: Type.SUCCESS,
         payload: data,

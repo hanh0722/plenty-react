@@ -11,7 +11,7 @@ import { urlGetUserForgetPassword } from "../../../config/url";
 import Container from "../../layout/container-empty/ContainerEmpty";
 import { Button } from "@material-ui/core";
 import SmallSpinner from "../../Loading/SmallSpinner/SmallSpinner";
-const ForgetPassword = () => {
+const ForgetPassword = ({resetPasswordHandler, isLoadingFromServer}) => {
   const [waitInput, setWaitInput] = useState(false);
   const [inputIsFetched, setInputIsFetched] = useState(false);
   const { getDataFromServerHandler, data, isLoading, error, status, resetAllHandler } =
@@ -32,7 +32,7 @@ const ForgetPassword = () => {
   useEffect(() => {
     if (!valid && value.trim().length === 0) {
       resetAllHandler();
-      console.log(1);
+      setWaitInput(false);
       return;
     }
     const inputIsEntered = setTimeout(() => {
@@ -83,7 +83,7 @@ const ForgetPassword = () => {
                 status === 401 &&
                 "Email is unactivated, please check the inbox of email"}
               {!isLoading && data && !error && (
-                <Button style={{ padding: "6px 16px" }} className={classes.btn}>
+                <Button onClick={() => resetPasswordHandler(value)} style={{ padding: "6px 16px" }} className={classes.btn}>
                   Reset password
                 </Button>
               )}
