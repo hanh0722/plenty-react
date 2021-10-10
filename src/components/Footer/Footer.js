@@ -1,7 +1,7 @@
-import React, {useContext} from "react";
+import React, { useContext } from "react";
 import styles from "./Footer.module.scss";
 import logo from "../../image/logo.png";
-import logoDarkTheme from '../../image/logo-dark.png';
+import logoDarkTheme from "../../image/logo-dark.png";
 import { Link } from "react-router-dom";
 import { DarkModeContext } from "../darkmode-context/darkmode-content";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -34,7 +34,7 @@ const Footer = () => {
           </div>
         </div>
         <ul>
-          <li className={styles['title__list']}>About</li>
+          <li className={styles["title__list"]}>About</li>
           {listAbout.map((item, index) => {
             return (
               <Link key={index} to="/">
@@ -44,7 +44,7 @@ const Footer = () => {
           })}
         </ul>
         <ul>
-          <li className={styles['title__list']}>Information</li>
+          <li className={styles["title__list"]}>Information</li>
           {informationList.map((item, index) => {
             return (
               <Link key={index} to="/">
@@ -54,7 +54,7 @@ const Footer = () => {
           })}
         </ul>
         <ul>
-          <li className={styles['title__list']}>Our Store</li>
+          <li className={styles["title__list"]}>Our Store</li>
           <div className="d-flex">
             {iconsSocial.map((item, index) => {
               return (

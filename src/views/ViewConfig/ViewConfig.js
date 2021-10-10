@@ -11,7 +11,8 @@ import SignIn from "../SignIn";
 import SuccessVerified from "../SuccessVerified";
 import TypeProduct from "../TypeProduct";
 import VerifyAccount from "../VerifyAccount";
-
+import ResetPassword from "../ResetPassword";
+import SuccessChangePassword from "../SuccessChangePassword";
 export {
     Blog,
     Checkout,
@@ -25,5 +26,7 @@ export {
     SignIn,
     SuccessVerified,
     TypeProduct,
-    VerifyAccount
+    VerifyAccount,
+    ResetPassword,
+    SuccessChangePassword
 }

@@ -1,9 +1,9 @@
 import React from "react";
 import { useRouteMatch } from "react-router-dom";
-import { Row } from "react-bootstrap";
 import Container from "../components/layout/container/Container";
 import ShopPage from "../components/ShopPage/ShopPage";
 import HeaderPage from "../components/HeaderPage/HeaderPage";
+import Grid from '../components/UI/Grid/Grid';
 const Shop = () => {
   const route = useRouteMatch();
   return (
@@ -18,9 +18,9 @@ const Shop = () => {
         ]}
       />
       <Container>
-        <Row>
+        <Grid>
           <ShopPage />
-        </Row>
+        </Grid>
       </Container>
     </>
   );

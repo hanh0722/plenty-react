@@ -1,4 +1,4 @@
-import { Route } from "react-router-dom";
+import { Route, Switch } from "react-router-dom";
 
 import {
   HOME_PAGE,
@@ -14,6 +14,8 @@ import {
   VERIFY_ACCOUNT,
   PAGE_SUCCESS_REGISTER,
   NOT_FOUND,
+  RESET_PASSWORD_VERIFY,
+  SUCCESS_CHANGE_PASSWORD
 } from "../components/link/link";
 import {
   Index,
@@ -29,6 +31,8 @@ import {
   SuccessVerified,
   Checkout,
   NotFound,
+  ResetPassword,
+  SuccessChangePassword
 } from "../views/ViewConfig/ViewConfig";
 export const RoutesConfig = [
   {
@@ -85,15 +89,27 @@ export const RoutesConfig = [
     component: Checkout,
   },
   {
+    path: RESET_PASSWORD_VERIFY,
+    component: ResetPassword
+  },
+  {
+    path: SUCCESS_CHANGE_PASSWORD,
+    component: SuccessChangePassword
+  },
+  {
     path: NOT_FOUND,
     component: NotFound,
-  },
+  }
 ];
 
 const RouteMapConfig = () => {
-  return RoutesConfig.map((route) => {
-    return <Route key={route.path} {...route} />;
-  });
+  return (
+    <Switch>
+      {RoutesConfig.map(route => {
+        return <Route key={route.path} {...route}/>
+      })}
+    </Switch>
+  )
 };
 
 export default RouteMapConfig;
