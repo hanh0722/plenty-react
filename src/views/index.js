@@ -7,9 +7,14 @@ import Package from "../components/Package/Package";
 import PageItems from "../components/PageItems/PageItems";
 import Service from "../components/Service/Service";
 import ViewShortItem from "../components/ViewShortItem/ViewShortItem";
+import Transition from '../components/Transition/Transition';
+import MessageSideBar from "../components/MessageSideBar/MessageSideBar";
 const Index = () => {
   return (
     <>
+      <MessageSideBar>
+        Hello
+      </MessageSideBar>
       <ViewShortItem/>
       <Main />
       <Landing />

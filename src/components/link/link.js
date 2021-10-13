@@ -1,3 +1,6 @@
+import { faDesktop, faPercentage, faShoppingCart, faBan, faHome, faStore} from "@fortawesome/free-solid-svg-icons";
+import { faUser, faChartBar, faNewspaper } from "@fortawesome/free-regular-svg-icons";
+
 export const HOME_PAGE = '/';
 export const SHOP = '/shop';
 export const SIGN_IN_PAGE = '/sign-in';
@@ -21,3 +24,63 @@ export const PRODUCTS = {
 export const DETAIL = '/shop/:name';
 export const PRODUCT_LIST = '/products/:type';
 export const NOT_FOUND = '/404';
+export const DASHBOARD = '/dashboard';
+export const DASHBOARD_MATERIAL = {
+    GENERAL: [
+        {
+            icon: faDesktop,
+            name: 'Basic',
+            path: '/basic'
+        },
+        {
+            icon: faUser,
+            name: 'User information',
+            path: '/information'
+        },
+        {
+            icon: faPercentage,
+            name: 'My Voucher',
+            path: '/voucher'
+        }
+    ],
+    ECOMMERCE: [
+        {
+            icon: faShoppingCart,
+            name: 'Orders',
+            path: '/orders'
+        },
+        {
+            icon: faBan,
+            name: 'Orders cancelled',
+            path: '/cancel'
+        },
+        {
+            icon: faChartBar,
+            name: 'Analytics',
+            path: '/analytics'
+        }
+    ],
+    ADMIN: [
+        {
+            icon: faHome,
+            name: 'General',
+            path: '/general'
+        },
+        {
+            icon: faNewspaper,
+            name: 'Blog',
+            path: '/blog'
+        },
+        {
+            icon: faUser,
+            name: 'User',
+            path: '/user'
+        },
+        {
+            icon: faStore,
+            name: 'Product',
+            path: '/product'
+        }
+    ],
+    CHANGE_VALUE_USER: '/user/account'
+}

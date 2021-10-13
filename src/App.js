@@ -5,7 +5,7 @@ import Navigation from "./components/Navigation/Navigation";
 import "bootstrap/dist/css/bootstrap.min.css";
 import SearchBar from "./components/SearchBar/SearchBar";
 import { useSelector, useDispatch } from "react-redux";
-import { useLocation, Redirect } from "react-router-dom";
+import { useLocation } from "react-router-dom";
 import CartMain from "./components/CartMain/CartMain";
 import "./components/styles/styles.scss";
 import ButtonTop from "./components/ButtonTop/ButtonTop";
@@ -14,7 +14,6 @@ import Footer from "./components/Footer/Footer";
 import Aos from "aos";
 import "aos/dist/aos.css";
 import LayoutTop from "./components/layout/LayoutTop/LayoutTop";
-import { NOT_FOUND } from "./components/link/link";
 // import Test from "./components/Test/Test";
 const App = () => {
   const [navigation, setNavigation] = useState(false);
@@ -62,7 +61,6 @@ const App = () => {
       <CartMain />
       <LayoutTop>
         <RoutesConfig />
-        <Redirect from="*" to={NOT_FOUND} />
         <Footer />
       </LayoutTop>
     </>

@@ -13,6 +13,7 @@ import TypeProduct from "../TypeProduct";
 import VerifyAccount from "../VerifyAccount";
 import ResetPassword from "../ResetPassword";
 import SuccessChangePassword from "../SuccessChangePassword";
+import DashBoardBasic from "../DashBoard";
 export {
     Blog,
     Checkout,
@@ -28,5 +29,6 @@ export {
     TypeProduct,
     VerifyAccount,
     ResetPassword,
-    SuccessChangePassword
+    SuccessChangePassword,
+    DashBoardBasic
 }

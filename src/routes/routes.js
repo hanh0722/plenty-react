@@ -15,7 +15,9 @@ import {
   PAGE_SUCCESS_REGISTER,
   NOT_FOUND,
   RESET_PASSWORD_VERIFY,
-  SUCCESS_CHANGE_PASSWORD
+  SUCCESS_CHANGE_PASSWORD,
+  DASHBOARD_MATERIAL,
+  DASHBOARD
 } from "../components/link/link";
 import {
   Index,
@@ -32,7 +34,8 @@ import {
   Checkout,
   NotFound,
   ResetPassword,
-  SuccessChangePassword
+  SuccessChangePassword,
+  DashBoardBasic
 } from "../views/ViewConfig/ViewConfig";
 export const RoutesConfig = [
   {
@@ -95,6 +98,10 @@ export const RoutesConfig = [
   {
     path: SUCCESS_CHANGE_PASSWORD,
     component: SuccessChangePassword
+  },
+  {
+    path: `${DASHBOARD}${DASHBOARD_MATERIAL.GENERAL[0].path}`,
+    component: DashBoardBasic
   },
   {
     path: NOT_FOUND,
