@@ -1,0 +1,13 @@
+@import '../constant/variable';
+.message{
+    position: fixed;
+    z-index: 5;
+    right: 0;
+    width: 100%;
+    max-width: 250px;
+    background: var(--white);
+    padding: $md-pd;
+    border-top-left-radius: 10px;
+    border-bottom-left-radius: 10px;
+    transition: all 1s ease-in-out;
+}

@@ -5,6 +5,7 @@ import CartSlice from "./cart";
 import ProductSlice from "./Product";
 import wishListSlice from "./wish-list";
 import styleDetailSlice from "./style-detail";
+import NotifySlice from "./NotifyAfterLogin/NotifyAfterLogin";
 const store = configureStore({
     reducer: {
         hamburger: hamburgerSlice.reducer,
@@ -12,7 +13,8 @@ const store = configureStore({
         cart: CartSlice.reducer,
         product: ProductSlice.reducer,
         wishlist: wishListSlice.reducer,
-        detail: styleDetailSlice.reducer
+        detail: styleDetailSlice.reducer,
+        notifyMessage: NotifySlice.reducer
     }
 })
 

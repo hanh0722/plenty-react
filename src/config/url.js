@@ -12,8 +12,9 @@ const urlGetUserForgetPassword = (email) =>
   `${userApi}/reset/${email}`;
 const loginUrl = `${authLinks}/login`;
 const resetPasswordUrl = `${userApi}/reset`;
-const checkResetPasswordUrl = (token) => `${userApi}/reset-password/${token}`;
+const checkResetPasswordUrl = (token, uidt) => `${userApi}/reset-password/${token}?${uidt}`;
 const changePasswordFromUser = `${userApi}/reset-password`;
+const getUserByToken = token => `${userApi}/validate/:token`;
 export {
   urlCheckVerify,
   registerUrl,
@@ -22,5 +23,6 @@ export {
   urlGetUserForgetPassword,
   resetPasswordUrl,
   checkResetPasswordUrl,
-  changePasswordFromUser
+  changePasswordFromUser,
+  getUserByToken
 };

@@ -17,7 +17,6 @@ const SignIn = () => {
     status,
     resetAllHandler,
   } = useFetch();
-  // console.log(dataSignIn, error, isLoading, status);
   const getUserFromInput = (userData) => {
     if (
       !userData.email.includes("@") ||

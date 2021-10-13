@@ -10,21 +10,25 @@ const ResetPassword = (props) => {
   const { getDataFromServerHandler, error, data, isLoading } =
     useFetch();
   const location = useLocation();
-  const uidToken = useMemo(() => {
+  const tokens = useMemo(() => {
     const searchParams = new URLSearchParams(location.search);
-    return searchParams.get("uidt");
+    return {
+      uidToken: searchParams.get('uidt'),
+      token: searchParams.get('token')
+    }
   }, [location.search]);
   useEffect(() => {
-    if (!uidToken) {
+    const {uidToken, token} = tokens;
+    if (!uidToken || !token) {
       return;
     }
     getDataFromServerHandler({
-      url: checkResetPasswordUrl(uidToken),
+      url: checkResetPasswordUrl(token, uidToken),
     });
-  }, [uidToken, getDataFromServerHandler]);
+  }, [tokens, getDataFromServerHandler]);
   return (
     <>
-      {!uidToken && <Redirect to={NOT_FOUND} />}
+      {(!tokens.token || !tokens.uidToken) && <Redirect to={NOT_FOUND} />}
       <HeaderPage
         title="Reset Password"
         paths={[
@@ -35,7 +39,8 @@ const ResetPassword = (props) => {
         ]}
       />
       {isLoading && <LoadingTime/>}
-      {!isLoading && data && !error && <ResetPasswordUser token={uidToken} _id={data.userId}/>}
+      {!isLoading && data && !error && <ResetPasswordUser token={tokens.token} _id={data.userId}/>}
+      {!isLoading && !data && error && <Redirect to={NOT_FOUND}/>}
     </>
   );
 };
