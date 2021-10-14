@@ -1,6 +1,5 @@
 import React, { useCallback, useEffect, useState } from "react";
 import RoutesConfig from "./routes/routes";
-import { timeOutSignIn } from "./components/helper/logoutAuto";
 import Navigation from "./components/Navigation/Navigation";
 import "bootstrap/dist/css/bootstrap.min.css";
 import SearchBar from "./components/SearchBar/SearchBar";
@@ -14,6 +13,9 @@ import Footer from "./components/Footer/Footer";
 import Aos from "aos";
 import "aos/dist/aos.css";
 import LayoutTop from "./components/layout/LayoutTop/LayoutTop";
+import MessageSideBar from "./components/MessageSideBar/MessageSideBar";
+import { checkUserIsAuth } from "./components/store/IsAuth/is-auth";
+// import { IsAuthContext } from "./context/is-auth";
 // import Test from "./components/Test/Test";
 const App = () => {
   const [navigation, setNavigation] = useState(false);
@@ -45,7 +47,7 @@ const App = () => {
       delay: 600,
     });
     window.addEventListener("scroll", getScrollHandler);
-    timeOutSignIn();
+    dispatch(checkUserIsAuth());
   }, [dispatch, getScrollHandler]);
   useEffect(() => {
     upToTopHandler();
@@ -55,6 +57,7 @@ const App = () => {
   };
   return (
     <>
+      <MessageSideBar />
       <Navigation isDowned={navigation} />
       <SearchBar isShowed={state} />
       <ButtonTop onClick={upToTopHandler} />

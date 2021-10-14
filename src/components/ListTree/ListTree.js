@@ -30,11 +30,14 @@ const ListTree = () => {
   useEffect(() => {
     // fake data
     // fetch ... .then()
-    setTimeout(() => {
+    const timeFake = setTimeout(() => {
       setSlide(DUMMY_DATA);
       setFilterList(DUMMY_DATA);
     }, 1000);
     // we can fetch wishlist in here
+    return () => {
+      clearTimeout(timeFake);
+    }
   }, []);
   useEffect(() => {
     const newList = filterListItem(type);

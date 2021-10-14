@@ -64,14 +64,23 @@ const Navigation = ({ isDowned }) => {
             <div
               className={`${styles.child} d-flex justify-content-center align-items-center`}
             >
-              <NavLink to="/" activeClassName={styles.active} exact>
+              <NavLink
+                onClick={clickHandler}
+                to="/"
+                activeClassName={styles.active}
+                exact
+              >
                 <li>Home</li>
               </NavLink>
             </div>
             <div
               className={`${styles.child} d-flex justify-content-center align-items-center`}
             >
-              <NavLink to="/shop" activeClassName={styles.active}>
+              <NavLink
+                onClick={clickHandler}
+                to="/shop"
+                activeClassName={styles.active}
+              >
                 <li>Shop</li>
               </NavLink>
             </div>
@@ -86,7 +95,11 @@ const Navigation = ({ isDowned }) => {
                 <div className={styles["list__inside"]}>
                   {nestedPath.map((items) => {
                     return (
-                      <NavLink to={`/products/${items.path}`} key={items.name}>
+                      <NavLink
+                        onClick={clickHandler}
+                        to={`/products/${items.path}`}
+                        key={items.name}
+                      >
                         {items.name}
                       </NavLink>
                     );
@@ -97,7 +110,11 @@ const Navigation = ({ isDowned }) => {
             <div
               className={`${styles.child} d-flex justify-content-center align-items-center`}
             >
-              <NavLink to="/blogs" activeClassName={styles.active}>
+              <NavLink
+                onClick={clickHandler}
+                to="/blogs"
+                activeClassName={styles.active}
+              >
                 <li>Blogs</li>
               </NavLink>
             </div>

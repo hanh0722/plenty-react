@@ -38,6 +38,8 @@
     --orange: #cd783e;
     --light-gray: #919eab1f;
     --active-db: 205, 120, 62;
+    --success-message: 57, 155, 74, .8;
+    --failed-message: 209, 75, 88, .8;
 }
 body[data-theme='dark']{
     color: var(--black);

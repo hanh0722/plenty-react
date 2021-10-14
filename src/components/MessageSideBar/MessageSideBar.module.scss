@@ -4,10 +4,38 @@
     z-index: 5;
     right: 0;
     width: 100%;
-    max-width: 250px;
+    max-width: 300px;
     background: var(--white);
-    padding: $md-pd;
+    padding: $lg-pd $lg-pd;
     border-top-left-radius: 10px;
     border-bottom-left-radius: 10px;
-    transition: all 1s ease-in-out;
+    transition: all .75s ease-in-out;
+    transform: translateX(100%);
+    top: 100px;
+    box-shadow: var(--shadow);
+    color: $white;
+}
+
+.back{
+    transform: translateX(0);
+}
+
+.close{
+    width: 25px;
+    height: 25px;
+    background: var(--black);
+    border-radius: 50%;
+    color: var(--white);
+    position: absolute;
+    right: 10px;
+    top: 10px;
+    font-size: 14px;
+    cursor: pointer;
+}
+
+.success{
+    background-color: rgba(var(--success-message));
+}
+.failed{
+    background-color: rgba(var(--failed-message));
 }

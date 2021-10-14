@@ -13,7 +13,7 @@ import TypeProduct from "../TypeProduct";
 import VerifyAccount from "../VerifyAccount";
 import ResetPassword from "../ResetPassword";
 import SuccessChangePassword from "../SuccessChangePassword";
-import DashBoardBasic from "../DashBoard";
+import DashBoardBasic from '../Dashboard/Basic';
 export {
     Blog,
     Checkout,
