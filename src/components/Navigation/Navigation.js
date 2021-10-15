@@ -1,4 +1,4 @@
-import React, { useState, useContext } from "react";
+import React, { useState, useContext, useMemo } from "react";
 import { Link, NavLink } from "react-router-dom";
 import styles from "./Navigation.module.scss";
 import logo from "../../image/logo.png";
@@ -48,6 +48,13 @@ const Navigation = ({ isDowned }) => {
       return (prevState = !prevState);
     });
   };
+  const checkScreenIsValid = useMemo(() => {
+    const widthScreen = window.innerWidth;
+    if (widthScreen <= 991) {
+      return true;
+    }
+    return false;
+  }, []);
   return (
     <>
       <nav className={`${isDowned && styles["nav__top"]} ${styles.nav}`}>
@@ -65,7 +72,7 @@ const Navigation = ({ isDowned }) => {
               className={`${styles.child} d-flex justify-content-center align-items-center`}
             >
               <NavLink
-                onClick={clickHandler}
+                onClick={checkScreenIsValid ? clickHandler : null}
                 to="/"
                 activeClassName={styles.active}
                 exact
@@ -77,7 +84,7 @@ const Navigation = ({ isDowned }) => {
               className={`${styles.child} d-flex justify-content-center align-items-center`}
             >
               <NavLink
-                onClick={clickHandler}
+                onClick={checkScreenIsValid ? clickHandler : null}
                 to="/shop"
                 activeClassName={styles.active}
               >
@@ -96,7 +103,7 @@ const Navigation = ({ isDowned }) => {
                   {nestedPath.map((items) => {
                     return (
                       <NavLink
-                        onClick={clickHandler}
+                        onClick={checkScreenIsValid ? clickHandler : null}
                         to={`/products/${items.path}`}
                         key={items.name}
                       >
@@ -111,14 +118,14 @@ const Navigation = ({ isDowned }) => {
               className={`${styles.child} d-flex justify-content-center align-items-center`}
             >
               <NavLink
-                onClick={clickHandler}
+                onClick={checkScreenIsValid ? clickHandler : null}
                 to="/blogs"
                 activeClassName={styles.active}
               >
                 <li>Blogs</li>
               </NavLink>
             </div>
-            {window.innerWidth <= 991 && <FeatureMobile />}
+            {checkScreenIsValid && <FeatureMobile />}
           </header>
           <div className={styles.icons}>
             {Icon.map((items, index) => {

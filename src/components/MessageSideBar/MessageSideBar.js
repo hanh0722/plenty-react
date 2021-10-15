@@ -8,6 +8,7 @@ import { NotifyActions } from "../store/NotifyAfterLogin/NotifyAfterLogin";
 const MessageSideBar = (props) => {
   const dispatch = useDispatch();
   const stateSlice = useSelector((state) => state.notifyMessage);
+  const isAuthExpire = useSelector(state => state.isAuth.expired);
   useEffect(() => {
     setTimeout(() => {
       dispatch(NotifyActions.removeNotify());
@@ -16,6 +17,15 @@ const MessageSideBar = (props) => {
       dispatch(NotifyActions.removeMessageAndCode());
     }, 6000);
   }, [dispatch, stateSlice.showed]);
+  useEffect(() => {
+    if(!isAuthExpire){
+      return;
+    }
+    dispatch(NotifyActions.showedNotify({
+      message: 'Your url is expired, please sign in again',
+      code: 400
+    }));
+  }, [isAuthExpire, dispatch]);
   return (
     <div
       className={`${styles.message} ${stateSlice.showed && styles.back} ${

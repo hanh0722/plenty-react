@@ -14,22 +14,26 @@
     top: 100px;
     box-shadow: var(--shadow);
     color: $white;
+    opacity: 0;
+    visibility: hidden;
 }
 
 .back{
     transform: translateX(0);
+    visibility: visible;
+    opacity: 1;
 }
 
 .close{
-    width: 25px;
-    height: 25px;
-    background: var(--black);
+    width: 20px;
+    height: 20px;
+    background: var(--brown);
     border-radius: 50%;
     color: var(--white);
     position: absolute;
     right: 10px;
     top: 10px;
-    font-size: 14px;
+    font-size: 12px;
     cursor: pointer;
 }
 

@@ -3,7 +3,7 @@ import Container from '../../components/DashBoard/layout/Container';
 const Basic = () => {
     return(
         <Container>
-
+            
         </Container>
     )
 }
