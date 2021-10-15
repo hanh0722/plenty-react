@@ -2,7 +2,8 @@ import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
     showed: false,
-    message: ''
+    message: '',
+    code: 200
 }
 
 const NotifySlice = createSlice({
@@ -11,19 +12,15 @@ const NotifySlice = createSlice({
     reducers: {
         showedNotify(state, action){
             state.showed = true;
-            state.message = action.payload || '';
-            setTimeout(() => {
-                state.showed = false;
-            }, 5000);
-            setTimeout(() => {
-                state.message = '';
-            }, 10000);
+            state.message = action.payload.message || '';
+            state.code = action.payload.code || 500;
         },
         removeNotify(state){
             state.showed = false;
-            setTimeout(() => {
-                state.message = '';
-            }, 5000);
+        },
+        removeMessageAndCode(state){
+            state.message = '';
+            state.code = 200;
         }
     }
 })

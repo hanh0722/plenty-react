@@ -4,7 +4,6 @@ const RightSide = props => {
     return(
         <div className={styles.right}>
             {props.children}
-            Hello
         </div>
     )
 }

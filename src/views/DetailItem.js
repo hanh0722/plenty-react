@@ -59,7 +59,7 @@ const DetailItem = () => {
     }, 500);
     return () => {
       clearTimeout(timeout);
-    }
+    };
   }, [params.name]);
   // useEffect(() => {
   //   // update the value of copyboard
@@ -173,7 +173,7 @@ const DetailItem = () => {
         mountOnEnter
         in={isValid}
       >
-        <LinkCheckOut url={'http://localhost:8080/image/indoor-1.jpeg'} />
+        <LinkCheckOut url={"http://localhost:8080/image/indoor-1.jpeg"} />
       </CSSTransition>
       <CSSTransition
         in={toggle}

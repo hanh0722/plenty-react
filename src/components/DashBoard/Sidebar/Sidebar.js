@@ -14,7 +14,7 @@ import ReactDOM from "react-dom";
 import Overlay from "../../overlay/Overlay";
 import Transition from "../../Transition/Transition";
 import { DASHBOARD } from "../../link/link";
-const SideBar = () => {
+const SideBar = ({ data, isLoading }) => {
   const rippleRef = useRef();
   const { dark } = useContext(DarkModeContext);
   const { toggle, changeToggleHandler } = useToggle(false);
@@ -27,13 +27,25 @@ const SideBar = () => {
   const onRippleFinish = (event) => {
     rippleRef.current.stop(event);
   };
+  console.log(data);
   const renderListPath = (array) => {
     const mapPath = array.map((item) => {
       return (
-        <NavLink activeClassName={styles.active} to={`${DASHBOARD}${item.path}`} key={item.name}>
-          <li className={`${styles['list--item']} d-flex align-items-center`} key={item.path}>
-              <span className={styles.icon}><FontAwesomeIcon icon={item.icon}/></span>
-              <div className={styles.name}><span>{item.name}</span></div>
+        <NavLink
+          activeClassName={styles.active}
+          to={`${DASHBOARD}${item.path}`}
+          key={item.name}
+        >
+          <li
+            className={`${styles["list--item"]} d-flex align-items-center`}
+            key={item.path}
+          >
+            <span className={styles.icon}>
+              <FontAwesomeIcon icon={item.icon} />
+            </span>
+            <div className={styles.name}>
+              <span>{item.name}</span>
+            </div>
           </li>
         </NavLink>
       );
@@ -63,7 +75,7 @@ const SideBar = () => {
             <TouchRipple ref={rippleRef} center={false} />
           </div>
         </div>
-        <User toggle={toggle} />
+        <User isLoading={isLoading} data={data} toggle={toggle} />
         <div className={styles.list}>
           <ul>
             <li>General</li>
@@ -73,10 +85,12 @@ const SideBar = () => {
             <li>E-Commerce</li>
             {renderListPath(DASHBOARD_MATERIAL.ECOMMERCE)}
           </ul>
-          <ul>
-            <li>Admin</li>
-            {renderListPath(DASHBOARD_MATERIAL.ADMIN)}
-          </ul>
+          {!isLoading && data && data.user.admin && (
+            <ul>
+              <li>Admin</li>
+              {renderListPath(DASHBOARD_MATERIAL.ADMIN)}
+            </ul>
+          )}
         </div>
       </div>
       <div onClick={setToggleHandler} className={styles.options}>

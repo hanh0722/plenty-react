@@ -1,4 +1,4 @@
-import React, { useState, useContext } from "react";
+import React, { useState, useContext, useMemo } from "react";
 import { Link, NavLink } from "react-router-dom";
 import styles from "./Navigation.module.scss";
 import logo from "../../image/logo.png";
@@ -48,6 +48,13 @@ const Navigation = ({ isDowned }) => {
       return (prevState = !prevState);
     });
   };
+  const checkScreenIsValid = useMemo(() => {
+    const widthScreen = window.innerWidth;
+    if (widthScreen <= 991) {
+      return true;
+    }
+    return false;
+  }, []);
   return (
     <>
       <nav className={`${isDowned && styles["nav__top"]} ${styles.nav}`}>
@@ -64,14 +71,23 @@ const Navigation = ({ isDowned }) => {
             <div
               className={`${styles.child} d-flex justify-content-center align-items-center`}
             >
-              <NavLink to="/" activeClassName={styles.active} exact>
+              <NavLink
+                onClick={checkScreenIsValid ? clickHandler : null}
+                to="/"
+                activeClassName={styles.active}
+                exact
+              >
                 <li>Home</li>
               </NavLink>
             </div>
             <div
               className={`${styles.child} d-flex justify-content-center align-items-center`}
             >
-              <NavLink to="/shop" activeClassName={styles.active}>
+              <NavLink
+                onClick={checkScreenIsValid ? clickHandler : null}
+                to="/shop"
+                activeClassName={styles.active}
+              >
                 <li>Shop</li>
               </NavLink>
             </div>
@@ -86,7 +102,11 @@ const Navigation = ({ isDowned }) => {
                 <div className={styles["list__inside"]}>
                   {nestedPath.map((items) => {
                     return (
-                      <NavLink to={`/products/${items.path}`} key={items.name}>
+                      <NavLink
+                        onClick={checkScreenIsValid ? clickHandler : null}
+                        to={`/products/${items.path}`}
+                        key={items.name}
+                      >
                         {items.name}
                       </NavLink>
                     );
@@ -97,11 +117,15 @@ const Navigation = ({ isDowned }) => {
             <div
               className={`${styles.child} d-flex justify-content-center align-items-center`}
             >
-              <NavLink to="/blogs" activeClassName={styles.active}>
+              <NavLink
+                onClick={checkScreenIsValid ? clickHandler : null}
+                to="/blogs"
+                activeClassName={styles.active}
+              >
                 <li>Blogs</li>
               </NavLink>
             </div>
-            {window.innerWidth <= 991 && <FeatureMobile />}
+            {checkScreenIsValid && <FeatureMobile />}
           </header>
           <div className={styles.icons}>
             {Icon.map((items, index) => {
