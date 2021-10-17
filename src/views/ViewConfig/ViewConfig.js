@@ -14,6 +14,7 @@ import VerifyAccount from "../VerifyAccount";
 import ResetPassword from "../ResetPassword";
 import SuccessChangePassword from "../SuccessChangePassword";
 import DashBoardBasic from '../Dashboard/Basic';
+import ProductAdmin from '../Dashboard/Product';
 export {
     Blog,
     Checkout,
@@ -30,5 +31,6 @@ export {
     VerifyAccount,
     ResetPassword,
     SuccessChangePassword,
-    DashBoardBasic
+    DashBoardBasic,
+    ProductAdmin
 }

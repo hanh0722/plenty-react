@@ -2,6 +2,7 @@
 :root{
     overflow-x: hidden;
     --disabled: rgba(0, 0, 0, .26);
+    --overlay: 0, 0, 0, .4;
     --blue-dark: #353353;
     --black: #000000;
     --white: #fff;
@@ -40,6 +41,8 @@
     --active-db: 205, 120, 62;
     --success-message: 57, 155, 74, .8;
     --failed-message: 209, 75, 88, .8;
+    --button-green: #00ab55;
+    --background-green: #c8facd;
 }
 body[data-theme='dark']{
     color: var(--black);
@@ -69,6 +72,8 @@ body[data-theme='dark']{
     --orange: #fff;
     --light-gray: #33363b;
     --active-db: 255, 255, 255;
+    --background-green: #33363b;
+    --button-green: #cd783e;
 }
 input[type='number']{
     &::-webkit-outer-spin-button, &::-webkit-inner-spin-button{
@@ -202,6 +207,37 @@ input[type='number']{
 }
 .MuiOutlinedInput-notchedOutline{
     border-color: #ddd !important;
+}
+.bullet-normal{
+    background: var(--background-green) !important;
+}
+.bullet--active{
+    background: var(--button-green) !important;
+    border: none;
+    width: 8px !important;
+    height: 8px !important;
+}
+.swiper-clickable-container{
+    position: absolute;
+    top: 10px;
+    bottom: auto !important;
+    left: 20px !important;
+    display: inline-block;
+    width: auto !important;
+}
+.list--preload-enter{
+    opacity: 0;
+}
+.list--preload-enter-active{
+    opacity: 1;
+    transition: all .75s ease-in-out;
+}
+.list--preload-exit{
+    opacity: 1;
+}
+.list--preload-exit-active{
+    opacity: 0;
+    transition: all .75s ease-in-out;
 }
 @keyframes active-pagination {
     0%{

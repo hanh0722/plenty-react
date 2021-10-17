@@ -1,5 +1,4 @@
-import { Route, Switch } from "react-router-dom";
-
+import { Route, Switch, Redirect } from "react-router-dom";
 import {
   HOME_PAGE,
   BLOG_PAGE,
@@ -17,7 +16,7 @@ import {
   RESET_PASSWORD_VERIFY,
   SUCCESS_CHANGE_PASSWORD,
   DASHBOARD_MATERIAL,
-  DASHBOARD
+  DASHBOARD,
 } from "../components/link/link";
 import {
   Index,
@@ -35,7 +34,8 @@ import {
   NotFound,
   ResetPassword,
   SuccessChangePassword,
-  DashBoardBasic
+  DashBoardBasic,
+  ProductAdmin as DashBoardProduct,
 } from "../views/ViewConfig/ViewConfig";
 export const RoutesConfig = [
   {
@@ -93,30 +93,35 @@ export const RoutesConfig = [
   },
   {
     path: RESET_PASSWORD_VERIFY,
-    component: ResetPassword
+    component: ResetPassword,
   },
   {
     path: SUCCESS_CHANGE_PASSWORD,
-    component: SuccessChangePassword
+    component: SuccessChangePassword,
   },
   {
     path: `${DASHBOARD}${DASHBOARD_MATERIAL.GENERAL[0].path}`,
-    component: DashBoardBasic
+    component: DashBoardBasic,
+  },
+  {
+    path: `${DASHBOARD}${DASHBOARD_MATERIAL.ADMIN[3].path}`,
+    component: DashBoardProduct,
   },
   {
     path: NOT_FOUND,
     component: NotFound,
-  }
+  },
 ];
 
 const RouteMapConfig = () => {
   return (
     <Switch>
-      {RoutesConfig.map(route => {
-        return <Route key={route.path} {...route}/>
+      {RoutesConfig.map((route, index) => {
+        return <Route {...route} key={index} />;
       })}
+      <Redirect from="*" to={NOT_FOUND}/>
     </Switch>
-  )
+  );
 };
 
 export default RouteMapConfig;
