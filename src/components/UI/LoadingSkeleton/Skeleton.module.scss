@@ -6,7 +6,7 @@
   opacity: 0.7;
   &:last-child {
     width: 80%;
-    margin-bottom: 0;
+    margin-bottom: 0 !important;
   }
   animation: skeleton-loading 1s linear alternate infinite;
 }

@@ -7,6 +7,7 @@ import wishListSlice from "./wish-list";
 import styleDetailSlice from "./style-detail";
 import NotifySlice from "./NotifyAfterLogin/NotifyAfterLogin";
 import isAuthSlice from "./IsAuth/is-auth";
+import userDataSlice from "./GetUserData/get-user-data";
 const store = configureStore({
     reducer: {
         hamburger: hamburgerSlice.reducer,
@@ -16,7 +17,8 @@ const store = configureStore({
         wishlist: wishListSlice.reducer,
         detail: styleDetailSlice.reducer,
         notifyMessage: NotifySlice.reducer,
-        isAuth: isAuthSlice.reducer
+        isAuth: isAuthSlice.reducer,
+        user: userDataSlice.reducer
     }
 })
 

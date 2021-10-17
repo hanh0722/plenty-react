@@ -8,7 +8,7 @@ import { NotifyActions } from "../store/NotifyAfterLogin/NotifyAfterLogin";
 const MessageSideBar = (props) => {
   const dispatch = useDispatch();
   const stateSlice = useSelector((state) => state.notifyMessage);
-  const isAuthExpire = useSelector(state => state.isAuth.expired);
+  const isAuthExpire = useSelector((state) => state.isAuth.expired);
   useEffect(() => {
     setTimeout(() => {
       dispatch(NotifyActions.removeNotify());
@@ -18,13 +18,15 @@ const MessageSideBar = (props) => {
     }, 6000);
   }, [dispatch, stateSlice.showed]);
   useEffect(() => {
-    if(!isAuthExpire){
+    if (!isAuthExpire) {
       return;
     }
-    dispatch(NotifyActions.showedNotify({
-      message: 'Your url is expired, please sign in again',
-      code: 400
-    }));
+    dispatch(
+      NotifyActions.showedNotify({
+        message: "Your url is expired, please sign in again",
+        code: 400,
+      })
+    );
   }, [isAuthExpire, dispatch]);
   return (
     <div
@@ -33,6 +35,9 @@ const MessageSideBar = (props) => {
       }`}
     >
       <div
+        onClick={() => {
+          dispatch(NotifyActions.removeNotify());
+        }}
         className={`${styles.close} d-flex justify-content-center align-items-center`}
       >
         <FontAwesomeIcon icon={faTimes} />

@@ -44,21 +44,21 @@ const SignIn = () => {
     });
   };
   useEffect(() => {
-    if (!dataSignIn || error || isLoading) {
+    if (error || isLoading) {
       return;
     }
     if (!isLoading && dataSignIn && !error) {
       const { token, expiry } = dataSignIn;
       localStorage.setItem("token/customer", token);
       localStorage.setItem("expiry/customer", expiry);
-      history.push(HOME_PAGE);
+      dispatch(isAuthActions.setIsAuthenticated(token));
       dispatch(
         NotifyActions.showedNotify({
           message: "Success",
           code: 200,
         })
       );
-      dispatch(isAuthActions.setIsAuthenticated(token));
+      history.push(HOME_PAGE);
     }
   }, [dataSignIn, error, isLoading, history, status, dispatch]);
   return (

@@ -1,10 +1,13 @@
 @import '../../constant/variable';
 .side--bar{
-    transition: all .75s ease-in-out;
-    border-right: 1px solid var(--gray);
     max-width: 300px;
     width: 100%;
+    transition: all .75s ease-in-out;
+    border-right: 1px solid var(--gray);
     z-index: 5;
+    position: sticky;
+    top: 0;
+    overflow-y: scroll;
     .logo{
         width: 60px;
         img{
@@ -55,6 +58,11 @@
             &:first-child{
                 padding: $md-pd 0 $md-pd $md-pd;
                 font-weight: bold;
+                transition: all .15s ease-in-out;
+                &:hover{
+                    background: rgba(var(--active-db), .75);
+                    color: var(--white);
+                }
             }
         }
         svg{
@@ -94,7 +102,7 @@
 .options{
     display: none;
 }
-@media screen and (max-width: 768px) {
+@media screen and (max-width: 1200px) {
     .side--bar{
         transform: translateX(-100%);
         position: fixed;
