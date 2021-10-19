@@ -5,6 +5,7 @@ import styles from "./File.module.scss";
 import Ripple from "../UI/Ripple/Ripple";
 import Transition from "../Transition/Transition";
 const DropzoneUpload = () => {
+  const [errorFile, setErrorFile] = useState(null);
   const [imageUpload, setImageUpload] = useState([]);
   const { acceptedFiles, getRootProps, getInputProps } = useDropzone({
     accept: "image/*",
@@ -26,6 +27,11 @@ const DropzoneUpload = () => {
     });
     setImageUpload(filterImageArray);
   };
+  useEffect(() => {
+    if(acceptedFiles.length > 5){
+      console.log(1);
+    }
+  }, [acceptedFiles])
   return (
     <>
       <Transition
@@ -58,7 +64,10 @@ const DropzoneUpload = () => {
         <div className={styles.preload}>
           {imageUpload.map((image) => {
             return (
-              <div key={image.id} className={`position-relative ${styles["preload-item"]}`}>
+              <div
+                key={image.id}
+                className={`position-relative ${styles["preload-item"]}`}
+              >
                 <span
                   onClick={() => removeItemHandler(image.id)}
                   className={styles.close}
@@ -72,6 +81,17 @@ const DropzoneUpload = () => {
           })}
         </div>
       )}
+      <Transition
+        options={{
+          in: errorFile !== null,
+          timeout: 750,
+          classNames: "scale",
+          unmountOnExit: true,
+          mountOnEnter: true,
+        }}
+      >
+        <p className='error__text'>{errorFile}</p>
+      </Transition>
     </>
   );
 };
