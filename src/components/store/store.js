@@ -8,6 +8,7 @@ import styleDetailSlice from "./style-detail";
 import NotifySlice from "./NotifyAfterLogin/NotifyAfterLogin";
 import isAuthSlice from "./IsAuth/is-auth";
 import userDataSlice from "./GetUserData/get-user-data";
+import uploadProductSlice from "./UploadProduct/UploadProduct";
 const store = configureStore({
     reducer: {
         hamburger: hamburgerSlice.reducer,
@@ -18,7 +19,8 @@ const store = configureStore({
         detail: styleDetailSlice.reducer,
         notifyMessage: NotifySlice.reducer,
         isAuth: isAuthSlice.reducer,
-        user: userDataSlice.reducer
+        user: userDataSlice.reducer,
+        upload: uploadProductSlice.reducer
     }
 })
 

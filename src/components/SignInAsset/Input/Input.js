@@ -22,9 +22,9 @@ const Input = forwardRef((props, ref) => {
   }
   return (
     <>
-      <div className={styles.input}>
+      <div className={`${styles.input} ${props.className}`}>
         <label htmlFor={props.input.id}>{props.label}</label>
-        <div className={styles.box}>
+        <div className={`${styles.box}`}>
           {props.thumbcontent && (
             <Thumb
               className={`${styles.thumb} ${

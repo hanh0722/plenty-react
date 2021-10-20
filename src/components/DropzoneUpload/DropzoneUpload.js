@@ -4,28 +4,30 @@ import p1 from "../../image/file-upload.png";
 import styles from "./File.module.scss";
 import Ripple from "../UI/Ripple/Ripple";
 import Transition from "../Transition/Transition";
-const DropzoneUpload = () => {
+const DropzoneUpload = ({getFileOfDrop}) => {
   const [imageUpload, setImageUpload] = useState([]);
   const { acceptedFiles, getRootProps, getInputProps } = useDropzone({
     accept: "image/*",
-    maxFiles: 5,
+    maxFiles: 5
   });
-
-  useEffect(() => {
-    const getFileFromLoading = acceptedFiles.map((file, index) => {
-      return {
-        id: index,
-        url: URL.createObjectURL(file),
-      };
-    });
-    setImageUpload(getFileFromLoading);
-  }, [acceptedFiles]);
   const removeItemHandler = (id) => {
     const filterImageArray = imageUpload.filter((file) => {
       return file.id !== id;
     });
     setImageUpload(filterImageArray);
   };
+  useEffect(() => {
+    const getImageUploadByLinks = acceptedFiles.map((file, index) => {
+      return {
+        id: index,
+        url: URL.createObjectURL(file)
+      }
+    })
+    if(getFileOfDrop){
+      getFileOfDrop(acceptedFiles);
+    }
+    setImageUpload(getImageUploadByLinks);
+  }, [acceptedFiles, getFileOfDrop]);
   return (
     <>
       <Transition
@@ -58,7 +60,10 @@ const DropzoneUpload = () => {
         <div className={styles.preload}>
           {imageUpload.map((image) => {
             return (
-              <div key={image.id} className={`position-relative ${styles["preload-item"]}`}>
+              <div
+                key={image.id}
+                className={`position-relative ${styles["preload-item"]}`}
+              >
                 <span
                   onClick={() => removeItemHandler(image.id)}
                   className={styles.close}

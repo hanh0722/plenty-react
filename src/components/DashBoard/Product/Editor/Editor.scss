@@ -56,3 +56,8 @@
 strong{
     font-weight: bold !important;
 }
+.ql-editor.ql-blank::before{
+    font-style: normal !important;
+    font-size: 14px;
+    color: var(--black) !important;
+}
