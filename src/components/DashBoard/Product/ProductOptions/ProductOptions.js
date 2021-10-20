@@ -1,4 +1,4 @@
-import React, { useState, useMemo } from "react";
+import React, { useState, useMemo, useEffect } from "react";
 import BoxContainer from "../../UI/BoxContainer/BoxContainer";
 import useToggle from "../../../../hook/use-toggle";
 import ToggleButton from "../../../UI/ToggleButton/ToggleButton";
@@ -7,12 +7,18 @@ import CategorySelect from "../../../UI/CategorySelect/CategorySelect";
 import NormalInput from "../../../input/NormalInput/NorInput";
 import Input from "../../../SignInAsset/Input/Input";
 import { Button } from "@material-ui/core";
-const ProductOptions = () => {
-  const { toggle, changeToggleHandler } = useToggle(false);
+import { useDispatch } from "react-redux";
+import {
+  uploadActions,
+  TYPE_DISPATCH,
+} from "../../../store/UploadProduct/UploadProduct";
+const ProductOptions = ({ onSubmit }) => {
+  const dispatch = useDispatch();
+  const { toggle, setToggle } = useToggle(true);
   const { toggle: selectToggle, changeToggleHandler: selectChangeToggle } =
     useToggle(false);
   const [valueInput, setValueInput] = useState("");
-  const [percent, setPercent] = useState("");
+  const [percent, setPercent] = useState(0);
   const [regularPrice, setRegularPrice] = useState("");
   const listItems = useMemo(() => {
     return ["Indoor", "Outdoor", "Herb", "Veggies"];
@@ -29,19 +35,56 @@ const ProductOptions = () => {
   const setValueToInput = (name) => {
     setValueInput(name);
     selectChangeToggle();
+    dispatch(
+      uploadActions.changeValueOfProduct({
+        type: TYPE_DISPATCH.TYPE,
+        value: name,
+      })
+    );
   };
 
   const changePercentHandler = (event) => {
+    if (+event.target.value > 100) {
+      return;
+    }
     setPercent(event.target.value);
+    dispatch(
+      uploadActions.changeValueOfProduct({
+        type: TYPE_DISPATCH.SALE_PERCENT,
+        value: event.target.value,
+      })
+    );
+  };
+
+  const changeInStock = () => {
+    setToggle((prevState) => {
+      dispatch(
+        uploadActions.changeValueOfProduct({
+          type: TYPE_DISPATCH.CHANGE_STOCK,
+          value: !prevState,
+        })
+      );
+      return !prevState;
+    });
   };
   const getPercentOfInput = useMemo(() => {
-    const calculatePrice = +percent * +regularPrice;
+    const calculatePrice = +regularPrice - (+regularPrice * +percent) / 100;
     return calculatePrice.toFixed(2);
   }, [percent, regularPrice]);
+  
+  useEffect(() => {
+    dispatch(
+      uploadActions.changeValueOfProduct({
+        type: TYPE_DISPATCH.REGULAR_PRICE,
+        value: getPercentOfInput,
+      })
+    );
+  }, [getPercentOfInput, dispatch]);
+  
   return (
     <BoxContainer className={styles.container}>
       <div className={`d-flex align-items-center ${styles.toggle}`}>
-        <ToggleButton isClicked={toggle} onClicked={changeToggleHandler} />
+        <ToggleButton isClicked={toggle} onClicked={changeInStock} />
         <span className={styles.title}>In stock</span>
       </div>
       <NormalInput
@@ -87,6 +130,8 @@ const ProductOptions = () => {
           input={{
             id: "sale-percent",
             type: "number",
+            max: 100,
+            min: 0,
             autoComplete: "off",
             placeholder: "Percent",
             onChange: changePercentHandler,
@@ -107,11 +152,16 @@ const ProductOptions = () => {
           className={styles.input}
         />
       </div>
-      <Button className={styles.button} type="submit" variant="contained">
+      <Button
+        onClick={onSubmit}
+        className={styles.button}
+        type="submit"
+        variant="contained"
+      >
         Create Product
       </Button>
     </BoxContainer>
   );
 };
 
-export default ProductOptions;
+export default React.memo(ProductOptions);
