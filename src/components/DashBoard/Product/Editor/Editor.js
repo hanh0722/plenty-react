@@ -1,4 +1,4 @@
-import React, { useState, forwardRef } from "react";
+import React, { useState, forwardRef, useMemo } from "react";
 import ReactQuill from "react-quill";
 import QuillToolbar, { modules, formats } from "./QuillToolbar";
 import "react-quill/dist/quill.snow.css";
@@ -8,6 +8,9 @@ const Editor = forwardRef(({ focusEditorHandler, getValue }, ref) => {
     setValue(content);
     getValue(editor.getHTML());
   };
+  const getModules = useMemo(() => {
+    return modules;
+  }, []);
   return (
     <>
       <QuillToolbar />
@@ -17,7 +20,7 @@ const Editor = forwardRef(({ focusEditorHandler, getValue }, ref) => {
         theme="snow"
         value={value}
         onChange={getValueFromEditor}
-        modules={modules}
+        modules={getModules}
         formats={formats}
         placeholder="Add description for product"
         onFocus={focusEditorHandler}

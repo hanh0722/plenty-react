@@ -46,13 +46,12 @@ const Product = () => {
   const setFileHandler = useCallback((data) => {
     setFiles(data);
   }, []);
-  console.log(error, isLoading, data);
   return (
     <Container>
       <form onSubmit={uploadProductHandler}>
         <Grid>
           <Form setFileHandler={setFileHandler} />
-          <ProductOptions onSubmit={uploadProductHandler} />
+          <ProductOptions isLoading={isLoading} onSubmit={uploadProductHandler} />
         </Grid>
       </form>
     </Container>
