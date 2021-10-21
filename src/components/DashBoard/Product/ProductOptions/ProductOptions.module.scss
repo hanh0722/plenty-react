@@ -39,3 +39,7 @@
     background: var(--btn-hover) !important;
     color: $white !important;
 }
+.disabled{
+    background: #ddd !important;
+    pointer-events: none !important;
+}

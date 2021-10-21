@@ -1,5 +1,9 @@
+import axios from "axios";
 import React from "react";
 import { Quill } from "react-quill";
+import { uploadSingleImageApi } from "../../../../config/url";
+import turnImageToBase64 from '../../../../util/base64-image';
+import { key_multer } from "../../../../util/key-server";
 import "./Editor.scss";
 // Custom Undo button icon component for Quill editor. You can import it directly
 // from 'quill/assets/icons/undo.svg' but I found that a number of loaders do not
@@ -50,13 +54,73 @@ Font.whitelist = [
 ];
 Quill.register(Font, true);
 
+const uploadFile = async (file) => {
+  const formData = new FormData();
+  formData.append(key_multer, file);
+  const token = localStorage.getItem("token/customer");
+  try {
+
+    // const response = await fetch(uploadSingleImageApi, {
+    //   method: "POST",
+    //   headers: {
+    //     Authorization: "Bearer " + token,
+    //   },
+    //   body: formData,
+    // });
+    // if (!response.ok) {
+    //   const error = new Error("Cannot upload image");
+    //   error.code = 500;
+    //   throw error;
+    // }
+    // const data = await response.json();
+    // return data.url;
+    const response = await axios.post(uploadSingleImageApi, formData, {
+      onUploadProgress: (ProgressEvent) => {
+        console.log(Math.floor((ProgressEvent.loaded) / ProgressEvent.total) * 100);
+        // feature progress loading will create after
+      }
+    })
+    if(response.status >= 400){
+      const error = new Error('Cannot upload image');
+      error.code = 500;
+      throw error;
+    }
+    return response.data.url;
+  } catch (err) {
+    return {
+      error: err.message,
+      code: err.code,
+    };
+  }
+};
+const imageHandler = function () {
+  const input = document.createElement("input");
+  input.setAttribute("type", "file");
+  input.setAttribute("accept", "image/*");
+  input.click();
+  input.onchange = async function () {
+    const file = input.files[0];
+    const range = this.quill.getSelection();
+    const urlBase64 = await turnImageToBase64(file);
+    this.quill.insertEmbed(range.index, "image", urlBase64);
+    this.quill.setSelection(range.index + 1);
+    // temporary image then change the url after done from server => don't need user to wait for it
+    const link = await uploadFile(file); 
+
+    // this part the image is inserted
+    // by 'image' option below, you just have to put src(link) of img here.
+    this.quill.deleteText(range.index, 1);
+    this.quill.insertEmbed(range.index, "image", link);
+  }.bind(this); // react thing
+};
 // Modules object for setting up the Quill editor
 export const modules = {
   toolbar: {
     container: ".toolbar",
     handlers: {
       undo: undoChange,
-      redo: redoChange
+      redo: redoChange,
+      image: imageHandler,
     },
   },
   history: {

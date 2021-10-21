@@ -1,7 +1,8 @@
 const serverUrl = "http://localhost:8080";
 const authLinks = `${serverUrl}/api/auth`;
 const userApi = `${serverUrl}/api/user`;
-const dashboardApi = `${serverUrl}/api/dashboard`
+const dashboardApi = `${serverUrl}/api/dashboard`;
+const uploadImageApi = `${serverUrl}/api/upload`;
 const urlCheckVerify = (id, token) => {
   return `${authLinks}/verify?id=${id}&token=${token}`;
 };
@@ -17,6 +18,8 @@ const checkResetPasswordUrl = (token, uidt) => `${userApi}/reset-password/${toke
 const changePasswordFromUser = `${userApi}/reset-password`;
 const getUserByToken = token => `${userApi}/validate/:token`;
 const getUserApi = `${dashboardApi}/user`;
+const uploadProductApi = `${dashboardApi}/product`;
+const uploadSingleImageApi = `${uploadImageApi}/image`;
 export {
   urlCheckVerify,
   registerUrl,
@@ -27,5 +30,7 @@ export {
   checkResetPasswordUrl,
   changePasswordFromUser,
   getUserByToken,
-  getUserApi
+  getUserApi,
+  uploadProductApi,
+  uploadSingleImageApi
 };

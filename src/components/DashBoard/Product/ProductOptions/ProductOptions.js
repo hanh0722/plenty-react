@@ -12,7 +12,7 @@ import {
   uploadActions,
   TYPE_DISPATCH,
 } from "../../../store/UploadProduct/UploadProduct";
-const ProductOptions = ({ onSubmit }) => {
+const ProductOptions = ({ onSubmit, isLoading }) => {
   const dispatch = useDispatch();
   const { toggle, setToggle } = useToggle(true);
   const { toggle: selectToggle, changeToggleHandler: selectChangeToggle } =
@@ -71,7 +71,7 @@ const ProductOptions = ({ onSubmit }) => {
     const calculatePrice = +regularPrice - (+regularPrice * +percent) / 100;
     return calculatePrice.toFixed(2);
   }, [percent, regularPrice]);
-  
+
   useEffect(() => {
     dispatch(
       uploadActions.changeValueOfProduct({
@@ -80,7 +80,7 @@ const ProductOptions = ({ onSubmit }) => {
       })
     );
   }, [getPercentOfInput, dispatch]);
-  
+
   return (
     <BoxContainer className={styles.container}>
       <div className={`d-flex align-items-center ${styles.toggle}`}>
@@ -154,11 +154,12 @@ const ProductOptions = ({ onSubmit }) => {
       </div>
       <Button
         onClick={onSubmit}
-        className={styles.button}
+        className={`${styles.button} ${isLoading && styles.disabled}`}
+        disabled={isLoading}
         type="submit"
         variant="contained"
       >
-        Create Product
+        {isLoading ? "Creating Product" : "Create Product"}
       </Button>
     </BoxContainer>
   );
