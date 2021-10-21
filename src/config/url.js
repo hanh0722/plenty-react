@@ -17,6 +17,7 @@ const checkResetPasswordUrl = (token, uidt) => `${userApi}/reset-password/${toke
 const changePasswordFromUser = `${userApi}/reset-password`;
 const getUserByToken = token => `${userApi}/validate/:token`;
 const getUserApi = `${dashboardApi}/user`;
+const uploadProductApi = `${dashboardApi}/product`;
 export {
   urlCheckVerify,
   registerUrl,
@@ -27,5 +28,6 @@ export {
   checkResetPasswordUrl,
   changePasswordFromUser,
   getUserByToken,
-  getUserApi
+  getUserApi,
+  uploadProductApi
 };
