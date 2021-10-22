@@ -1,18 +1,21 @@
 import axios from "axios";
-import { useReducer, useCallback } from "react";
-
+import { useReducer, useCallback, useEffect } from "react";
+import { useDispatch } from "react-redux";
+import { progressActions } from "../components/store/ProgressLoading/ProgressLoading";
 const type = {
   LOADING: "LOADING",
   SUCCESS: "SUCCESS",
   ERROR: "ERROR",
-  PROGRESS: "PROGRESS",
+  PROGRESS_UPLOAD: "PROGRESS",
   RESET: "RESET",
+  PROGRESS_DOWNLOAD: "PROGRESS_DOWNLOAD",
 };
 const initialState = {
   isLoading: false,
   percentLoading: 0,
   error: null,
   data: null,
+  percentDownload: 0,
 };
 const reducerFn = (state, action) => {
   switch (action.type) {
@@ -36,7 +39,7 @@ const reducerFn = (state, action) => {
         error: action.payload,
       };
     }
-    case type.PROGRESS: {
+    case type.PROGRESS_UPLOAD: {
       return {
         ...state,
         percentLoading: action.payload,
@@ -47,14 +50,29 @@ const reducerFn = (state, action) => {
         ...initialState,
       };
     }
+    case type.PROGRESS_DOWNLOAD: {
+      return {
+        ...state,
+        percentDownload: action.payload,
+      };
+    }
     default:
       return state;
   }
 };
 const useAxios = () => {
   const [state, dispatch] = useReducer(reducerFn, initialState);
+  const dispatchEvent = useDispatch();
+  useEffect(() => {
+    if (state.percentDownload !== 0) {
+      dispatchEvent(progressActions.setPercentByLoading(state.percentDownload));
+    }
+    if (state.percentLoading !== 0) {
+      dispatchEvent(progressActions.setPercentByLoading(state.percentLoading));
+    }
+  }, [state.percentDownload, state.percentLoading, dispatchEvent]);
   const fetchDataFromServer = useCallback(
-    async ({ method, url, headers, data }) => {
+    async (routeConfig) => {
       try {
         dispatch({
           type: type.RESET,
@@ -62,22 +80,38 @@ const useAxios = () => {
         dispatch({
           type: type.LOADING,
         });
+        dispatchEvent(progressActions.resetPercent());
+        dispatchEvent(progressActions.setStartLoading());
         const response = await axios({
-          method: method ? method : "GET",
-          url: url,
-          headers: {
-            ...headers,
-          },
-          data: data,
+          method: routeConfig.method ? routeConfig.method : "GET",
+          url: routeConfig.url,
+          headers: routeConfig.headers
+            ? {
+                ...routeConfig.headers,
+              }
+            : {},
+          data: routeConfig.data ? routeConfig.data : null,
+          params: routeConfig.params
+            ? {
+                ...routeConfig.params,
+              }
+            : null,
           onUploadProgress: (progressEvent) => {
-            console.log(progressEvent.loaded);
-            let completePercent = Math.floor(
+            let percentCompleted = Math.round(
               (progressEvent.loaded * 100) / progressEvent.total
             );
-            console.log(completePercent);
             dispatch({
-              type: type.PROGRESS,
-              payload: completePercent,
+              type: type.PROGRESS_UPLOAD,
+              payload: percentCompleted,
+            });
+          },
+          onDownloadProgress: (progressEvent) => {
+            const percentage = Math.round(
+              (progressEvent.loaded * 100) / progressEvent.total
+            );
+            dispatch({
+              type: type.PROGRESS_DOWNLOAD,
+              payload: percentage,
             });
           },
         });
@@ -88,8 +122,11 @@ const useAxios = () => {
         }
         dispatch({
           type: type.SUCCESS,
-          payload: response
-        })
+          payload: response,
+        });
+        setTimeout(() => {
+          dispatchEvent(progressActions.finishedFetch());
+        }, 1000);
       } catch (err) {
         const message = err.message;
         const code = err.statusCode || 500;
@@ -100,9 +137,10 @@ const useAxios = () => {
             code: code,
           },
         });
+        dispatchEvent(progressActions.finishedFetch());
       }
     },
-    []
+    [dispatchEvent]
   );
   return {
     isLoading: state.isLoading,
@@ -110,6 +148,7 @@ const useAxios = () => {
     error: state.error,
     data: state.data,
     fetchDataFromServer: fetchDataFromServer,
+    percentDownload: state.percentDownload,
   };
 };
 

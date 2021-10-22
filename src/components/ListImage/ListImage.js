@@ -7,28 +7,43 @@ import "swiper/components/thumbs/thumbs.min.css";
 import SwiperCore, { Navigation, Pagination, Thumbs } from "swiper/core";
 import classes from "./ListImage.module.scss";
 import MagnifyImage from "../MagnifyImage/MagnifyImage";
+import Skeleton from "../UI/LoadingSkeleton/Skeleton";
 SwiperCore.use([Navigation, Pagination, Thumbs]);
 
-const ListImage = ({ images }) => {
+const ListImage = ({ images, isLoading }) => {
   const [thumbsSwiper, setThumbsSwiper] = useState(null);
 
+  const renderImageSkeleton = (number) => {
+    const array = [];
+    for (let i = 1; i <= number; i++) {
+      array.push(
+        <Skeleton key={i} src imageClassName={classes["image-list"]} />
+      );
+    }
+    return array;
+  };
   return (
     <>
       <Swiper
         className={`pb-3 ${classes.container}`}
         loop={true}
         spaceBetween={10}
-        navigation={true}
+        navigation={isLoading ? false : true}
         thumbs={{ swiper: thumbsSwiper }}
         grabCursor={false}
       >
-        {images.map((item) => {
-          return (
-            <SwiperSlide key={item}>
-              <MagnifyImage src={item}/>
-            </SwiperSlide>
-          );
-        })}
+        {isLoading && (
+          <Skeleton src imageClassName={classes["image-zoom-loading"]} />
+        )}
+        {!isLoading &&
+          images &&
+          images.map((item) => {
+            return (
+              <SwiperSlide key={item}>
+                <MagnifyImage src={item} />
+              </SwiperSlide>
+            );
+          })}
       </Swiper>
       <Swiper
         onSwiper={setThumbsSwiper}
@@ -38,13 +53,18 @@ const ListImage = ({ images }) => {
         watchSlidesProgress={true}
         className={`${classes["image__content"]} swiper__card`}
       >
-        {images.map((item) => {
-          return (
-            <SwiperSlide key={item}>
-              <img src={item} alt={item} />
-            </SwiperSlide>
-          );
-        })}
+        {isLoading && (
+          <div className={classes.grid}>{renderImageSkeleton(4)}</div>
+        )}
+        {!isLoading &&
+          images &&
+          images.map((item) => {
+            return (
+              <SwiperSlide key={item}>
+                <img src={item} alt={item} />
+              </SwiperSlide>
+            );
+          })}
       </Swiper>
     </>
   );

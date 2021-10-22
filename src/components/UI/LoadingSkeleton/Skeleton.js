@@ -1,4 +1,4 @@
-import React, { useMemo } from "react";
+import React from "react";
 import styles from "./Skeleton.module.scss";
 
 const Skeleton = ({
@@ -10,17 +10,11 @@ const Skeleton = ({
   classSkeleton,
   reverse,
   imageClassName,
+  containerSkeleton
 }) => {
-  const valueRender = useMemo(() => {
-    let defaultValue = 2;
-    if (times) {
-      defaultValue = times;
-    }
-    return defaultValue;
-  }, [times]);
   const renderSkeleton = () => {
     const arraySkeleton = [];
-    for (let i = 0; i < valueRender; i++) {
+    for (let i = 0; i < times; i++) {
       arraySkeleton.push(
         <div key={i} className={`${styles.skeleton} ${classSkeleton}`} />
       );
@@ -31,7 +25,7 @@ const Skeleton = ({
     <>
       <div
         className={`${
-          src &&
+          src && times !== 0 && 
           `d-flex ${
             reverse && "flex-row-reverse"
           } justify-content-between align-items-center`
@@ -45,11 +39,7 @@ const Skeleton = ({
             style={{ ...style }}
           />
         )}
-        <div
-          className={`${styles["render--skeleton"]} ${
-            src && styles["render--has--image"]
-          }`}
-        >
+        <div className={containerSkeleton ? containerSkeleton : ''}>
           {renderSkeleton()}
         </div>
       </div>

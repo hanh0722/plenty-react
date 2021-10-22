@@ -6,6 +6,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faStar } from "@fortawesome/free-regular-svg-icons";
 import { useDispatch } from "react-redux";
 import { CartActions } from "../store/cart";
+import Skeleton from "../UI/LoadingSkeleton/Skeleton";
 const Product = (props) => {
   const dispatch = useDispatch();
   const addCartHandler = () => {
@@ -22,23 +23,36 @@ const Product = (props) => {
   return (
     <div className={styles.container} style={props.style}>
       <div className={`${styles.col}`}>
-        <img src={props.imageUrl} alt="ImageItem" />
-        <div className={styles.overlay}>
-          <div
-            className={`${styles.icon} d-flex justify-content-center align-items-center`}
-          >
-            <FontAwesomeIcon icon={faStar} />
-          </div>
-          <div className={styles.btn}>
-            <Button onClick={addCartHandler} variant="contained">
-              Add to cart
-            </Button>
-          </div>
-        </div>
+        {props.isLoading && (
+          <Skeleton src imageClassName={styles.loading} times={0}/>
+        )}
+        {!props.isLoading && (
+          <>
+            <img src={props.imageUrl} alt="ImageItem" />
+            <div className={styles.overlay}>
+              <div
+                className={`${styles.icon} d-flex justify-content-center align-items-center`}
+              >
+                <FontAwesomeIcon icon={faStar} />
+              </div>
+              <div className={styles.btn}>
+                <Button onClick={addCartHandler} variant="contained">
+                  Add to cart
+                </Button>
+              </div>
+            </div>
+          </>
+        )}
       </div>
       <div className={styles.item}>
-        <Link to={`${props.link}`}>{props.name}</Link>
-        <p>${props.price}</p>
+        {props.isLoading ? (
+          <Skeleton times={3} classSkeleton='mb-2 mt-2'/>
+        ) : (
+          <>
+            <Link to={`${props.link}`}>{props.name}</Link>
+            <p>${props.price}</p>
+          </>
+        )}
       </div>
     </div>
   );

@@ -11,7 +11,7 @@ import {
   uploadActions,
   TYPE_DISPATCH,
 } from "../../../store/UploadProduct/UploadProduct";
-const Form = ({ setFileHandler }) => {
+const Form = ({ setFileHandler, setIsLoadingUpload }) => {
   const editorRef = useRef();
   const dispatch = useDispatch();
   const focusEditorHandler = () => {
@@ -53,9 +53,10 @@ const Form = ({ setFileHandler }) => {
         ref={editorRef}
         focusEditorHandler={focusEditorHandler}
         getValue={getValueOfEditor}
+        setIsLoadingUpload={setIsLoadingUpload}
       />
       <label className="pt-3">Upload Image</label>
-      <DropzoneUpload getFileOfDrop={setFileHandler}/>
+      <DropzoneUpload getFileOfDrop={setFileHandler} />
     </div>
   );
 };

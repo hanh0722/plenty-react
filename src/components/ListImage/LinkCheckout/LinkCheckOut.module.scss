@@ -56,7 +56,14 @@
         outline: none;
     }
 }
-
+.loading-image{
+    width: 100px;
+    height: 100px;
+}
+.container-loading{
+    width: 100px;
+    margin-left: 10px;
+}
 @media screen and (max-width: 768px) {
     .add{
         button{
@@ -101,5 +108,9 @@
         }
         line-height: 30px;
         width: auto !important;
+    }
+    .loading-image{
+        width: 60px;
+        height: 60px;
     }
 }

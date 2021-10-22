@@ -14,6 +14,7 @@ import Aos from "aos";
 import "aos/dist/aos.css";
 import LayoutTop from "./components/layout/LayoutTop/LayoutTop";
 import MessageSideBar from "./components/MessageSideBar/MessageSideBar";
+import ProgressLoading from "./components/ProgressLoading/ProgressLoading";
 import { checkUserIsAuth } from "./components/store/IsAuth/is-auth";
 // import { IsAuthContext } from "./context/is-auth";
 // import Test from "./components/Test/Test";
@@ -57,6 +58,7 @@ const App = () => {
   };
   return (
     <>
+      <ProgressLoading/>
       <MessageSideBar />
       <Navigation isDowned={navigation} />
       <SearchBar isShowed={state} />
