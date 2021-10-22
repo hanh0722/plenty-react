@@ -1,0 +1,10 @@
+import { serverUrl } from "./url";
+
+const api = `${serverUrl}/api/product`;
+
+const getAllProductsFromServer = `${api}/products`;
+
+const getProductById = (id) => {
+  return `${api}/products/${id}`;
+};
+export { getAllProductsFromServer, getProductById };

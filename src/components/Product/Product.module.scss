@@ -8,10 +8,14 @@
     }
     a{
         text-decoration: none;
-        color: var(--black);
+        color: var(--black) !important;
         display: block;
         margin-top: 20px;
         font-weight: bold;
+        transition: all .15s cubic-bezier(0.075, 0.82, 0.165, 1);
+        &:hover{
+            color: $brown !important;
+        }
     }
     .item{
         p{
@@ -83,7 +87,10 @@
         }
     }
 }
-
+.loading{
+    height: 300px !important;
+    width: 100% !important;
+}
 @media screen and (max-width: 576px) {
     .container{
         .btn{

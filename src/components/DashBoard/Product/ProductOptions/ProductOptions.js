@@ -12,7 +12,7 @@ import {
   uploadActions,
   TYPE_DISPATCH,
 } from "../../../store/UploadProduct/UploadProduct";
-const ProductOptions = ({ onSubmit, isLoading }) => {
+const ProductOptions = ({ onSubmit, isLoading, isLoadingUpload }) => {
   const dispatch = useDispatch();
   const { toggle, setToggle } = useToggle(true);
   const { toggle: selectToggle, changeToggleHandler: selectChangeToggle } =
@@ -155,7 +155,7 @@ const ProductOptions = ({ onSubmit, isLoading }) => {
       <Button
         onClick={onSubmit}
         className={`${styles.button} ${isLoading && styles.disabled}`}
-        disabled={isLoading}
+        disabled={isLoading || isLoadingUpload}
         type="submit"
         variant="contained"
       >

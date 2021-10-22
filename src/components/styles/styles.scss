@@ -239,6 +239,40 @@ input[type='number']{
     opacity: 0;
     transition: all .75s ease-in-out;
 }
+.scale-fix-enter{
+    @extend .scale-enter;
+    transform: scale(.65) translate(-50%, -50%);
+    opacity: 0;
+}
+.scale-fix-enter-active{
+    @extend .scale-enter-active;
+    transform: scale(1) translate(-50%, -50%);
+    opacity: 1
+}
+.scale-fix-exit{
+    @extend .scale-exit;
+    transform: scale(1) translate(-50%, -50%);
+    opacity: 1
+}
+.scale-fix-exit-active{
+    @extend .scale-exit-active;
+    transform: scale(.65) translate(-50%, -50%);
+    opacity: 0;
+}
+.fade-enter{
+    opacity: 0;
+}
+.fade-enter-active{
+    opacity: 1;
+    transition: all .5s ease-in-out;
+}
+.fade-exit{
+    opacity: 1;
+}
+.fade-exit-active{
+    opacity: 0;
+    transition: all .5s ease-in-out;
+}
 @keyframes active-pagination {
     0%{
         opacity: 0;
