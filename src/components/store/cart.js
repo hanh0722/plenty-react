@@ -72,6 +72,5 @@ const CartSlice = createSlice({
     },
   },
 });
-
 export const CartActions = CartSlice.actions;
 export default CartSlice;

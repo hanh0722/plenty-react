@@ -64,6 +64,7 @@ const useCart = () => {
     // dispatch(CartActions.showCartHandler());
     // dispatch(CartActions.addToCartHandler(product));
   };
+  
   return {
     isLoading,
     data,

@@ -10,7 +10,7 @@ const Skeleton = ({
   classSkeleton,
   reverse,
   imageClassName,
-  containerSkeleton
+  containerSkeleton,
 }) => {
   const renderSkeleton = () => {
     const arraySkeleton = [];
@@ -25,7 +25,8 @@ const Skeleton = ({
     <>
       <div
         className={`${
-          src && times !== 0 && 
+          src &&
+          times !== 0 &&
           `d-flex ${
             reverse && "flex-row-reverse"
           } justify-content-between align-items-center`
@@ -39,7 +40,7 @@ const Skeleton = ({
             style={{ ...style }}
           />
         )}
-        <div className={containerSkeleton ? containerSkeleton : ''}>
+        <div className={containerSkeleton ? containerSkeleton : ""}>
           {renderSkeleton()}
         </div>
       </div>
