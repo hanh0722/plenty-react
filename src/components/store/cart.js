@@ -1,5 +1,4 @@
 import { createSlice } from "@reduxjs/toolkit";
-
 const initialState = {
   cart: [],
   showCart: false,
@@ -17,6 +16,9 @@ const CartSlice = createSlice({
   name: "cart",
   initialState,
   reducers: {
+    setCartHandler(state, action) {
+      state.cart = action.payload;
+    },
     addToCartHandler(state, action) {
       const isExisted = state.cart.findIndex(
         (item) => item.id === action.payload.id
@@ -33,7 +35,11 @@ const CartSlice = createSlice({
         // add to cart if it doesn't exist
       } else {
         // existed => increase quantity
-        const newCart = helperChangeCart(state.cart, isExisted, action.payload.quantity ? +action.payload.quantity : 1);
+        const newCart = helperChangeCart(
+          state.cart,
+          isExisted,
+          action.payload.quantity ? +action.payload.quantity : 1
+        );
         state.cart = newCart;
       }
     },

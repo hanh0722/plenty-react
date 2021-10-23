@@ -51,6 +51,32 @@
         }
     }
 }
+.loading-image{
+    width: 100%;
+    height: 100%;
+}
+.ld-text{
+    margin-bottom: 12px;
+}
+.container--text{
+    height: 400px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+.infor-product{
+    ol, ul{
+        padding-top: 20px;
+    }
+}
+@media screen and (max-width: 991px) {
+    .container--text{
+        height: 250px;
+    }
+    .ld-text{
+        margin-bottom: 8px;
+    }
+}
 @media screen and (max-width: 768px){
     .introduce{
         .content__product{
@@ -68,5 +94,8 @@
         p{
             display: inline-block;
         }
+    }
+    .loading-image{
+        height: 400px;
     }
 }

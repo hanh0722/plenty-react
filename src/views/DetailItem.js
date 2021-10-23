@@ -1,5 +1,5 @@
 import React, { useEffect, useState, useRef, useMemo } from "react";
-import { useRouteMatch, useLocation } from "react-router-dom";
+import { useRouteMatch, useLocation, Redirect } from "react-router-dom";
 import { Col, Container, Row } from "react-bootstrap";
 import styles from "../components/styles/DetailItem.module.scss";
 import ReactDOM from "react-dom";
@@ -18,6 +18,7 @@ import HeaderPage from "../components/HeaderPage/HeaderPage";
 import useAxios from "../hook/use-axios";
 import { getProductById } from "../config/product";
 import DetailProduct from "../components/Detail/DetailProduct/DetailProduct";
+import { NOT_FOUND } from "../components/link/link";
 const DetailItem = () => {
   const location = useLocation();
   const { isLoading, error, fetchDataFromServer, data } = useAxios();
@@ -35,7 +36,6 @@ const DetailItem = () => {
       url: getProductById(getProductId),
     });
   }, [fetchDataFromServer, getProductId]);
-  console.log(isLoading, error, data);
   const { toggle, changeToggleHandler } = useToggle(false);
   const getCopyHandler = () => {
     navigator.clipboard.writeText(inputRef.current.value);
@@ -46,6 +46,7 @@ const DetailItem = () => {
   };
   return (
     <>
+      {!isLoading && error && <Redirect to={NOT_FOUND} />}
       <HeaderPage
         isLoading={isLoading}
         title={data?.data?.product?.title}
@@ -71,7 +72,7 @@ const DetailItem = () => {
             setContent={setContent}
           />
         </Row>
-        <MoreDetail isLoading={isLoading} detail={data?.data?.product}/>
+        <MoreDetail isLoading={isLoading} detail={data?.data?.product} />
         <Related />
       </Container>
       <CSSTransition
@@ -81,7 +82,11 @@ const DetailItem = () => {
         mountOnEnter
         in={isValid}
       >
-        <LinkCheckOut isLoading={isLoading} url={data?.data?.product?.images?.urls[0]} />
+        <LinkCheckOut
+          product={data?.data?.product}
+          isLoading={isLoading}
+          url={data?.data?.product?.images?.urls[0]}
+        />
       </CSSTransition>
       <CSSTransition
         in={toggle}

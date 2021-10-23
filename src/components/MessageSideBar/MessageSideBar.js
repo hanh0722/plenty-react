@@ -10,12 +10,16 @@ const MessageSideBar = (props) => {
   const stateSlice = useSelector((state) => state.notifyMessage);
   const isAuthExpire = useSelector((state) => state.isAuth.expired);
   useEffect(() => {
-    setTimeout(() => {
+    const timeoutNotify = setTimeout(() => {
       dispatch(NotifyActions.removeNotify());
     }, 5000);
-    setTimeout(() => {
+    const timeoutMessage = setTimeout(() => {
       dispatch(NotifyActions.removeMessageAndCode());
     }, 6000);
+    return () => {
+      clearTimeout(timeoutNotify);
+      clearTimeout(timeoutMessage);
+    }
   }, [dispatch, stateSlice.showed]);
   useEffect(() => {
     if (!isAuthExpire) {

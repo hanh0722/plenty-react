@@ -1,5 +1,5 @@
 import { Button } from "@material-ui/core";
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import ButtonItem from "../UI/Button/Button";
 import styles from "./CartMain.module.scss";
 import Item from "./Item/Item";
@@ -12,11 +12,17 @@ import { CartActions } from "../store/cart";
 import "../CSSTransition/CSSTransition.scss";
 import { Link } from "react-router-dom";
 import { CHECK_OUT_PAGE } from "../link/link";
+import useAxios from "../../hook/use-axios";
+
 const CartMain = () => {
   const cart = useSelector((state) => state.cart.cart);
   const isShowCart = useSelector((state) => state.cart.showCart);
   const dispatch = useDispatch();
   const [showVoucher, setShowVoucher] = useState(false);
+  console.log(cart);
+  useEffect(() => {
+
+  }, []);
   return (
     <>
       <div className={`${styles.cart} ${isShowCart && styles["cart__back"]}`}>
@@ -54,6 +60,7 @@ const CartMain = () => {
                 price={item.price}
                 quantity={item.quantity}
                 id={item.id}
+                type={item.type}
               />
             );
           })}
