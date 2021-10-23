@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React from "react";
 import { Col } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -11,8 +11,6 @@ import styles from "../../styles/DetailItem.module.scss";
 import Skeleton from "../../UI/LoadingSkeleton/Skeleton";
 import classes from "./DetailProduct.module.scss";
 import useCart from "../../../hook/use-cart";
-import { useDispatch } from "react-redux";
-import { NotifyActions } from "../../store/NotifyAfterLogin/NotifyAfterLogin";
 const DetailProduct = ({
   product,
   changeToggleHandler,
@@ -21,18 +19,7 @@ const DetailProduct = ({
 }) => {
   const { incrementHandler, decrementHandler, quantity, setQuantity } =
     useQuantity(1);
-  const { isLoading: isLoadingAddProduct, error, addCartHandler } = useCart();
-  const dispatch = useDispatch();
-  useEffect(() => {
-    if (!isLoadingAddProduct && error) {
-      dispatch(
-        NotifyActions.showedNotify({
-          message: error.message,
-          code: error.code,
-        })
-      );
-    }
-  }, [isLoadingAddProduct, error, dispatch]);
+  const { addCartHandler } = useCart();
   return (
     <>
       <Col

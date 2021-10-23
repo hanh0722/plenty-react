@@ -4,3 +4,9 @@ export const Type = {
     SUCCESS: 'SUCCESS',
     RESET: 'RESET'
 }
+
+export const TYPE_CART = {
+    ADD: 'ADD',
+    REMOVE: 'REMOVE'
+}
+

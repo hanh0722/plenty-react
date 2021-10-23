@@ -5,6 +5,8 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faTrashAlt } from "@fortawesome/free-regular-svg-icons";
 import { useDispatch } from "react-redux";
 import { CartActions } from "../../store/cart";
+import useCart from "../../../hook/use-cart";
+
 const Item = ({ imageUrl, name, price, quantity, id, type }) => {
   const dispatch = useDispatch();
   const dataItem = {
@@ -15,6 +17,7 @@ const Item = ({ imageUrl, name, price, quantity, id, type }) => {
     type,
     id,
   };
+  const { removeItemFromCart } = useCart();
   return (
     <>
       <div
@@ -46,13 +49,15 @@ const Item = ({ imageUrl, name, price, quantity, id, type }) => {
                 readOnly
               />
               <div
-                onClick={() => dispatch(CartActions.increseItemHandler(dataItem))}
+                onClick={() =>
+                  dispatch(CartActions.increseItemHandler(dataItem))
+                }
               >
                 +
               </div>
             </div>
             <div
-              onClick={() => dispatch(CartActions.removeItemInCart(dataItem))}
+              onClick={() => removeItemFromCart(id)}
               className={`${styles.trash} d-flex justify-content-center align-items-center`}
             >
               <FontAwesomeIcon icon={faTrashAlt} />

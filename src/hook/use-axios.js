@@ -109,7 +109,7 @@ const useAxios = () => {
             let percentage = Math.round(
               (progressEvent.loaded * 100) / progressEvent.total
             );
-            if(cb){
+            if (cb) {
               cb(percentage);
             }
             dispatch({
@@ -119,7 +119,7 @@ const useAxios = () => {
           },
         });
         if (response.status >= 400) {
-          const error = response || "Cannot fetch data";
+          const error = new Error(response.data.message || "Cannot fetch data");
           error.statusCode = response.status || 500;
           throw error;
         }
