@@ -6,6 +6,7 @@
     z-index: 5;
     bottom: 0;
     padding: 10px;
+    box-shadow: var(--shadow);
 }
 .link{
     max-width: 1140px;
@@ -19,10 +20,10 @@
     }
     line-height: 40px;
     p{
-        font-size: $fs-sm;
+        font-size: 12px;
         &:first-child{
             font-weight: bold;
-            font-size: $fs-md;
+            font-size: 12px;
         }
     }
 }

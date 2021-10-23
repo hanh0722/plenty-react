@@ -3,7 +3,7 @@ import styles from "./LinkCheckOut.module.scss";
 import { Button } from "@material-ui/core";
 import useQuantity from "../../../hook/use-quantity";
 import Skeleton from "../../UI/LoadingSkeleton/Skeleton";
-const LinkCheckOut = ({ url, isLoading }) => {
+const LinkCheckOut = ({ url, isLoading, product }) => {
   const { incrementHandler, decrementHandler, quantity, setQuantity } =
     useQuantity();
   return (
@@ -22,12 +22,12 @@ const LinkCheckOut = ({ url, isLoading }) => {
                 />
               </>
             )}
-            {!isLoading && (
+            {!isLoading && product && (
               <>
                 <img src={url} alt="" />
                 <div className="ms-3">
-                  <p>Book</p>
-                  <p>$22.00</p>
+                  <p>{product.title}</p>
+                  <p>${product.last_price}</p>
                 </div>
               </>
             )}

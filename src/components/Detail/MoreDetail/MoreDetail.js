@@ -1,13 +1,22 @@
-import React from "react";
+import React, { useMemo } from "react";
 import styles from "./MoreDetail.module.scss";
-import p1 from "../../../image/indoor-1.jpeg";
 import { Row, Col } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
 import { styleDetailActions } from "../../store/style-detail";
-import Delivery from '../LayoutDelivery/Delivery';
-const MoreDetail = () => {
+import Delivery from "../LayoutDelivery/Delivery";
+import Skeleton from "../../UI/LoadingSkeleton/Skeleton";
+import { randomElements } from "../../../util/random-array";
+import ReactHTMLParser from "react-html-parser";
+
+const MoreDetail = ({ isLoading, detail }) => {
   const dispatch = useDispatch();
   const content = useSelector((state) => state.detail.content);
+  const renderImage = useMemo(() => {
+    if(!detail){
+      return;
+    }
+    return randomElements(detail.images.urls).valueRandom;
+  }, [detail]);
   return (
     <div>
       <div
@@ -15,20 +24,25 @@ const MoreDetail = () => {
       >
         <p
           onClick={() => dispatch(styleDetailActions.getIntroduction())}
-          className={!content ? styles.active : ''}
+          className={!content ? styles.active : ""}
         >
           Product Description
         </p>
         <p
           onClick={() => dispatch(styleDetailActions.getShippingAndReturn())}
-          className={content ? styles.active : ''}
+          className={content ? styles.active : ""}
         >
           Shipping & Returns
         </p>
       </div>
       <Row className={styles.introduce}>
         <Col xs={12} sm={12} md={4} lg={4} className={styles.image}>
-          <img src={p1} alt="" />
+          {!isLoading && detail && (
+            <img src={renderImage} alt="" />
+          )}
+          {isLoading && (
+            <Skeleton imageClassName={styles["loading-image"]} src />
+          )}
         </Col>
         <Col
           xs={12}
@@ -39,21 +53,20 @@ const MoreDetail = () => {
         >
           {!content ? (
             <>
-              <h4>The Iconic Silhouette</h4>
-              <p>
-                he garments labelled as Committed are products that have been
-                produced using sustainable fibers or processes, reducing their
-                environmental impact. Mango's goal is to support the
-                implementation of practices more committed to the environment,
-                and therefore increase the number of sustainable garments in the
-                collection.
-              </p>
-              <div className={styles["more__detail"]}>
-                <ul>
-                  <li>Fit for home</li>
-                  <li>Reasonable price</li>
-                </ul>
-              </div>
+              {isLoading && (
+                <Skeleton
+                  classSkeleton={styles["ld-text"]}
+                  className={styles["container--text"]}
+                  times={15}
+                />
+              )}
+              {!isLoading && detail && (
+                <>
+                  <div className={styles["infor-product"]}>
+                    {ReactHTMLParser(detail.description)}
+                  </div>
+                </>
+              )}
             </>
           ) : (
             <>
@@ -63,7 +76,7 @@ const MoreDetail = () => {
                 gorgeous floral lace with sheer overlay straps that hold you in
                 and eliminates gaping. Removable pads let you customize you
               </p>
-              <Delivery className='none'/>
+              <Delivery className="none" />
             </>
           )}
         </Col>

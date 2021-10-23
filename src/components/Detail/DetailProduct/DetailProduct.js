@@ -4,15 +4,13 @@ import { Link } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faStar } from "@fortawesome/free-regular-svg-icons";
 import { Button } from "@material-ui/core";
-import { useDispatch } from "react-redux";
 import Methods from "../Methods/Methods";
 import Delivery from "../LayoutDelivery/Delivery";
-import { CartActions } from "../../store/cart";
 import useQuantity from "../../../hook/use-quantity";
 import styles from "../../styles/DetailItem.module.scss";
 import Skeleton from "../../UI/LoadingSkeleton/Skeleton";
 import classes from "./DetailProduct.module.scss";
-
+import useCart from "../../../hook/use-cart";
 const DetailProduct = ({
   product,
   changeToggleHandler,
@@ -21,21 +19,21 @@ const DetailProduct = ({
 }) => {
   const { incrementHandler, decrementHandler, quantity, setQuantity } =
     useQuantity(1);
-  const dispatch = useDispatch();
-  const addCartHandler = () => {
-    dispatch(CartActions.showCartHandler());
-    dispatch(
-      CartActions.addToCartHandler({
-        id: product.id,
-        name: product.name,
-        imageUrl: product.imageUrl,
-        quantity: quantity,
-        price: product.price,
-      })
-    );
-  };
+  const {
+    isLoading: isLoadingAddProduct,
+    data,
+    error,
+    addCartHandler,
+  } = useCart();
+  console.log(isLoadingAddProduct, data, error);
   return (
-    <Col xs={12} sm={12} md={6} lg={6} className={`${styles["col__content"]}`}>
+    <Col
+      xs={12}
+      sm={12}
+      md={6}
+      lg={6}
+      className={`${styles["col__content"]} ${classes.container}`}
+    >
       <div
         className={`${styles.title} d-flex justify-content-between align-items-center`}
       >
@@ -53,8 +51,18 @@ const DetailProduct = ({
         {isLoading && <Skeleton times={2} classSkeleton={classes.line} />}
         {!isLoading && product && (
           <>
-            {product.sale_percent !== 0 && <p>Sale: {product.sale_percent} </p>}
-            Price: {product.last_price}
+            {product.sale_percent !== 0 && (
+              <p className={classes.sale}>
+                Sale: <span>{product.sale_percent}%</span>{" "}
+              </p>
+            )}
+            Price:{" "}
+            {product.sale_percent !== 0 && (
+              <span className={classes["sale-value"]}>
+                {product.regular_price}
+              </span>
+            )}{" "}
+            ${product.last_price}
           </>
         )}
       </div>
@@ -62,51 +70,66 @@ const DetailProduct = ({
       {isLoading && <Skeleton times={2} classSkeleton={classes.line} />}
       {!isLoading && product && (
         <>
-          <p className={styles["quantity__title"]}>
+          <p
+            className={`${styles["quantity__title"]} ${
+              !product.inStock && classes["out-product"]
+            }`}
+          >
             In Stock: {product.inStock ? "Normal" : "Out of product"}
           </p>
           <p className={styles["quantity__title"]}>
-            Type: {product.type_product}
+            Type: {product.type_product || "Other"}
           </p>
         </>
       )}
-      <div
-        className={`${styles["add__to__cart"]} d-flex justify-content-between align-items-center`}
-      >
-        <div
-          className={`${styles.quantity} d-flex justify-content-center align-items-center`}
-        >
-          <div onClick={decrementHandler} className={styles.btn}>
-            -
+
+      {!isLoading && (
+        <>
+          <div
+            className={`${styles["add__to__cart"]} d-flex justify-content-between align-items-center`}
+          >
+            <div
+              className={`${styles.quantity} d-flex justify-content-center align-items-center`}
+            >
+              <div onClick={decrementHandler} className={styles.btn}>
+                -
+              </div>
+              <div>
+                <input
+                  type="number"
+                  min="1"
+                  max="100"
+                  value={quantity}
+                  onChange={(event) => setQuantity(+event.target.value)}
+                />
+              </div>
+              <div onClick={incrementHandler} className={styles.btn}>
+                +
+              </div>
+            </div>
+            <div className={styles["btn__add"]}>
+              <Button
+                onClick={() => addCartHandler(quantity, product._id)}
+                variant="outlined"
+              >
+                Add To Cart
+              </Button>
+            </div>
           </div>
-          <div>
-            <input
-              type="number"
-              min="1"
-              max="100"
-              value={quantity}
-              onChange={(event) => setQuantity(+event.target.value)}
-            />
+          <div className={`${styles.space} w-100`}>
+            <Link to="/checkout">
+              <Button className="w-100" variant="contained">
+                Buy it now!
+              </Button>
+            </Link>
           </div>
-          <div onClick={incrementHandler} className={styles.btn}>
-            +
-          </div>
-        </div>
-        <div className={styles["btn__add"]}>
-          <Button onClick={addCartHandler} variant="outlined">
-            Add To Cart
-          </Button>
-        </div>
-      </div>
-      <div className={`${styles.space} w-100`}>
-        <Link to="/checkout">
-          <Button className="w-100" variant="contained">
-            Buy it now!
-          </Button>
-        </Link>
-      </div>
-      <Methods setContent={setContent} setChangeLayout={changeToggleHandler} />
-      <Delivery />
+          <Methods
+            setContent={setContent}
+            setChangeLayout={changeToggleHandler}
+          />
+          <Delivery />
+        </>
+      )}
     </Col>
   );
 };
