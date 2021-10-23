@@ -72,7 +72,7 @@ const useAxios = () => {
     }
   }, [state.percentDownload, state.percentLoading, dispatchEvent]);
   const fetchDataFromServer = useCallback(
-    async (routeConfig) => {
+    async (routeConfig, cb) => {
       try {
         dispatch({
           type: type.RESET,
@@ -106,9 +106,12 @@ const useAxios = () => {
             });
           },
           onDownloadProgress: (progressEvent) => {
-            const percentage = Math.round(
+            let percentage = Math.round(
               (progressEvent.loaded * 100) / progressEvent.total
             );
+            if (cb) {
+              cb(percentage);
+            }
             dispatch({
               type: type.PROGRESS_DOWNLOAD,
               payload: percentage,
@@ -116,7 +119,7 @@ const useAxios = () => {
           },
         });
         if (response.status >= 400) {
-          const error = response || "Cannot fetch data";
+          const error = new Error(response.data.message || "Cannot fetch data");
           error.statusCode = response.status || 500;
           throw error;
         }

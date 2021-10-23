@@ -19,118 +19,114 @@ const DetailProduct = ({
 }) => {
   const { incrementHandler, decrementHandler, quantity, setQuantity } =
     useQuantity(1);
-  const {
-    isLoading: isLoadingAddProduct,
-    data,
-    error,
-    addCartHandler,
-  } = useCart();
-  console.log(isLoadingAddProduct, data, error);
+  const { addCartHandler } = useCart();
   return (
-    <Col
-      xs={12}
-      sm={12}
-      md={6}
-      lg={6}
-      className={`${styles["col__content"]} ${classes.container}`}
-    >
-      <div
-        className={`${styles.title} d-flex justify-content-between align-items-center`}
+    <>
+      <Col
+        xs={12}
+        sm={12}
+        md={6}
+        lg={6}
+        className={`${styles["col__content"]} ${classes.container}`}
       >
-        <h4>
-          {isLoading && <Skeleton times={1} />}
-          {!isLoading && product && `${product.title}`}
-        </h4>
         <div
-          className={`${styles.wishlist} d-flex justify-content-center align-items-center`}
+          className={`${styles.title} d-flex justify-content-between align-items-center`}
         >
-          <FontAwesomeIcon icon={faStar} />
+          <h4>
+            {isLoading && <Skeleton times={1} />}
+            {!isLoading && product && `${product.title}`}
+          </h4>
+          <div
+            className={`${styles.wishlist} d-flex justify-content-center align-items-center`}
+          >
+            <FontAwesomeIcon icon={faStar} />
+          </div>
         </div>
-      </div>
-      <div className={styles.price}>
+        <div className={styles.price}>
+          {isLoading && <Skeleton times={2} classSkeleton={classes.line} />}
+          {!isLoading && product && (
+            <>
+              {product.sale_percent !== 0 && (
+                <p className={classes.sale}>
+                  Sale: <span>{product.sale_percent}%</span>{" "}
+                </p>
+              )}
+              Price:{" "}
+              {product.sale_percent !== 0 && (
+                <span className={classes["sale-value"]}>
+                  {product.regular_price}
+                </span>
+              )}{" "}
+              ${product.last_price}
+            </>
+          )}
+        </div>
+
         {isLoading && <Skeleton times={2} classSkeleton={classes.line} />}
         {!isLoading && product && (
           <>
-            {product.sale_percent !== 0 && (
-              <p className={classes.sale}>
-                Sale: <span>{product.sale_percent}%</span>{" "}
-              </p>
-            )}
-            Price:{" "}
-            {product.sale_percent !== 0 && (
-              <span className={classes["sale-value"]}>
-                {product.regular_price}
-              </span>
-            )}{" "}
-            ${product.last_price}
+            <p
+              className={`${styles["quantity__title"]} ${
+                !product.inStock && classes["out-product"]
+              }`}
+            >
+              In Stock: {product.inStock ? "Normal" : "Out of product"}
+            </p>
+            <p className={styles["quantity__title"]}>
+              Type: {product.type_product || "Other"}
+            </p>
           </>
         )}
-      </div>
 
-      {isLoading && <Skeleton times={2} classSkeleton={classes.line} />}
-      {!isLoading && product && (
-        <>
-          <p
-            className={`${styles["quantity__title"]} ${
-              !product.inStock && classes["out-product"]
-            }`}
-          >
-            In Stock: {product.inStock ? "Normal" : "Out of product"}
-          </p>
-          <p className={styles["quantity__title"]}>
-            Type: {product.type_product || "Other"}
-          </p>
-        </>
-      )}
-
-      {!isLoading && (
-        <>
-          <div
-            className={`${styles["add__to__cart"]} d-flex justify-content-between align-items-center`}
-          >
+        {!isLoading && (
+          <>
             <div
-              className={`${styles.quantity} d-flex justify-content-center align-items-center`}
+              className={`${styles["add__to__cart"]} d-flex justify-content-between align-items-center`}
             >
-              <div onClick={decrementHandler} className={styles.btn}>
-                -
-              </div>
-              <div>
-                <input
-                  type="number"
-                  min="1"
-                  max="100"
-                  value={quantity}
-                  onChange={(event) => setQuantity(+event.target.value)}
-                />
-              </div>
-              <div onClick={incrementHandler} className={styles.btn}>
-                +
-              </div>
-            </div>
-            <div className={styles["btn__add"]}>
-              <Button
-                onClick={() => addCartHandler(quantity, product._id)}
-                variant="outlined"
+              <div
+                className={`${styles.quantity} d-flex justify-content-center align-items-center`}
               >
-                Add To Cart
-              </Button>
+                <div onClick={decrementHandler} className={styles.btn}>
+                  -
+                </div>
+                <div>
+                  <input
+                    type="number"
+                    min="1"
+                    max="100"
+                    value={quantity}
+                    onChange={(event) => setQuantity(+event.target.value)}
+                  />
+                </div>
+                <div onClick={incrementHandler} className={styles.btn}>
+                  +
+                </div>
+              </div>
+              <div className={styles["btn__add"]}>
+                <Button
+                  onClick={() => addCartHandler(quantity, product._id)}
+                  variant="outlined"
+                >
+                  Add To Cart
+                </Button>
+              </div>
             </div>
-          </div>
-          <div className={`${styles.space} w-100`}>
-            <Link to="/checkout">
-              <Button className="w-100" variant="contained">
-                Buy it now!
-              </Button>
-            </Link>
-          </div>
-          <Methods
-            setContent={setContent}
-            setChangeLayout={changeToggleHandler}
-          />
-          <Delivery />
-        </>
-      )}
-    </Col>
+            <div className={`${styles.space} w-100`}>
+              <Link to="/checkout">
+                <Button className="w-100" variant="contained">
+                  Buy it now!
+                </Button>
+              </Link>
+            </div>
+            <Methods
+              setContent={setContent}
+              setChangeLayout={changeToggleHandler}
+            />
+            <Delivery />
+          </>
+        )}
+      </Col>
+    </>
   );
 };
 

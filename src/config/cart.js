@@ -7,8 +7,10 @@ const addToCartById = id => {
 }
 const addToCartWithParams = `${api}/add`;
 const getCartOfUser = `${api}/user`;
+const removeItemWithId =`${api}/delete`;
 export {
     addToCartById,
     addToCartWithParams,
-    getCartOfUser
+    getCartOfUser,
+    removeItemWithId
 }

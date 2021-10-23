@@ -71,6 +71,30 @@ body[data-theme='dark']{
         border: 1px solid var(--black);
     }
 }
+.loading-cart{
+    height: 200px;
+}
+.image-loading{
+    width: 100px;
+    height: 100px;
+}
+.container-loading{
+    width: calc(100% - 120px);
+}
+.voucher--loading{
+    padding: 50px 0;
+    max-width: 300px;
+    margin: 0 auto;
+}
+.check-loading{
+    div{
+        &:last-child{
+            height: 20px;
+            margin: 20px auto 0 auto;
+            border-radius: 5px;
+        }
+    }
+}
 @media screen and (max-width: 1320px) {
     .cart{
         width: 35%;
