@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { Col } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -11,6 +11,8 @@ import styles from "../../styles/DetailItem.module.scss";
 import Skeleton from "../../UI/LoadingSkeleton/Skeleton";
 import classes from "./DetailProduct.module.scss";
 import useCart from "../../../hook/use-cart";
+import { useDispatch } from "react-redux";
+import { CartActions } from "../../store/cart";
 const DetailProduct = ({
   product,
   changeToggleHandler,
@@ -19,7 +21,28 @@ const DetailProduct = ({
 }) => {
   const { incrementHandler, decrementHandler, quantity, setQuantity } =
     useQuantity(1);
-  const { addCartHandler } = useCart();
+  const dispatch = useDispatch();
+  const {
+    addCartHandler,
+    error,
+    isLoading: isLoadingAddCart,
+    data,
+  } = useCart();
+  useEffect(() => {
+    if (!error && !isLoadingAddCart && data) {
+      dispatch(CartActions.showCartHandler());
+      dispatch(
+        CartActions.addToCartHandler({
+          id: data.data.product._id,
+          name: data.data.product.title,
+          imageUrl: data.data.product.images.urls[0],
+          quantity: data.data.product.add_quantity,
+          price: data.data.product.last_price,
+          type: data.data.product.type_product,
+        })
+      );
+    }
+  }, [error, isLoadingAddCart, data, dispatch]);
   return (
     <>
       <Col

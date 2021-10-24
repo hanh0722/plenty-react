@@ -9,6 +9,7 @@ const type = {
   PROGRESS_UPLOAD: "PROGRESS",
   RESET: "RESET",
   PROGRESS_DOWNLOAD: "PROGRESS_DOWNLOAD",
+  STATUS: "STATUS"
 };
 const initialState = {
   isLoading: false,
@@ -16,6 +17,7 @@ const initialState = {
   error: null,
   data: null,
   percentDownload: 0,
+  status: 200
 };
 const reducerFn = (state, action) => {
   switch (action.type) {
@@ -44,6 +46,12 @@ const reducerFn = (state, action) => {
         ...state,
         percentLoading: action.payload,
       };
+    }
+    case type.STATUS: {
+      return {
+        ...state,
+        status: action.payload
+      }
     }
     case type.RESET: {
       return {
@@ -127,12 +135,20 @@ const useAxios = () => {
           type: type.SUCCESS,
           payload: response,
         });
+        dispatch({
+          type: type.STATUS,
+          payload: response.status
+        })
         setTimeout(() => {
           dispatchEvent(progressActions.finishedFetch());
         }, 1000);
       } catch (err) {
         const message = err.message;
         const code = err.statusCode || 500;
+        dispatch({
+          type: type.STATUS,
+          payload: code
+        })
         dispatch({
           type: type.ERROR,
           payload: {
@@ -152,6 +168,7 @@ const useAxios = () => {
     data: state.data,
     fetchDataFromServer: fetchDataFromServer,
     percentDownload: state.percentDownload,
+    status: state.status
   };
 };
 

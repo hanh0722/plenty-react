@@ -19,6 +19,7 @@ import useAxios from "../hook/use-axios";
 import { getProductById } from "../config/product";
 import DetailProduct from "../components/Detail/DetailProduct/DetailProduct";
 import { NOT_FOUND } from "../components/link/link";
+
 const DetailItem = () => {
   const location = useLocation();
   const { isLoading, error, fetchDataFromServer, data } = useAxios();

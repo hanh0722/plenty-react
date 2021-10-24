@@ -1,3 +1,4 @@
+@import '../constant/variable';
 .title{
     padding-bottom: 30px;
 }
@@ -34,6 +35,32 @@
     }
     padding-bottom: 20px;
 }
+.image-loading{
+    height: 200px;
+    width: 100%;
+}
+.skeleton-container{
+    margin-top: $md-mg;
+    div{
+        margin-bottom: 8px;
+    }
+}
+.loading-grid{
+    grid-template-columns: repeat(5, 1fr);
+    .loading{
+        display: block !important;
+    }
+}
+@media screen and (max-width: 991px) {
+    .loading-grid{
+        grid-template-columns: repeat(4, 1fr);
+    }
+}
+@media screen and (max-width: 768px) {
+    .loading-grid{
+        grid-template-columns: repeat(3, 1fr);
+    }    
+}
 @media screen and (max-width: 576px) {
     .options{
         flex-direction: column;
@@ -41,5 +68,13 @@
         li{
             margin-bottom: 15px;
         }
+    }
+    .loading-grid{
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+@media screen and (max-width: 400px) {
+    .loading-grid{
+        grid-template-columns: repeat(1, 1fr);
     }
 }
