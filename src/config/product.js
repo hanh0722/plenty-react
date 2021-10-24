@@ -4,7 +4,8 @@ const api = `${serverUrl}/api/product`;
 
 const getAllProductsFromServer = `${api}/products`;
 
+const getProductByType = `${api}/get`;
 const getProductById = (id) => {
   return `${api}/products/${id}`;
 };
-export { getAllProductsFromServer, getProductById };
+export { getAllProductsFromServer, getProductById, getProductByType };
