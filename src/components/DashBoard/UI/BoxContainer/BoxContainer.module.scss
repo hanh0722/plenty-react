@@ -4,6 +4,7 @@
     background: var(--white);
     box-shadow: var(--shadow);
     border-radius: 10px;
+    transition: all .35s ease-in-out;
 }
 
 @media screen and (max-width: 991px) {

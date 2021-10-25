@@ -27,6 +27,8 @@
         padding: $sm-pd 0px;
         position: relative;
         transition: all .5s;
+        margin-top: $sm-mg;
+        display: block;
         &::before, &::after{
             position: absolute;
             bottom: 0;
@@ -47,6 +49,8 @@
             opacity: 0;
             background: var(--btn-hover);
             transition: all .5s;
+            border-top-left-radius: 5px;
+            border-top-right-radius: 5px;
         }
         &::after{
             right: 0;
@@ -70,7 +74,9 @@
         }
     }
 }
-
+.ripple{
+    display: inline-block;
+}
 @media screen and (max-width: 1200px) {
     .text{
         padding: $md-pd;

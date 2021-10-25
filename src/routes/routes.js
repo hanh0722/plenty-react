@@ -36,6 +36,7 @@ import {
   SuccessChangePassword,
   DashBoardBasic,
   ProductAdmin as DashBoardProduct,
+  UserInformation
 } from "../views/ViewConfig/ViewConfig";
 export const RoutesConfig = [
   {
@@ -102,6 +103,10 @@ export const RoutesConfig = [
   {
     path: `${DASHBOARD}${DASHBOARD_MATERIAL.GENERAL[0].path}`,
     component: DashBoardBasic,
+  },
+  {
+    path: `${DASHBOARD}${DASHBOARD_MATERIAL.GENERAL[1].path}`,
+    component: UserInformation
   },
   {
     path: `${DASHBOARD}${DASHBOARD_MATERIAL.ADMIN[3].path}`,

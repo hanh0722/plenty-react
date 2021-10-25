@@ -6,10 +6,15 @@ import banner from "../../image/banner-1.jpeg";
 import { Button } from "@material-ui/core";
 import BannerImages from "../layout/Banner-images/BannerImages";
 import styles from "./Landing.module.scss";
+import { Link } from "react-router-dom";
+import { PRODUCTS } from "../link/link";
+import { randomElements } from "../../util/random-array";
 const Landing = () => {
+  const mapRouteRandom = Object.entries(PRODUCTS);
+  const randomByteLink = randomElements(mapRouteRandom);
   return (
     <Content>
-      <div data-aos='fade-up'>
+      <div data-aos="fade-up">
         <Container>
           <Row className="justify-content-between align-items-center">
             <Col xs={12} sm={12} md={6} lg={6}>
@@ -26,9 +31,12 @@ const Landing = () => {
                   anywhere else, you can mix and match our vibrant container
                   gardens to create beautiful gardens of any size.
                 </p>
-                <Button className={styles.button} variant="contained">
-                  Shop Indoor
-                </Button>
+                <p>Choose product you want now! - <span style={{textTransform: 'capitalize'}}>{randomByteLink.valueRandom[0].toLowerCase()}</span></p>
+                <Link to={randomByteLink.valueRandom[1]}>
+                  <Button className={styles.button} variant="contained">
+                    Shop {randomByteLink.valueRandom[0].toLowerCase()}
+                  </Button>
+                </Link>
               </div>
             </Col>
           </Row>

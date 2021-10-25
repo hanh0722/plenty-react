@@ -8,4 +8,10 @@ const getProductByType = `${api}/get`;
 const getProductById = (id) => {
   return `${api}/products/${id}`;
 };
-export { getAllProductsFromServer, getProductById, getProductByType };
+const getAllTypesOfProducts = `${api}/get/type`;
+export {
+  getAllProductsFromServer,
+  getProductById,
+  getProductByType,
+  getAllTypesOfProducts,
+};

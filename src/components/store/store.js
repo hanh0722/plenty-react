@@ -10,6 +10,7 @@ import isAuthSlice from "./IsAuth/is-auth";
 import userDataSlice from "./GetUserData/get-user-data";
 import uploadProductSlice from "./UploadProduct/UploadProduct";
 import progressSlice from "./ProgressLoading/ProgressLoading";
+import navigationDashSlice from "./NavigationDash/navigation-dash";
 const store = configureStore({
     reducer: {
         hamburger: hamburgerSlice.reducer,
@@ -22,7 +23,8 @@ const store = configureStore({
         isAuth: isAuthSlice.reducer,
         user: userDataSlice.reducer,
         upload: uploadProductSlice.reducer,
-        progress: progressSlice.reducer
+        progress: progressSlice.reducer,
+        nav: navigationDashSlice.reducer
     }
 })
 
