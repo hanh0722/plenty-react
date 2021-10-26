@@ -30,3 +30,11 @@ $height-full: 100vh;
 $upper: uppercase;
 $lower: lowercase;
 $capitalize: capitalize;
+
+@mixin show-n-line($value) {
+    overflow: hidden;
+   text-overflow: ellipsis;
+   display: -webkit-box;
+   -webkit-line-clamp: $value; /* number of lines to show */
+   -webkit-box-orient: vertical;
+}

@@ -9,7 +9,8 @@ const type = {
   PROGRESS_UPLOAD: "PROGRESS",
   RESET: "RESET",
   PROGRESS_DOWNLOAD: "PROGRESS_DOWNLOAD",
-  STATUS: "STATUS"
+  STATUS: "STATUS",
+  STOP_LOADING: "STOP_LOADING"
 };
 const initialState = {
   isLoading: false,
@@ -64,6 +65,12 @@ const reducerFn = (state, action) => {
         percentDownload: action.payload,
       };
     }
+    case type.STOP_LOADING: {
+      return {
+        ...state,
+        isLoading: false
+      }
+    }
     default:
       return state;
   }
@@ -71,6 +78,11 @@ const reducerFn = (state, action) => {
 const useAxios = () => {
   const [state, dispatch] = useReducer(reducerFn, initialState);
   const dispatchEvent = useDispatch();
+  const stopLoading = useCallback(() => {
+    dispatch({
+      type: type.STOP_LOADING
+    })
+  }, []); 
   useEffect(() => {
     if (state.percentDownload !== 0) {
       dispatchEvent(progressActions.setPercentByLoading(state.percentDownload));
@@ -80,7 +92,7 @@ const useAxios = () => {
     }
   }, [state.percentDownload, state.percentLoading, dispatchEvent]);
   const fetchDataFromServer = useCallback(
-    async (routeConfig, cb) => {
+    async (routeConfig, cb_download, cb_upload) => {
       try {
         dispatch({
           type: type.RESET,
@@ -108,6 +120,9 @@ const useAxios = () => {
             let percentCompleted = Math.round(
               (progressEvent.loaded * 100) / progressEvent.total
             );
+            if(cb_upload){
+              cb_upload(percentCompleted);
+            }
             dispatch({
               type: type.PROGRESS_UPLOAD,
               payload: percentCompleted,
@@ -117,8 +132,8 @@ const useAxios = () => {
             let percentage = Math.round(
               (progressEvent.loaded * 100) / progressEvent.total
             );
-            if (cb) {
-              cb(percentage);
+            if (cb_download) {
+              cb_download(percentage);
             }
             dispatch({
               type: type.PROGRESS_DOWNLOAD,
@@ -168,7 +183,8 @@ const useAxios = () => {
     data: state.data,
     fetchDataFromServer: fetchDataFromServer,
     percentDownload: state.percentDownload,
-    status: state.status
+    status: state.status,
+    stopLoading: stopLoading
   };
 };
 

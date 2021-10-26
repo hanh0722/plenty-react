@@ -12,6 +12,7 @@ import {
   uploadActions,
   TYPE_DISPATCH,
 } from "../../../store/UploadProduct/UploadProduct";
+import FetchTypeProduct from "../FetchTypeProduct/FetchTypeProduct";
 const ProductOptions = ({ onSubmit, isLoading, isLoadingUpload }) => {
   const dispatch = useDispatch();
   const { toggle, setToggle } = useToggle(true);
@@ -20,20 +21,18 @@ const ProductOptions = ({ onSubmit, isLoading, isLoadingUpload }) => {
   const [valueInput, setValueInput] = useState("");
   const [percent, setPercent] = useState(0);
   const [regularPrice, setRegularPrice] = useState("");
-  const listItems = useMemo(() => {
-    return ["Indoor", "Outdoor", "Herb", "Veggies"];
-  }, []);
-  const [list, setList] = useState(listItems);
+  const [list, setList] = useState([]);
+  const [firstList, setFirstList] = useState();
   const getValueFromInput = (event) => {
     setValueInput(event.target.value);
-    const filterFromList = listItems.filter((name) => {
-      return name.includes(event.target.value);
+    const filterItemFromList = list.filter((item) => {
+      return item.toLowerCase().includes(event.target.value.toLowerCase());
     });
-    setList(filterFromList);
+    setFirstList(filterItemFromList);
   };
 
   const setValueToInput = (name) => {
-    setValueInput(name);
+    setValueInput(name.toUpperCase());
     selectChangeToggle();
     dispatch(
       uploadActions.changeValueOfProduct({
@@ -100,15 +99,12 @@ const ProductOptions = ({ onSubmit, isLoading, isLoadingUpload }) => {
         className={styles.input}
       />
       <CategorySelect isShowed={selectToggle}>
-        {list.length === 0 && <li>No results</li>}
-        {list.length > 0 &&
-          list.map((item) => {
-            return (
-              <li onClick={setValueToInput.bind(null, item)} key={item}>
-                {item}
-              </li>
-            );
-          })}
+        <FetchTypeProduct
+          onClick={setValueToInput}
+          setList={setList}
+          setFirstList={setFirstList}
+          firstList={firstList}
+        />
       </CategorySelect>
       <Input
         functionCondition={(value) => value.trim().length > 0}

@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import { Col } from "react-bootstrap";
 import styles from "./ContentBanner.module.scss";
 import { SHOP } from "../link/link";
+import Ripple from '../UI/Ripple/Ripple';
 const ContentBanner = () => {
   return (
     <Col
@@ -18,11 +19,13 @@ const ContentBanner = () => {
         everything!) 🔥
       </p>
       <h2>Why plants make you happy</h2>
-      <p>
-        <Link to={SHOP}>
-          Shop Collection <span className={styles.hover}></span>
-        </Link>
-      </p>
+      <Ripple className={styles.ripple}>
+        <p>
+          <Link to={SHOP}>
+            Shop Collection <span className={styles.hover}></span>
+          </Link>
+        </p>
+      </Ripple>
     </Col>
   );
 };
