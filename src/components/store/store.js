@@ -11,6 +11,7 @@ import userDataSlice from "./GetUserData/get-user-data";
 import uploadProductSlice from "./UploadProduct/UploadProduct";
 import progressSlice from "./ProgressLoading/ProgressLoading";
 import navigationDashSlice from "./NavigationDash/navigation-dash";
+import citySlice from "./GetCity/get-city";
 const store = configureStore({
     reducer: {
         hamburger: hamburgerSlice.reducer,
@@ -24,7 +25,8 @@ const store = configureStore({
         user: userDataSlice.reducer,
         upload: uploadProductSlice.reducer,
         progress: progressSlice.reducer,
-        nav: navigationDashSlice.reducer
+        nav: navigationDashSlice.reducer,
+        city: citySlice.reducer
     }
 })
 

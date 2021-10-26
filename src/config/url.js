@@ -20,6 +20,7 @@ const getUserByToken = token => `${userApi}/validate/:token`;
 const getUserApi = `${dashboardApi}/user`;
 const uploadProductApi = `${dashboardApi}/product`;
 const uploadSingleImageApi = `${uploadImageApi}/image`;
+const getCountryApi = 'https://countriesnow.space/api/v0.1/countries/flag/images';
 export {
   urlCheckVerify,
   registerUrl,
@@ -32,5 +33,6 @@ export {
   getUserByToken,
   getUserApi,
   uploadProductApi,
-  uploadSingleImageApi
+  uploadSingleImageApi,
+  getCountryApi
 };
