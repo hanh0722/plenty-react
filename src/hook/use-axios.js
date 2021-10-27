@@ -92,7 +92,7 @@ const useAxios = () => {
     }
   }, [state.percentDownload, state.percentLoading, dispatchEvent]);
   const fetchDataFromServer = useCallback(
-    async (routeConfig, cb_download, cb_upload) => {
+    async (routeConfig, cb_download, cb_upload, isShowProgress) => {
       try {
         dispatch({
           type: type.RESET,

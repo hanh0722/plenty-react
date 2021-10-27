@@ -22,7 +22,7 @@ import { DarkModeContext } from "../darkmode-context/darkmode-content";
 import { CartActions } from "../store/cart";
 import Breakpoints from "../Breakpoints/Breakpoints";
 import FeatureMobile from "./FeatureMobile/FeatureMobile";
-import { SIGN_IN_PAGE } from "../link/link";
+import { DASHBOARD_MATERIAL, DASHBOARD } from "../link/link";
 const dataToolTip = ["Search", "Account", "WishList", "Cart"];
 const Icon = [faSearch, faUser, faHeart, faShoppingCart];
 const nestedPath = [
@@ -179,7 +179,7 @@ const Navigation = ({ isDowned }) => {
               }
               return (
                 <li key={index}>
-                  <Link to={SIGN_IN_PAGE}>
+                  <Link to={`${DASHBOARD}${DASHBOARD_MATERIAL.GENERAL[0].path}`}>
                     <FontAwesomeIcon icon={items} />
                   </Link>
                   <Thumb className={styles.tooltip}>{dataToolTip[index]}</Thumb>

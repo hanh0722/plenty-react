@@ -1,7 +1,9 @@
 import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
-  isLoggedIn: false,
+  isLoggedIn: !!localStorage.getItem('token/customer') ? true : false,
+  // check if user has token or not, if we dont have token, initialstate must be false
+  // if we have token => must be true => persist token
   expired: false,
   token: localStorage.getItem('token/customer') || null,
 };

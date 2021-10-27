@@ -21,6 +21,8 @@ const getUserApi = `${dashboardApi}/user`;
 const uploadProductApi = `${dashboardApi}/product`;
 const uploadSingleImageApi = `${uploadImageApi}/image`;
 const getCountryApi = 'https://countriesnow.space/api/v0.1/countries/flag/images';
+const postCountryByName = 'https://countriesnow.space/api/v0.1/countries/states';
+const updateUserInformation = `${userApi}/update`;
 export {
   urlCheckVerify,
   registerUrl,
@@ -34,5 +36,7 @@ export {
   getUserApi,
   uploadProductApi,
   uploadSingleImageApi,
-  getCountryApi
+  getCountryApi,
+  postCountryByName,
+  updateUserInformation
 };
