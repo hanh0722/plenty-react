@@ -1,10 +1,11 @@
-import {useReducer} from 'react';
+import {useReducer, useCallback} from 'react';
 
 const typeInput = {
     CHANGE_HANDLER: 'CHANGE_INPUT',
     TOUCHED_HANDLER: 'TOUCHED_INPUT',
     RESET_INPUT: 'RESET_INPUT',
-    FOCUS_INPUT: 'FOCUS_INPUT'
+    FOCUS_INPUT: 'FOCUS_INPUT',
+    INITIAL_VALUE: 'INITIAL_VALUE'
 }
 const initialState = {
     isTouched: false,
@@ -37,14 +38,26 @@ const reducerInputFn = (state, action) =>{
                 isFocused: true
             }
         }
+        case typeInput.INITIAL_VALUE: {
+            return {
+                ...state,
+                value: action.payload
+            }
+        }
         default:
             return state;
     }
 }
 const useInput = (validHandler) =>{
     const [state, dispatch] = useReducer(reducerInputFn, initialState);
-
     const valid = validHandler(state.value);
+
+    const setInitialValue = useCallback(value => {
+        dispatch({
+            type: typeInput.INITIAL_VALUE,
+            payload: value
+        })
+    }, []);
     const changeInputHandler = event =>{
         dispatch({
             type: typeInput.CHANGE_HANDLER,
@@ -74,7 +87,8 @@ const useInput = (validHandler) =>{
         touchedInputHandler,
         resetHandler,
         focusInputHandler,
-        isFocused: state.isFocused
+        isFocused: state.isFocused,
+        setInitialValue
     }
 }
 

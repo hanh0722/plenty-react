@@ -10,7 +10,7 @@ import { uploadSingleImageApi } from "../../../../config/url";
 import { key_multer } from "../../../../util/key-server";
 import { useDispatch } from "react-redux";
 import { NotifyActions } from "../../../store/NotifyAfterLogin/NotifyAfterLogin";
-const FormUser = () => {
+const FormUser = ({ user, setAvatar }) => {
   const [url, setUrl] = useState(null);
   const dispatch = useDispatch();
   const { isLoading, error, data, fetchDataFromServer, percentLoading } =
@@ -32,8 +32,15 @@ const FormUser = () => {
     inputRef.current.click();
   };
   useEffect(() => {
+    if(user){
+      const avatar = user.avatar;
+      if(avatar){
+        setUrl(avatar);
+      }
+    }
     if (!isLoading && !error && data) {
-      setUrl(data.data.url);
+      setUrl(data.data.url); 
+      setAvatar(data.data.url);
     }
     if (!isLoading && error) {
       dispatch(
@@ -43,7 +50,7 @@ const FormUser = () => {
         })
       );
     }
-  }, [isLoading, error, dispatch, data]);
+  }, [isLoading, error, dispatch, data, setAvatar, user]);
   return (
     <BoxContainer
       className={`d-flex flex-column justify-content-center align-items-center ${styles.container}`}

@@ -89,7 +89,7 @@ const SideBar = () => {
   };
   return (
     <>
-      {!isLoggedIn && <Redirect to={SIGN_IN_PAGE} />}
+      {!isLoggedIn && !token && <Redirect to={SIGN_IN_PAGE} />}
       {!isLoading && error && <Redirect to={NOT_FOUND} />}
       <div
         className={`${styles["side--bar"]} ${
