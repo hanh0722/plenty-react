@@ -10,8 +10,9 @@ import { uploadSingleImageApi } from "../../../../config/url";
 import { key_multer } from "../../../../util/key-server";
 import { useDispatch } from "react-redux";
 import { NotifyActions } from "../../../store/NotifyAfterLogin/NotifyAfterLogin";
-const FormUser = ({ user, setAvatar }) => {
-  const [url, setUrl] = useState(null);
+import Skeleton from "../../../UI/LoadingSkeleton/Skeleton";
+const FormUser = ({ user, setAvatar, avatar }) => {
+  const [url, setUrl] = useState(avatar);
   const dispatch = useDispatch();
   const { isLoading, error, data, fetchDataFromServer, percentLoading } =
     useAxios();
@@ -32,14 +33,14 @@ const FormUser = ({ user, setAvatar }) => {
     inputRef.current.click();
   };
   useEffect(() => {
-    if(user){
+    if (user) {
       const avatar = user.avatar;
-      if(avatar){
+      if (avatar) {
         setUrl(avatar);
       }
     }
     if (!isLoading && !error && data) {
-      setUrl(data.data.url); 
+      setUrl(data.data.url);
       setAvatar(data.data.url);
     }
     if (!isLoading && error) {
@@ -56,11 +57,16 @@ const FormUser = ({ user, setAvatar }) => {
       className={`d-flex flex-column justify-content-center align-items-center ${styles.container}`}
     >
       <div className={styles.image}>
-        <ImageUser
-          src={url}
-          isLoading={isLoading}
-          percentUpload={percentLoading}
-        />
+        {!user && (
+          <Skeleton imageClassName="w-100 h-100 rounded-circle" src />
+        )}
+        {user && (
+          <ImageUser
+            src={url}
+            isLoading={isLoading}
+            percentUpload={percentLoading}
+          />
+        )}
         {!isLoading && (
           <div
             onClick={accessFileUpload}

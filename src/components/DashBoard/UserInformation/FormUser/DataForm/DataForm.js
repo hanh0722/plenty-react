@@ -17,7 +17,14 @@ import { cityActions } from "../../../../store/GetCity/get-city";
 import GetCityByCountry from "../../../../GetListCountry/GetCityByCountry/GetCityByCountry";
 import { Button } from "@material-ui/core";
 import Skeleton from "../../../../UI/LoadingSkeleton/Skeleton";
-const DataForm = ({ onSubmit, forwardAllRef, setCountry, setCity, city }) => {
+const DataForm = ({
+  onSubmit,
+  forwardAllRef,
+  setCountry,
+  setCity,
+  city,
+  isLoading,
+}) => {
   const dispatch = useDispatch();
   const getCityFromList = useCallback(
     (city) => {
@@ -71,7 +78,6 @@ const DataForm = ({ onSubmit, forwardAllRef, setCountry, setCity, city }) => {
                   <FontAwesomeIcon icon={faMobileAlt} />
                 </Input>
                 <GetListCountry
-                  city={city}
                   setCountry={setCountry}
                   getCityHandler={getCityFromList}
                   initialCountry={{
@@ -118,13 +124,7 @@ const DataForm = ({ onSubmit, forwardAllRef, setCountry, setCity, city }) => {
                 >
                   <FontAwesomeIcon icon={faEnvelopeOpen} />
                 </Input>
-                <GetCityByCountry
-                  setCity={setCity}
-                  initialCity={{
-                    city: user.basic_information.city,
-                    code: user.basic_information.city_code,
-                  }}
-                />
+                <GetCityByCountry city={city} setCity={setCity} />
               </>
             )}
           </Col>
@@ -132,10 +132,13 @@ const DataForm = ({ onSubmit, forwardAllRef, setCountry, setCity, city }) => {
         {user && (
           <Button
             onClick={onSubmit}
+            disabled={isLoading}
             variant="contained"
-            className={`w-100 mt-5 ${classes["btn-save"]}`}
+            className={`w-100 mt-5 ${classes["btn-save"]} ${
+              isLoading && classes.disabled
+            }`}
           >
-            Save Information
+            {!isLoading ? "Save Information" : "Updating Information"}
           </Button>
         )}
       </div>

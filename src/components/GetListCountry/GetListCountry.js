@@ -36,7 +36,6 @@ const GetListCountry = ({getCityHandler, setCountry: setCountryHandler, initialC
     }
     changeToggleHandler();
   };
-  console.log(country);
   return (
     <div className={styles.list}>
       <p onClick={changeToggleHandler} className={styles.title}>Country</p>
