@@ -58,7 +58,7 @@ const App = () => {
   };
   return (
     <>
-      <ProgressLoading/>
+      <ProgressLoading />
       <MessageSideBar />
       <Navigation isDowned={navigation} />
       <SearchBar isShowed={state} />

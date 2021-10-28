@@ -8,11 +8,11 @@ import Skeleton from "../UI/LoadingSkeleton/Skeleton";
 import useToggle from "../../hook/use-toggle";
 import Transition from "../Transition/Transition";
 
-const GetListCountry = ({getCityHandler}) => {
+const GetListCountry = ({getCityHandler, setCountry: setCountryHandler, initialCountry}) => {
   const { isLoading, error, data, fetchDataFromServer, stopLoading } =
     useAxios();
   const { toggle, changeToggleHandler } = useToggle(false);
-  const [country, setCountry] = useState(null);
+  const [country, setCountry] = useState(initialCountry);
   useEffect(() => {
     fetchDataFromServer({
       url: getCountryApi,
@@ -21,8 +21,16 @@ const GetListCountry = ({getCityHandler}) => {
       stopLoading();
     };
   }, [fetchDataFromServer, stopLoading]);
+  useEffect(() => {
+    if(initialCountry){
+      getCityHandler(initialCountry.country);
+    }
+  }, [initialCountry, getCityHandler]);
   const setCountryToInput = (country) => {
     setCountry(country);
+    if(setCountryHandler){
+      setCountryHandler(country);
+    }
     if(getCityHandler){
       getCityHandler(country.country);
     }
@@ -36,7 +44,7 @@ const GetListCountry = ({getCityHandler}) => {
         className={`d-flex justify-content-between align-items-center ${styles.select}`}
       >
         <span className={styles["name-country"]}>
-          {country ? country.country : "Choose Country"}
+          {country.country ? country.country : "Choose Country"}
         </span>
         {country && (
           <span>

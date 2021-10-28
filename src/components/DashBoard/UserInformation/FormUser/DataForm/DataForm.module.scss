@@ -23,3 +23,7 @@
         margin-bottom: 8px;
     }
 }
+.disabled{
+    background: var(--input-bg) !important;
+    pointer-events: none !important;
+}

@@ -12,12 +12,14 @@ const User = ({ toggle, isLoading, data }) => {
       }`}
     >
       {isLoading ? (
-       <Skeleton times={4} src round/>
+        <>
+        <Skeleton times={4} containerSkeleton={styles.skeleton} src round/>
+       </>
       ) : (
         data && 
         <>
           <div className={styles.image}>
-            <img src={data.avatar ? data.avatar : imageDefault} alt="" />
+            <img src={data.user.avatar ? data.user.avatar : imageDefault} alt="" />
           </div>
           <div className={styles.flow}>
             <div className={styles.content}>

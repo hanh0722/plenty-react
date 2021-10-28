@@ -16,6 +16,7 @@ import SuccessChangePassword from "../SuccessChangePassword";
 import DashBoardBasic from '../Dashboard/Basic';
 import ProductAdmin from '../Dashboard/Product';
 import UserInformation from "../Dashboard/UserInformation";
+import BlogDashboard from '../Dashboard/Blog';
 export {
     Blog,
     Checkout,
@@ -34,5 +35,6 @@ export {
     SuccessChangePassword,
     DashBoardBasic,
     ProductAdmin,
-    UserInformation
+    UserInformation,
+    BlogDashboard
 }
