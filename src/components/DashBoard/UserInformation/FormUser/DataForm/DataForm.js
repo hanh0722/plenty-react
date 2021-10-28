@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useCallback } from "react";
 import BoxContainer from "../../../UI/BoxContainer/BoxContainer";
 import Input from "../../../../SignInAsset/Input/Input";
 import styles from "../../../../SignInAsset/LoginForm/Form.module.scss";
@@ -17,11 +17,14 @@ import { cityActions } from "../../../../store/GetCity/get-city";
 import GetCityByCountry from "../../../../GetListCountry/GetCityByCountry/GetCityByCountry";
 import { Button } from "@material-ui/core";
 import Skeleton from "../../../../UI/LoadingSkeleton/Skeleton";
-const DataForm = ({ onSubmit, forwardAllRef }) => {
+const DataForm = ({ onSubmit, forwardAllRef, setCountry, setCity, city }) => {
   const dispatch = useDispatch();
-  const getCityFromList = (city) => {
-    dispatch(cityActions.changeCountry(city));
-  };
+  const getCityFromList = useCallback(
+    (city) => {
+      dispatch(cityActions.changeCountry(city));
+    },
+    [dispatch]
+  );
 
   const user = useSelector((state) => state.user.user?.user);
   return (
@@ -29,7 +32,12 @@ const DataForm = ({ onSubmit, forwardAllRef }) => {
       <div className={`${styles.form} ${classes.form}`}>
         <Row>
           <Col xs={12} sm={12} md={6} lg={6}>
-            {!user && <Skeleton times={25} containerSkeleton={classes['skeleton-container']} />}
+            {!user && (
+              <Skeleton
+                times={25}
+                containerSkeleton={classes["skeleton-container"]}
+              />
+            )}
             {user && (
               <>
                 <Input
@@ -60,14 +68,27 @@ const DataForm = ({ onSubmit, forwardAllRef }) => {
                   initialValue={user.phone}
                   error="Mobile phone must be at least 10 numbers"
                 >
-                  <FontAwesomeIcon icon={faMobileAlt}/>
+                  <FontAwesomeIcon icon={faMobileAlt} />
                 </Input>
-                <GetListCountry getCityHandler={getCityFromList} initialCountry={user.basic_information.country}/>
+                <GetListCountry
+                  city={city}
+                  setCountry={setCountry}
+                  getCityHandler={getCityFromList}
+                  initialCountry={{
+                    country: user.basic_information.country,
+                    flag: user.basic_information.flag,
+                  }}
+                />
               </>
             )}
           </Col>
           <Col xs={12} sm={12} md={6} lg={6}>
-            {!user && <Skeleton times={25} containerSkeleton={classes['skeleton-container']}/>}
+            {!user && (
+              <Skeleton
+                times={25}
+                containerSkeleton={classes["skeleton-container"]}
+              />
+            )}
             {user && (
               <>
                 <Input
@@ -97,7 +118,13 @@ const DataForm = ({ onSubmit, forwardAllRef }) => {
                 >
                   <FontAwesomeIcon icon={faEnvelopeOpen} />
                 </Input>
-                <GetCityByCountry initialCity={user.basic_information.city}/>
+                <GetCityByCountry
+                  setCity={setCity}
+                  initialCity={{
+                    city: user.basic_information.city,
+                    code: user.basic_information.city_code,
+                  }}
+                />
               </>
             )}
           </Col>

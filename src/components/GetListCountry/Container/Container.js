@@ -13,7 +13,6 @@ const Container = ({
   transitionConfig,
   onClick,
   toggle,
-  condition,
   initialValue,
 }) => {
   return (

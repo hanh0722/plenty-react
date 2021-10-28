@@ -1,14 +1,13 @@
-import React, { forwardRef, useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { faCity } from "@fortawesome/free-solid-svg-icons";
 import useAxios from "../../../hook/use-axios";
 import { postCountryByName } from "../../../config/url";
 import { useSelector } from "react-redux";
 import Container from "../Container/Container";
 import useToggle from "../../../hook/use-toggle";
-const GetCityByCountry = forwardRef(({ initialCity }, ref) => {
+const GetCityByCountry = ({ initialCity, setCity, city }) => {
   const { fetchDataFromServer, data, isLoading, error } = useAxios();
   const country = useSelector((state) => state.city.country);
-  const [state, setState] = useState(null);
   const { toggle, changeToggleHandler } = useToggle(false);
   useEffect(() => {
     if (!country) {
@@ -26,23 +25,23 @@ const GetCityByCountry = forwardRef(({ initialCity }, ref) => {
     });
   }, [country, fetchDataFromServer]);
   const setStateToState = (state) => {
-    setState(state);
+    setCity(state);
     changeToggleHandler();
+    console.log(state);
   };
+  console.log(city);
   return (
     <Container
       onClick={changeToggleHandler}
       toggle={toggle}
       isLoading={isLoading}
       error={error}
-      value={state ? `${state.name} - ${state.state_code}` : null}
+      value={''}
       title="City"
       icon={faCity}
-      initialValue={initialCity}
     >
       {!data && (
         <li
-          ref={ref}
           className={`text-center h-100 d-flex justify-content-center align-items-center error__text`}
         >
           Please choose country first!
@@ -57,6 +56,6 @@ const GetCityByCountry = forwardRef(({ initialCity }, ref) => {
       })}
     </Container>
   );
-});
+};
 
 export default GetCityByCountry;
