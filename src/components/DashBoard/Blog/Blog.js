@@ -7,15 +7,21 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faHeading, faPenAlt } from "@fortawesome/free-solid-svg-icons";
 import { checkInputIsEmpty } from "../../../util";
 import DropzoneUpload from "../../DropzoneUpload/DropzoneUpload";
-const Blog = () => {
-  const [editorIsLoading, setEditorIsLoading] = useState(false);
-  const [valueEditor, setValueEditor] = useState("");
+const Blog = ({
+  setGetValueEditor,
+  setTitleHandler,
+  setDescriptionHandler,
+  getFileOfDropzone,
+  setImageIsLoading,
+}) => {
   const editorRef = useRef();
   const setValueEditorHandler = (htmlContent) => {
-    setValueEditor(htmlContent);
+    if (typeof setGetValueEditor === "function") {
+      setGetValueEditor(htmlContent);
+    }
   };
   return (
-    <form className={`${styles.form} ${classes.container}`}>
+    <div className={`${styles.form} ${classes.container}`}>
       <Input
         functionCondition={(value) => checkInputIsEmpty(value)}
         input={{
@@ -24,6 +30,7 @@ const Blog = () => {
           required: true,
           placeholder: "Blog Title",
           id: "Title",
+          onChange: setTitleHandler,
         }}
         error="Blog must have title"
         label="Title"
@@ -38,6 +45,7 @@ const Blog = () => {
           required: true,
           placeholder: "Short Description",
           id: "short_description",
+          onChange: setDescriptionHandler,
         }}
         error="Blog must have short description"
         label="Short Description"
@@ -48,7 +56,7 @@ const Blog = () => {
       <Editor
         ref={editorRef}
         getValue={setValueEditorHandler}
-        setIsLoadingUpload={setEditorIsLoading}
+        setIsLoadingUpload={setImageIsLoading}
         placeholder="Write some awesome content"
       />
       <label className="pt-3">Cover Image (Outside Blog)</label>
@@ -56,8 +64,9 @@ const Blog = () => {
         maxFiles={1}
         config={{ multiple: false }}
         title="Upload Image for content outside (1 image)"
+        getFileOfDrop={getFileOfDropzone}
       />
-    </form>
+    </div>
   );
 };
 

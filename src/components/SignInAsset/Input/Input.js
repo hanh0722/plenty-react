@@ -60,11 +60,11 @@ const Input = forwardRef(
             <NormalInput
               ref={ref}
               input={{
+                ...input,
                 value: value,
                 onChange: changeInputHandlerFn,
                 onBlur: touchedInputHandler,
                 onFocus: focusInputHandler,
-                ...input,
               }}
               className={!valid && isTouched ? "error__input" : ""}
             />
