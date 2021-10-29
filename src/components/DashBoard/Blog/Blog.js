@@ -1,4 +1,4 @@
-import React, { useState, useRef } from "react";
+import React, { useRef } from "react";
 import Editor from "../Product/Editor/Editor";
 import Input from "../../SignInAsset/Input/Input";
 import styles from "../../SignInAsset/LoginForm/Form.module.scss";
@@ -12,7 +12,7 @@ const Blog = ({
   setTitleHandler,
   setDescriptionHandler,
   getFileOfDropzone,
-  setImageIsLoading,
+  setImageIsLoading
 }) => {
   const editorRef = useRef();
   const setValueEditorHandler = (htmlContent) => {

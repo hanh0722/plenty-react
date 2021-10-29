@@ -10,7 +10,7 @@ import { createPostApi } from "../../config/post";
 import { useSelector, useDispatch } from "react-redux";
 import { NotifyActions } from "../../components/store/NotifyAfterLogin/NotifyAfterLogin";
 const Blog = () => {
-  const token = useSelector(state => state.isAuth.token);
+  const token = useSelector((state) => state.isAuth.token);
   const [getValueEditor, setGetValueEditor] = useState("");
   const [description, setDescription] = useState("");
   const [imageIsLoading, setImageIsLoading] = useState(false);
@@ -44,11 +44,11 @@ const Blog = () => {
     });
     fetchDataFromServer({
       url: createPostApi,
-      method: 'POST',
+      method: "POST",
       headers: {
-        Authorization: 'Bearer ' + token
+        Authorization: "Bearer " + token,
       },
-      data: formData
+      data: formData,
     });
   };
   const setTitleHandler = (event) => {
@@ -61,17 +61,22 @@ const Blog = () => {
     setImages(files);
   };
   useEffect(() => {
-    if(!isLoading && data){
-      dispatch(NotifyActions.showedNotify({
-        message: 'Created Blog Successfully',
-        code: 200
-      }))
+    if (!isLoading && data) {
+      dispatch(
+        NotifyActions.showedNotify({
+          message: "Created Blog Successfully",
+          code: 200,
+        })
+      );
+      console.log(data);
     }
-    if(!isLoading && error){
-      dispatch(NotifyActions.showedNotify({
-        message: error.message || 'Please try again!, error',
-        code: error.code || 500
-      }))
+    if (!isLoading && error) {
+      dispatch(
+        NotifyActions.showedNotify({
+          message: error.message || "Please try again!, error",
+          code: error.code || 500,
+        })
+      );
     }
   }, [error, dispatch, isLoading, data]);
   return (
@@ -86,6 +91,7 @@ const Blog = () => {
                 setDescriptionHandler={setDescriptionHandler}
                 getFileOfDropzone={getFileOfDropzone}
                 setImageIsLoading={setImageIsLoading}
+                valueEditor={getValueEditor}
               />
             </Col>
             <Col xs={12} sm={12} md={4} lg={4}>

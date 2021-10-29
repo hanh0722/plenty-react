@@ -12,13 +12,13 @@ const SingleBlog = ({imageUrl, type, title, description}) => {
       </div>
       <div className={styles["block--content"]}>
         <p className={styles.type}>{type}</p>
-        <Link to="/">
+        <Link to="/blogs/hello/2">
           {title}
         </Link>
         <p className={styles.intro}>
           {description}
         </p>
-        <Button variant='outlined' className={`${styles.btn}`}>Read More</Button>
+        <Link to="/blogs/hello/2"><Button variant='outlined' className={`${styles.btn}`}>Read More</Button></Link>
       </div>
     </div>
   );
