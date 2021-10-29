@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useContext, useEffect, useRef, useState } from "react";
 import styles from "./Footer.module.scss";
 import logo from "../../image/logo.png";
 import logoDarkTheme from "../../image/logo-dark.png";
@@ -21,6 +21,16 @@ const informationList = [
 
 const iconsSocial = [faFacebook, faTwitter, faInstagram];
 const Footer = () => {
+  const textRefTransform = useRef();
+  const [state, setState] = useState(null);
+  useEffect(() => {
+    const textContent = textRefTransform.current.textContent;
+    const splitText = textContent.split('');
+    const mapItem = splitText.map((item, index) => {
+      return <span key={index} data-aos="fade-down" data-aos-delay={250 * index}>{item}</span>
+    })
+    setState(mapItem);
+  }, []);
   const DarkModeCtx = useContext(DarkModeContext);
   return (
     <footer className={styles["layout-ft"]}>
@@ -30,7 +40,7 @@ const Footer = () => {
             <img src={DarkModeCtx.dark ? logoDarkTheme : logo} alt="logo" />
           </div>
           <div className={styles["first__list"]}>
-            <h4>Don't miss a thing</h4>
+            <h4 ref={textRefTransform}>{!state ? "Don't miss a thing" : state} </h4>
           </div>
         </div>
         <ul>

@@ -20,6 +20,10 @@
     img{
         width: 100%;
         height: auto;
+        z-index: 1;
+    }
+    span{
+        z-index: 5;
     }
     .logo{
         display: block;
@@ -63,6 +67,12 @@
         text-decoration: none;
         color: var(--black);
         text-transform: capitalize;
+    }
+}
+.first__list{
+    h4{
+        overflow: visible;
+        z-index: 1000;
     }
 }
 @media screen and (max-width: 1000px) {

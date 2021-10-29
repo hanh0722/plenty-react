@@ -1,8 +1,10 @@
 import React from 'react';
 import styles from './Select.module.scss';
-const Select = () => {
+const Select = (props) => {
     return(
-        <div></div>
+        <select className={`${styles.select} ${props.className}`} onChange={props.onChange}>
+            {props.children}
+        </select>
     )
 }
 
