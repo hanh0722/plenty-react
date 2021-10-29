@@ -17,6 +17,7 @@ import DashBoardBasic from '../Dashboard/Basic';
 import ProductAdmin from '../Dashboard/Product';
 import UserInformation from "../Dashboard/UserInformation";
 import BlogDashboard from '../Dashboard/Blog';
+import DetailBlog from "../DetailBlog";
 export {
     Blog,
     Checkout,
@@ -36,5 +37,6 @@ export {
     DashBoardBasic,
     ProductAdmin,
     UserInformation,
-    BlogDashboard
+    BlogDashboard,
+    DetailBlog
 }

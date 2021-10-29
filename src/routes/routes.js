@@ -17,6 +17,7 @@ import {
   SUCCESS_CHANGE_PASSWORD,
   DASHBOARD_MATERIAL,
   DASHBOARD,
+  BLOG_DETAIL,
 } from "../components/link/link";
 import {
   Index,
@@ -37,7 +38,8 @@ import {
   DashBoardBasic,
   ProductAdmin as DashBoardProduct,
   UserInformation,
-  BlogDashboard
+  BlogDashboard,
+  DetailBlog,
 } from "../views/ViewConfig/ViewConfig";
 export const RoutesConfig = [
   {
@@ -71,6 +73,10 @@ export const RoutesConfig = [
     path: BLOG_PAGE,
     component: Blog,
     exact: true,
+  },
+  {
+    path: BLOG_DETAIL,
+    component: DetailBlog,
   },
   {
     path: REGISTER_PAGE,
@@ -107,7 +113,7 @@ export const RoutesConfig = [
   },
   {
     path: `${DASHBOARD}${DASHBOARD_MATERIAL.GENERAL[1].path}`,
-    component: UserInformation
+    component: UserInformation,
   },
   {
     path: `${DASHBOARD}${DASHBOARD_MATERIAL.ADMIN[3].path}`,
@@ -115,7 +121,7 @@ export const RoutesConfig = [
   },
   {
     path: `${DASHBOARD}${DASHBOARD_MATERIAL.ADMIN[1].path}`,
-    component: BlogDashboard
+    component: BlogDashboard,
   },
   {
     path: NOT_FOUND,
@@ -129,7 +135,7 @@ const RouteMapConfig = () => {
       {RoutesConfig.map((route, index) => {
         return <Route {...route} key={index} />;
       })}
-      <Redirect from="*" to={NOT_FOUND}/>
+      <Redirect from="*" to={NOT_FOUND} />
     </Switch>
   );
 };

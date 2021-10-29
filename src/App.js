@@ -16,8 +16,6 @@ import LayoutTop from "./components/layout/LayoutTop/LayoutTop";
 import MessageSideBar from "./components/MessageSideBar/MessageSideBar";
 import ProgressLoading from "./components/ProgressLoading/ProgressLoading";
 import { checkUserIsAuth } from "./components/store/IsAuth/is-auth";
-// import { IsAuthContext } from "./context/is-auth";
-// import Test from "./components/Test/Test";
 const App = () => {
   const [navigation, setNavigation] = useState(false);
   const location = useLocation();

@@ -20,7 +20,8 @@ export const PRODUCTS = {
     INDOOR: '/products/indoor',
     OUTDOOR: '/products/outdoor',
     VEGGIES: '/products/herbs-veggies'
-}
+};
+export const BLOG_DETAIL = '/blogs/:id/:name';
 export const DETAIL = '/shop/:name';
 export const PRODUCT_LIST = '/products/:type';
 export const NOT_FOUND = '/404';
