@@ -9,6 +9,7 @@ import useAxios from "../../hook/use-axios";
 import { createPostApi } from "../../config/post";
 import { useSelector, useDispatch } from "react-redux";
 import { NotifyActions } from "../../components/store/NotifyAfterLogin/NotifyAfterLogin";
+import Preview from "../../components/DashBoard/Blog/Preview/Preview";
 const Blog = () => {
   const token = useSelector((state) => state.isAuth.token);
   const [getValueEditor, setGetValueEditor] = useState("");
@@ -18,6 +19,7 @@ const Blog = () => {
   const [title, setTitle] = useState("");
   const [isPublic, setIsPublic] = useState(true);
   const [category, setCategory] = useState(undefined);
+  const [isPreview, setIsPreview] = useState(false);
   const dispatch = useDispatch();
   const { fetchDataFromServer, data, isLoading, error } = useAxios();
   const submitBlogHandler = (event) => {
@@ -68,7 +70,6 @@ const Blog = () => {
           code: 200,
         })
       );
-      console.log(data);
     }
     if (!isLoading && error) {
       dispatch(
@@ -79,6 +80,9 @@ const Blog = () => {
       );
     }
   }, [error, dispatch, isLoading, data]);
+  const previewPostHandler = () => {
+    
+  }
   return (
     <>
       <Container>
@@ -101,11 +105,19 @@ const Blog = () => {
                 setIsPublic={setIsPublic}
                 setCategory={setCategory}
                 category={category ? category : ""}
+                onPreview={previewPostHandler}
               />
             </Col>
           </Row>
         </form>
       </Container>
+      <Preview data={{
+        title: title,
+        valueEditor: getValueEditor,
+        description: description,
+        images: images,
+        category: category,
+      }}/>
     </>
   );
 };

@@ -17,13 +17,14 @@ import { getCartOfUser } from "../../config/cart";
 import Skeleton from "../UI/LoadingSkeleton/Skeleton";
 const CartMain = () => {
   const token = useSelector((state) => state.isAuth.token);
+  const isLoggedIn = useSelector(state => state.isAuth.isLoggedIn);
   const cart = useSelector((state) => state.cart.cart);
   const isShowCart = useSelector((state) => state.cart.showCart);
   const dispatch = useDispatch();
   const { isLoading, data, fetchDataFromServer, error } = useAxios();
   const [showVoucher, setShowVoucher] = useState(false);
   useEffect(() => {
-    if (!token) {
+    if (!token || !isLoggedIn) {
       return;
     }
     fetchDataFromServer({
@@ -32,7 +33,7 @@ const CartMain = () => {
         Authorization: "Bearer " + token,
       },
     });
-  }, [fetchDataFromServer, token]);
+  }, [fetchDataFromServer, token, isLoggedIn]);
   useEffect(() => {
     if (!isLoading && !error && data) {
       const transformCart = data.data.cart.map((product) => {
