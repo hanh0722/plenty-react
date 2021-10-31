@@ -10,3 +10,22 @@
     height: 100vh;
     overflow: scroll;
 }
+.bar{
+    padding: 30px 3%;
+    p{
+        font-size: $fs-sm;
+    }
+    button{
+        background: var(--button-green) !important;
+        color: $white !important;
+        box-shadow: var(--button-green-shadow);
+    }
+}
+
+.image{
+    height: calc(100vh - 100px);
+    p{
+        padding-top: $lg-pd;
+        font-weight: bold;
+    }
+}

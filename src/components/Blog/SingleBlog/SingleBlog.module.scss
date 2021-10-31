@@ -22,7 +22,7 @@
         margin: $sm-mg 0 !important;
         font-size: $fs-sm;
     }
-    p, a{
+    p, .link{
         text-decoration: none;
         color: var(--black);
         overflow: hidden;
@@ -37,10 +37,11 @@
     }
     .type{
         font-weight: 600;
-        text-transform: capitalize;
+        text-transform: uppercase;
+        letter-spacing: 1px;
     }
     button{
-        margin-top: 20px;
+        margin-top: $md-pd;
         border: 2px solid var(--btn-quantity);
         &:hover{
             background: var(--btn-hover);

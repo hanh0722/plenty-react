@@ -1,4 +1,6 @@
 import React, { useEffect, useState } from "react";
+import ReactDOM from "react-dom";
+import Overlay from "../../components/overlay/Overlay";
 import BlogDashBoard from "../../components/DashBoard/Blog/Blog";
 import Container from "../../components/DashBoard/layout/Container";
 import { Row, Col } from "react-bootstrap";
@@ -10,8 +12,11 @@ import { createPostApi } from "../../config/post";
 import { useSelector, useDispatch } from "react-redux";
 import { NotifyActions } from "../../components/store/NotifyAfterLogin/NotifyAfterLogin";
 import Preview from "../../components/DashBoard/Blog/Preview/Preview";
+import Transition from "../../components/Transition/Transition";
+import useToggle from "../../hook/use-toggle";
 const Blog = () => {
   const token = useSelector((state) => state.isAuth.token);
+  const user = useSelector((state) => state.user.user);
   const [getValueEditor, setGetValueEditor] = useState("");
   const [description, setDescription] = useState("");
   const [imageIsLoading, setImageIsLoading] = useState(false);
@@ -19,9 +24,10 @@ const Blog = () => {
   const [title, setTitle] = useState("");
   const [isPublic, setIsPublic] = useState(true);
   const [category, setCategory] = useState(undefined);
-  const [isPreview, setIsPreview] = useState(false);
   const dispatch = useDispatch();
   const { fetchDataFromServer, data, isLoading, error } = useAxios();
+  const { toggle: isPreview, changeToggleHandler: setPreview } =
+    useToggle(false);
   const submitBlogHandler = (event) => {
     if (
       !checkInputIsEmpty(title) ||
@@ -80,9 +86,17 @@ const Blog = () => {
       );
     }
   }, [error, dispatch, isLoading, data]);
+  useEffect(() => {
+    if(isPreview){
+      document.body.setAttribute('fixed-body', 'fixed');
+    } else {
+      document.body.removeAttribute('fixed-body');
+    }
+  }, [isPreview]);
   const previewPostHandler = () => {
-    
-  }
+    setPreview();
+  };
+
   return (
     <>
       <Container>
@@ -111,13 +125,33 @@ const Blog = () => {
           </Row>
         </form>
       </Container>
-      <Preview data={{
-        title: title,
-        valueEditor: getValueEditor,
-        description: description,
-        images: images,
-        category: category,
-      }}/>
+      <Transition
+        options={{
+          timeout: 750,
+          classNames: "scale",
+          in: isPreview,
+          unmountOnExit: true,
+          mountOnEnter: true,
+        }}
+      >
+        <>
+          <Preview
+            data={{
+              title: title,
+              valueEditor: getValueEditor,
+              description: description,
+              images: images,
+              category: category,
+              user: user?.user,
+              removePreview: setPreview,
+            }}
+          />
+          {ReactDOM.createPortal(
+            <Overlay />,
+            document.getElementById("bg__ol")
+          )}
+        </>
+      </Transition>
     </>
   );
 };

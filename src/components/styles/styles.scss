@@ -43,6 +43,7 @@
     --failed-message: 209, 75, 88, .8;
     --button-green: #00ab55;
     --background-green: #c8facd;
+    --button-green-shadow: rgb(0, 171, 85, .24) 0px 8px 16px 0px;
 }
 body[data-theme='dark']{
     color: var(--black);
@@ -74,6 +75,10 @@ body[data-theme='dark']{
     --active-db: 255, 255, 255;
     --background-green: #33363b;
     --button-green: #cd783e;
+}
+body[fixed-body='fixed']{
+    overflow: hidden;
+    height: 100vh;
 }
 input[type='number']{
     &::-webkit-outer-spin-button, &::-webkit-inner-spin-button{
@@ -259,6 +264,14 @@ input[type='number']{
     transform: scale(.65) translate(-50%, -50%);
     opacity: 0;
 }
+@mixin start-open-preview {
+    opacity: 1;
+    transform: translateY(-100%);
+}
+@mixin opened-preview {
+    opacity: 1;
+    transform: translateY(0);
+}
 .fade-enter{
     opacity: 0;
 }
@@ -272,6 +285,20 @@ input[type='number']{
 .fade-exit-active{
     opacity: 0;
     transition: all .5s ease-in-out;
+}
+.open-preview-enter{
+    @include start-open-preview();
+}
+.open-preview-enter-exit{
+    @include opened-preview();
+    transition: all 1s ease-in-out;
+}
+.open-preview-exit{
+    @include opened-preview();
+}
+.open-preview-exit-active{
+    @include start-open-preview();
+    transition: all 1s ease-in-out;
 }
 @keyframes active-pagination {
     0%{

@@ -7,28 +7,49 @@ import RecentBlog from "../components/Blog/RecentBlog/RecentBlog";
 import CategoriesBlog from "../components/Blog/CategoriesBlog/CategoriesBlog";
 import RecentPost from "../components/Blog/RecentPost/RecentPost";
 import styles from "../styles/DetailBlog.module.scss";
-const DetailBlog = ({ data }) => {
+const DetailBlog = ({
+  data,
+  title,
+  previewMode,
+  paths,
+  category,
+  user,
+  timeCreated,
+  content_blog,
+  children
+}) => {
   const params = useParams();
   return (
     <>
       <Container>
         <HeaderPage
-          title={params.name}
-          paths={[
-            {
-              name: "Hello",
-              link: "/",
-            },
-          ]}
+          title={title}
+          paths={
+            previewMode
+              ? paths
+              : [
+                  {
+                    name: "Hello",
+                    link: "/",
+                  },
+                ]
+          }
         />
         <Row>
           <Col xs={12} sm={12} md={8} lg={8}>
-            <BlogDetail />
-            <RecentBlog />
+            <BlogDetail
+              category={category}
+              user={user?.name}
+              timeCreated={timeCreated}
+              contentBlog={content_blog}
+              title={title}
+            />
+            {!previewMode && <RecentBlog />}
+            {children}
           </Col>
           <Col xs={12} sm={12} md={4} lg={4} className={styles.container}>
-            <CategoriesBlog />
-            <RecentPost />
+            {category && <CategoriesBlog category={category} />}
+            {!previewMode && <RecentPost />}
           </Col>
         </Row>
       </Container>
