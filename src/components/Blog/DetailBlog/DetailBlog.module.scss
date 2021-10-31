@@ -8,6 +8,7 @@
     font-size: 30px;
     padding: $sm-pd 0;
     letter-spacing: 0.5px;
+    line-height: 40px;
   }
   p {
     font-size: $fs-sm;
@@ -25,7 +26,7 @@
     border-radius: 10px;
   }
   p {
-    padding-top: $lg-pd;
+    padding-top: $sm-pd;
   }
   line-height: 35px;
   font-size: $fs-sm;

@@ -7,16 +7,27 @@ import classes from "./Options.module.scss";
 import { Button } from "@material-ui/core";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faClipboard } from "@fortawesome/free-regular-svg-icons";
-const Options = ({setIsPublic, setCategory, category, isSubmit, editorIsLoading}) => {
+const Options = ({
+  setIsPublic,
+  setCategory,
+  category,
+  isSubmit,
+  editorIsLoading,
+  onPreview,
+}) => {
   const { toggle, changeToggleHandler } = useToggle(true);
-  
+
   const changePublicOfPost = () => {
     setIsPublic(!toggle);
     changeToggleHandler();
-  }
+  };
+  const getCategoryByComma = (event) => {
+    const parseEvent = event.target.value.split(",");
+    setCategory(parseEvent);
+  };
   return (
     <>
-      <div className={styles.form}>
+      <div className={`${styles.form} ${classes.container} w-100`}>
         <div
           className={`d-flex justify-content-between align-items-center ${classes.line}`}
         >
@@ -28,13 +39,14 @@ const Options = ({setIsPublic, setCategory, category, isSubmit, editorIsLoading}
             functionCondition={(value) => value.trim().length >= 0}
             input={{
               type: "text",
-              placeholder: "Category of blog",
+              placeholder:
+                'Category',
               autoComplete: "off",
-              id: 'Category',
+              id: "Category",
               value: category,
-              onChange: event => setCategory(event.target.value)
+              onChange: getCategoryByComma,
             }}
-            label="Category"
+            label='Category (multiple must have "," after)'
           >
             <FontAwesomeIcon icon={faClipboard} />
           </Input>
@@ -42,6 +54,7 @@ const Options = ({setIsPublic, setCategory, category, isSubmit, editorIsLoading}
       </div>
       <div className={`d-flex justify-content-between align-items-center`}>
         <Button
+          onClick={onPreview}
           variant="outlined"
           className={`${classes.btn} ${classes["btn-preview"]}`}
         >
@@ -51,7 +64,9 @@ const Options = ({setIsPublic, setCategory, category, isSubmit, editorIsLoading}
           disabled={editorIsLoading}
           onClick={isSubmit}
           variant="contained"
-          className={`${classes.btn} ${classes.button} ${editorIsLoading && classes.disabled}`}
+          className={`${classes.btn} ${classes.button} ${
+            editorIsLoading && classes.disabled
+          }`}
         >
           Post
         </Button>
