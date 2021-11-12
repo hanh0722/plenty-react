@@ -29,6 +29,10 @@ const ProductOptions = ({ onSubmit, isLoading, isLoadingUpload }) => {
       return item.toLowerCase().includes(event.target.value.toLowerCase());
     });
     setFirstList(filterItemFromList);
+    dispatch(uploadActions.changeValueOfProduct({
+      type: TYPE_DISPATCH.TYPE,
+      value: event.target.value
+    }))
   };
 
   const setValueToInput = (name) => {
@@ -41,7 +45,6 @@ const ProductOptions = ({ onSubmit, isLoading, isLoadingUpload }) => {
       })
     );
   };
-
   const changePercentHandler = (event) => {
     if (+event.target.value > 100) {
       return;

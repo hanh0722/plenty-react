@@ -6,9 +6,10 @@ import useAxios from "../../hook/use-axios";
 import { getAllProductsFromServer } from "../../config/product";
 import { NOT_FOUND } from "../link/link";
 import Grid from "../UI/Grid/Grid";
+import Pagination from "../Pagination/Pagination";
 const ShopPage = () => {
   const { isLoading, fetchDataFromServer, error, data } = useAxios();
-  const [perPage, setPerPage] = useState(1);
+  const [perPage, setPerPage] = useState(2);
   const [totalPage, setTotalPage] = useState(null);
   const location = useLocation();
   const getCurrentPage = useMemo(() => {
@@ -62,6 +63,13 @@ const ShopPage = () => {
           </>
         )}
       </Grid>
+      {!isLoading && data && totalPage && (
+        <Pagination
+          perPage={perPage}
+          totalPage={totalPage}
+          currentPage={getCurrentPage}
+        />
+      )}
     </>
   );
 };

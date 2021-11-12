@@ -39,6 +39,7 @@ const FetchTypeProduct = ({ onClick, firstList, setFirstList, setList }) => {
           Cannot get type of products, please try again
         </p>
       )}
+      {!isLoading && data && data?.length === 0 && <p className="text-center">We don't have any suggestion! Add one</p>}
     </>
   );
 };
