@@ -10,8 +10,7 @@ import Pagination from "../Pagination/Pagination";
 import ChooseItemPerpage from "../ChooseItemPerpage/ChooseItemPerpage";
 const ShopPage = () => {
   const { isLoading, fetchDataFromServer, error, data } = useAxios();
-  const [perPage] = useState(8);
-  const [column, setColumn] = useState(4);
+  const [perPage, setPage] = useState(8);
   const [totalPage, setTotalPage] = useState(null);
   const location = useLocation();
   const getCurrentPage = useMemo(() => {
@@ -41,11 +40,11 @@ const ShopPage = () => {
       setTotalPage(data.data.total_product);
     }
   }, [data, totalPage]);
-  console.log(column);
+
   return (
     <>
       {!isLoading && error && <Redirect to={NOT_FOUND} />}
-        <ChooseItemPerpage defaultColumn={4} setColumnPerPage={setColumn}/>
+        <ChooseItemPerpage defaultColumn={8} setColumnPerPage={setPage}/>
         <Grid>
           {isLoading && _renderLoadingSkeleton(perPage)}
           {!isLoading && data && (

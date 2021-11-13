@@ -1,5 +1,5 @@
 import React from "react";
-import { useParams } from "react-router-dom";
+// import { useParams } from "react-router-dom";
 import BlogDetail from "../components/Blog/DetailBlog/DetailBlog";
 import HeaderPage from "../components/HeaderPage/HeaderPage";
 import { Row, Col, Container } from "react-bootstrap";
@@ -18,7 +18,6 @@ const DetailBlog = ({
   content_blog,
   children
 }) => {
-  const params = useParams();
   return (
     <>
       <Container>

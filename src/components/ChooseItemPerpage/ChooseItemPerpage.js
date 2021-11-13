@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import styles from "./ChooseItemPerpage.module.scss";
 
 const ChooseItemPerpage = ({ defaultColumn, setColumnPerPage }) => {
-  const [column, setColumn] = useState(defaultColumn || 4);
+  const [column, setColumn] = useState(defaultColumn || 8);
   const changeColumnHandler = (column) => {
     setColumn(column);
     if (setColumnPerPage) {
@@ -12,7 +12,7 @@ const ChooseItemPerpage = ({ defaultColumn, setColumnPerPage }) => {
   return (
     <div className={`${styles.container}`}>
       <div className={`d-flex justify-content-end align-items-center`}>
-        <span onClick={changeColumnHandler.bind(null, 2)} className={column === 2 ? styles.active : ""}>
+        <span onClick={changeColumnHandler.bind(null, 4)} className={column === 4 ? styles.active : ""}>
           <svg
             width="12px"
             height="12px"
@@ -46,7 +46,7 @@ const ChooseItemPerpage = ({ defaultColumn, setColumnPerPage }) => {
             </g>
           </svg>
         </span>
-        <span onClick={changeColumnHandler.bind(null, 3)} className={column === 3 ? styles.active : ""}>
+        <span onClick={changeColumnHandler.bind(null, 6)} className={column === 6 ? styles.active : ""}>
           <svg
             width="12px"
             height="12px"
@@ -86,7 +86,7 @@ const ChooseItemPerpage = ({ defaultColumn, setColumnPerPage }) => {
             </g>
           </svg>
         </span>
-        <span onClick={changeColumnHandler.bind(null, 4)} className={column === 4 ? styles.active : ""}>
+        <span onClick={changeColumnHandler.bind(null, 8)} className={column === 8 ? styles.active : ""}>
           <svg
             width="12px"
             height="12px"

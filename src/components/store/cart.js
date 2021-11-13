@@ -2,7 +2,9 @@ import { createSlice } from "@reduxjs/toolkit";
 const initialState = {
   cart: [],
   showCart: false,
-  isLoading: false
+  isLoading: false,
+  total: 0,
+  discount: 0
 };
 const helperChangeCart = (cart, isExisted, condition) => {
   const newCart = [...cart];
@@ -20,10 +22,10 @@ const CartSlice = createSlice({
     setCartHandler(state, action) {
       state.cart = action.payload;
     },
-    startLoadingCartHandler(state){
-      state.isLoading = true
+    startLoadingCartHandler(state) {
+      state.isLoading = true;
     },
-    finishLoadingCartHandler(state){
+    finishLoadingCartHandler(state) {
       state.isLoading = false;
     },
     addToCartHandler(state, action) {

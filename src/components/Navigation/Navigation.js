@@ -34,7 +34,7 @@ const nestedPath = [
     name: "Indoor Plans",
   },
   { path: "outdoor", name: "Outdoor Plans" },
-  { path: "herbs-veggies", name: "Herb + Veggies" },
+  { path: "veggies", name: "Herb + Veggies" },
 ];
 const Navigation = ({ isDowned }) => {
   const history = useHistory();
