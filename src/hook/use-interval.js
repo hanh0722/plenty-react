@@ -2,7 +2,7 @@ import { useState, useEffect, useCallback } from "react";
 
 const useInterval = (timeSeconds, condition) => {
   const [time, setTime] = useState(timeSeconds);
-  const [isRunning, setIsRunning] = useState(condition);
+  const [isRunning, setIsRunning] = useState(condition || false);
   const startCountingHandler = useCallback(() => {
     setIsRunning(true);
   }, []);

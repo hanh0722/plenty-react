@@ -51,6 +51,10 @@
     --light-red-primary: rgba(255, 73, 66, 0.08);
     --light-green-primary: rgba(0, 171, 85, 0.08);
 }
+body[data-sp='open']{
+    height: 100vh;
+    overflow-y: hidden;
+}
 body[data-theme='dark']{
     color: var(--black);
     background: var(--white);

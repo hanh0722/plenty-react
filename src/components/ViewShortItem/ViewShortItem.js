@@ -1,59 +1,79 @@
 import { Button } from "@material-ui/core";
-import React, { useState, useEffect } from "react";
+import React, { useCallback, useEffect, useMemo } from "react";
 import { Link } from "react-router-dom";
 import styles from "./ViewShortItem.module.scss";
 import { useSelector, useDispatch } from "react-redux";
-import DUMMY_DATA from "../DummyData/DUMMY_DATA";
 import { CSSTransition } from "react-transition-group";
 import Overlay from "../overlay/Overlay";
 import ReactDOM from "react-dom";
 import "../CSSTransition/CSSTransition.scss";
 import { ProductActions } from "../store/Product";
 import { CartActions } from "../store/cart";
+import useAxios from "../../hook/use-axios";
+import { getProductById } from "../../config/product";
+import { randomElements } from "../../util/random-array";
+import nonAccentVietnamese from "../removeUnicode/removeUnicode";
+import ParseHTML from "../../util/ParseHTML";
+import useQuantity from "../../hook/use-quantity";
+import Skeleton from "../UI/LoadingSkeleton/Skeleton";
+import useCart from "../../hook/use-cart";
 const ViewShortItem = () => {
-  const [valueItem, setValueItem] = useState(null);
-  const [quantityItem, setQuantityItem] = useState(1);
   const itemId = useSelector((state) => state.product.idProduct);
-  const showModel = useSelector(state => state.product.showModel);
+  const showModel = useSelector((state) => state.product.showModel);
+  const {
+    isLoading: isLoadingAddCart,
+    data: dataAddCart,
+    addCartHandler,
+  } = useCart();
   const dispatch = useDispatch();
+  const { isLoading, error, data, fetchDataFromServer } = useAxios();
+  const { incrementHandler, decrementHandler, quantity, setQuantity } =
+    useQuantity(1);
   useEffect(() => {
     if (!itemId) {
-      setValueItem(null);
       return;
     }
-    setTimeout(() => {
-      const value = DUMMY_DATA.find((item) => item.id === itemId);
-      setValueItem(value);
-      setQuantityItem(1);
-    }, 500);
+    fetchDataFromServer({
+      url: getProductById(itemId),
+    });
     // find in DB and fetch from server
     // mongoDB: find(_id: new mongodb.objectId(id))
-  }, [itemId]);
+  }, [itemId, fetchDataFromServer]);
   const changeQuantityHandler = (event) => {
-    setQuantityItem(+event.target.value);
+    setQuantity(+event.target.value);
   };
-  const decreseItemHandler = () => {
-    if (quantityItem === 1) {
-      return;
-    }
-    setQuantityItem((prevState) => prevState - 1);
-  };
-  const addItemToCartHandler = event => {
+  const addItemToCartHandler = (event) => {
     event.preventDefault();
-    
-    dispatch(CartActions.addToCartHandler({
-      ...valueItem,
-      quantity: quantityItem
-    }))
-    dispatch(CartActions.showCartHandler())
-    resetHandler();
-  }
-  const resetHandler = () => {
-    dispatch(ProductActions.setShowModalHandler())
+    addCartHandler(quantity, itemId);
+  };
+  const resetHandler = useCallback(() => {
+    dispatch(ProductActions.setShowModalHandler());
     setTimeout(() => {
-      dispatch(ProductActions.removeProduct())
-    }, 500)
-  }
+      dispatch(ProductActions.removeProduct());
+    }, 500);
+  }, [dispatch]);
+
+  useEffect(() => {
+    if (!isLoadingAddCart && dataAddCart) {
+      dispatch(
+        CartActions.addToCartHandler({
+          id: dataAddCart.data.product._id,
+          name: dataAddCart.data.product.title,
+          imageUrl: dataAddCart.data.product.images.urls[0],
+          quantity: dataAddCart.data.product.add_quantity,
+          price: dataAddCart.data.product.last_price,
+          type: dataAddCart.data.product.type_product,
+        })
+      );
+      dispatch(CartActions.showCartHandler());
+      resetHandler();
+    }
+  }, [dispatch, resetHandler, isLoadingAddCart, dataAddCart]);
+  const _renderRandomImage = useMemo(() => {
+    if (data) {
+      return randomElements(data.data.product.images.urls).valueRandom;
+    }
+  }, [data]);
   return (
     //   problem with animation because <div> render nothing in here
     <>
@@ -66,22 +86,43 @@ const ViewShortItem = () => {
           classNames={"view"}
         >
           <div className={styles.view}>
-            {valueItem && (
+            {isLoading && (
+              <div className={styles.loading}>
+                <Skeleton
+                  containerSkeleton={styles["container-loading"]}
+                  imageClassName={styles["image-loading"]}
+                  src
+                  times={8}
+                />
+              </div>
+            )}
+            {!isLoading && data && (
               <>
                 <div className={styles.image}>
-                  <img src={valueItem.imageUrl} alt="" />
+                  <img src={_renderRandomImage} alt="" />
                 </div>
                 <div
                   className={`${styles["product__info"]} d-flex flex-column justify-content-between`}
                 >
                   <div className={styles["content__product"]}>
-                    <Link to="/">{valueItem.name}</Link>
-                    <p>Price: ${valueItem.price}</p>
-                    <p className={styles.content}>
-                      The Iconic Silhouette he garments labelled as Committed
-                      are products that have been produced
-                    </p>
-                    <p className={styles.type}>Style: {valueItem.type}</p>
+                    <Link
+                      className={styles.text}
+                      to={`/shop/${nonAccentVietnamese(
+                        data.data.product.title
+                      )}?id=${data.data.product._id}`}
+                    >
+                      {data.data.product.title}
+                    </Link>
+                    <p>Price: ${data.data.product.last_price}</p>
+                    <div className={styles.content}>
+                      <ParseHTML string={data.data.product.description} />
+                    </div>
+                    <div className={styles.type}>
+                      Style:{" "}
+                      <span className={styles.text}>
+                        {data.data.product.type_product}
+                      </span>
+                    </div>
                   </div>
                   <div
                     className={`d-flex justify-content-between align-items-center ${styles.row}`}
@@ -89,40 +130,31 @@ const ViewShortItem = () => {
                     <div
                       className={`${styles.quantity} d-flex justify-content-center align-items-center`}
                     >
-                      <div onClick={decreseItemHandler}>-</div>
+                      <div onClick={decrementHandler}>-</div>
                       <input
                         onChange={changeQuantityHandler}
-                        value={quantityItem}
+                        value={quantity}
                         type="number"
                         min="1"
                         max="100"
                       />
-                      <div
-                        onClick={() =>
-                          setQuantityItem((prevState) => prevState + 1)
-                        }
-                      >
-                        +
-                      </div>
+                      <div onClick={incrementHandler}>+</div>
                     </div>
-                    <Button
-                      type="submit"
-                      variant="contained"
-                    >
+                    <Button type="submit" variant="contained">
                       Add To Cart
                     </Button>
                   </div>
                 </div>
               </>
             )}
+            {!isLoading && error && (
+              <p className="error__text">Cannot get data, please try again!</p>
+            )}
           </div>
         </CSSTransition>
         {showModel &&
           ReactDOM.createPortal(
-            <Overlay
-              onClick={resetHandler}
-              style={{ zIndex: "20" }}
-            />,
+            <Overlay onClick={resetHandler} style={{ zIndex: "20" }} />,
             document.getElementById("product__bg")
           )}
       </form>

@@ -12,6 +12,7 @@ import uploadProductSlice from "./UploadProduct/UploadProduct";
 import progressSlice from "./ProgressLoading/ProgressLoading";
 import navigationDashSlice from "./NavigationDash/navigation-dash";
 import citySlice from "./GetCity/get-city";
+import cartCheckoutSlice from "./CartCheckout/cartCheckout-slice";
 const store = configureStore({
     reducer: {
         hamburger: hamburgerSlice.reducer,
@@ -26,7 +27,8 @@ const store = configureStore({
         upload: uploadProductSlice.reducer,
         progress: progressSlice.reducer,
         nav: navigationDashSlice.reducer,
-        city: citySlice.reducer
+        city: citySlice.reducer,
+        cartCheckout: cartCheckoutSlice.reducer
     }
 })
 

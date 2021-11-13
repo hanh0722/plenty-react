@@ -9,6 +9,7 @@
         padding: 10px 20px;
         line-height: 30px;
         border: 1px solid #ddd;
+        resize: none;
         &:focus{
             outline: none;
         }
@@ -17,7 +18,7 @@
         &::placeholder{
             color: var(--black);
         }
-        border-radius: 10px;
+        border-radius: 7px;
         transition: all .35s cubic-bezier(0.075, 0.82, 0.165, 1);
         &:hover{
             box-shadow: $sm-shadow;

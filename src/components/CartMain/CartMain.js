@@ -15,11 +15,13 @@ import { CHECK_OUT_PAGE } from "../link/link";
 import useAxios from "../../hook/use-axios";
 import { getCartOfUser } from "../../config/cart";
 import Skeleton from "../UI/LoadingSkeleton/Skeleton";
+import { cartCheckoutActions } from "../store/CartCheckout/cartCheckout-slice";
 const CartMain = () => {
   const token = useSelector((state) => state.isAuth.token);
-  const isLoggedIn = useSelector(state => state.isAuth.isLoggedIn);
+  const isLoggedIn = useSelector((state) => state.isAuth.isLoggedIn);
   const cart = useSelector((state) => state.cart.cart);
   const isShowCart = useSelector((state) => state.cart.showCart);
+  const cartCheckout = useSelector((state) => state.cartCheckout);
   const dispatch = useDispatch();
   const { isLoading, data, fetchDataFromServer, error } = useAxios();
   const [showVoucher, setShowVoucher] = useState(false);
@@ -35,7 +37,11 @@ const CartMain = () => {
     });
   }, [fetchDataFromServer, token, isLoggedIn]);
   useEffect(() => {
+    if (isLoading) {
+      dispatch(CartActions.startLoadingCartHandler());
+    }
     if (!isLoading && !error && data) {
+      dispatch(CartActions.finishLoadingCartHandler());
       const transformCart = data.data.cart.map((product) => {
         return {
           id: product._id,
@@ -47,6 +53,14 @@ const CartMain = () => {
         };
       });
       dispatch(CartActions.setCartHandler(transformCart));
+      const firstTotalCart = transformCart.reduce((acc, item) => {
+        return acc + item.quantity * item.price;
+      }, 0);
+      dispatch(
+        cartCheckoutActions.setTotalHandler(
+          Math.round(firstTotalCart * 100) / 100
+        )
+      );
     }
   }, [isLoading, error, data, dispatch]);
   const renderSkeleton = (number) => {
@@ -65,6 +79,13 @@ const CartMain = () => {
     }
     return arraySkeleton;
   };
+  useEffect(() => {
+    if (isShowCart) {
+      document.body.setAttribute("data-sp", "open");
+    } else {
+      document.body.removeAttribute("data-sp");
+    }
+  }, [isShowCart]);
   return (
     <>
       <div className={`${styles.cart} ${isShowCart && styles["cart__back"]}`}>
@@ -124,7 +145,7 @@ const CartMain = () => {
                 imageClassName={styles["image-loading"]}
               />
             )}
-            {!isLoading && (
+            {!isLoading && cart.length > 0 && (
               <>
                 <div
                   onClick={() => setShowVoucher(true)}
@@ -153,20 +174,21 @@ const CartMain = () => {
                   className={`${styles.subtotal} d-flex justify-content-between align-items-center pb-3`}
                 >
                   <span>Subtotal:</span>
-                  <span>
-                    $
-                    {cart
-                      .reduce((acc, item) => {
-                        return acc + +item.price * +item.quantity;
-                      }, 0)
-                      .toFixed(2)}
-                  </span>
+                  <span>${cartCheckout.first_price}</span>
                 </p>
-                <Link to={CHECK_OUT_PAGE}>
-                  <Button variant="contained" type="submit">
-                    Checkout
-                  </Button>
-                </Link>
+                <p
+                  className={`${styles.subtotal} d-flex justify-content-between align-items-center pb-3`}
+                >
+                  <span>Discount:</span>
+                  <span>${cartCheckout.discount}</span>
+                </p>
+                {cart.length > 0 && (
+                  <Link to={CHECK_OUT_PAGE}>
+                    <Button variant="contained" type="submit">
+                      Checkout
+                    </Button>
+                  </Link>
+                )}
               </>
             )}
           </div>

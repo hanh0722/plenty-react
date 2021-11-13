@@ -2,6 +2,7 @@ import { createSlice } from "@reduxjs/toolkit";
 const initialState = {
   cart: [],
   showCart: false,
+  isLoading: false
 };
 const helperChangeCart = (cart, isExisted, condition) => {
   const newCart = [...cart];
@@ -18,6 +19,12 @@ const CartSlice = createSlice({
   reducers: {
     setCartHandler(state, action) {
       state.cart = action.payload;
+    },
+    startLoadingCartHandler(state){
+      state.isLoading = true
+    },
+    finishLoadingCartHandler(state){
+      state.isLoading = false;
     },
     addToCartHandler(state, action) {
       const isExisted = state.cart.findIndex(
