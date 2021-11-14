@@ -8,7 +8,7 @@ const DetailBlog = ({category, user, timeCreated, contentBlog, title}) => {
     <>
       <article className={styles.container}>
         <header className={`text-center ${styles.header}`}>
-          <h6>{category && (category[0] || category)}</h6>
+          <h6>Category: {category && (category || category[0])}</h6>
           <h4>{title}</h4>
           <p>
             Created by <span>{user ? user : "ADMIN"}</span> on <span>{timeCreated}</span>

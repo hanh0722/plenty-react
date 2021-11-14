@@ -1,11 +1,15 @@
 @import '../../constant/variable';
+@import '../../../theme/mixin';
 .image--container{
     overflow: hidden;
     .image{
         width: 100%;
         img{
             width: 100%;
-            height: auto;
+            max-height: 250px;
+            min-height: 250px;
+            object-fit: cover;
+            border-radius: 10px;
             transition: all .5s cubic-bezier(0.075, 0.82, 0.165, 1);
             &:hover{
                 transform: scale(1.1);

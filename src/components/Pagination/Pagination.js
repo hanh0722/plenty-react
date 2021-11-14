@@ -3,7 +3,7 @@ import usePagination from "../../hook/use-pagination";
 import { Link } from "react-router-dom";
 import styles from "./Pagination.module.scss";
 
-const Pagination = ({ currentPage, perPage, totalPage }) => {
+const Pagination = ({ currentPage, perPage, totalPage, className }) => {
   const {
     goToNextPage,
     goToPrevPage,
@@ -14,7 +14,7 @@ const Pagination = ({ currentPage, perPage, totalPage }) => {
   } = usePagination(currentPage, perPage, totalPage);
   return (
     <ul
-      className={`d-flex justify-content-center align-items-center ${styles.pagination}`}
+      className={`d-flex justify-content-center align-items-center ${styles.pagination} ${className}`}
     >
       <li
         onClick={goToPrevPage}

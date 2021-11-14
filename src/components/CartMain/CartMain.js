@@ -15,13 +15,13 @@ import { CHECK_OUT_PAGE } from "../link/link";
 import useAxios from "../../hook/use-axios";
 import { getCartOfUser } from "../../config/cart";
 import Skeleton from "../UI/LoadingSkeleton/Skeleton";
-import { cartCheckoutActions } from "../store/CartCheckout/cartCheckout-slice";
 const CartMain = () => {
   const token = useSelector((state) => state.isAuth.token);
   const isLoggedIn = useSelector((state) => state.isAuth.isLoggedIn);
   const cart = useSelector((state) => state.cart.cart);
   const isShowCart = useSelector((state) => state.cart.showCart);
-  const cartCheckout = useSelector((state) => state.cartCheckout);
+  const total = useSelector(state => state.cart.total);
+  const discount = useSelector(state => state.cart.discount);
   const dispatch = useDispatch();
   const { isLoading, data, fetchDataFromServer, error } = useAxios();
   const [showVoucher, setShowVoucher] = useState(false);
@@ -53,14 +53,6 @@ const CartMain = () => {
         };
       });
       dispatch(CartActions.setCartHandler(transformCart));
-      const firstTotalCart = transformCart.reduce((acc, item) => {
-        return acc + item.quantity * item.price;
-      }, 0);
-      dispatch(
-        cartCheckoutActions.setTotalHandler(
-          Math.round(firstTotalCart * 100) / 100
-        )
-      );
     }
   }, [isLoading, error, data, dispatch]);
   const renderSkeleton = (number) => {
@@ -173,14 +165,14 @@ const CartMain = () => {
                 <p
                   className={`${styles.subtotal} d-flex justify-content-between align-items-center pb-3`}
                 >
-                  <span>Subtotal:</span>
-                  <span>${cartCheckout.first_price}</span>
+                  <span>Subtotal: </span>
+                  <span>${total}</span>
                 </p>
                 <p
                   className={`${styles.subtotal} d-flex justify-content-between align-items-center pb-3`}
                 >
                   <span>Discount:</span>
-                  <span>${cartCheckout.discount}</span>
+                  <span>{discount}%</span>
                 </p>
                 {cart.length > 0 && (
                   <Link to={CHECK_OUT_PAGE}>

@@ -1,13 +1,15 @@
 import React, { useState } from "react";
 import styles from "./ChooseItemPerpage.module.scss";
-
+import { useHistory } from "react-router-dom";
 const ChooseItemPerpage = ({ defaultColumn, setColumnPerPage }) => {
   const [column, setColumn] = useState(defaultColumn || 8);
+  const history = useHistory();
   const changeColumnHandler = (column) => {
     setColumn(column);
     if (setColumnPerPage) {
       setColumnPerPage(column);
     }
+    history.push('?page=1');
   };
   return (
     <div className={`${styles.container}`}>
@@ -16,7 +18,7 @@ const ChooseItemPerpage = ({ defaultColumn, setColumnPerPage }) => {
           <svg
             width="12px"
             height="12px"
-            class="w-[12px] h-[12px]"
+            className="w-[12px] h-[12px]"
             fill="currentColor"
             xmlns="http://www.w3.org/2000/svg"
             viewBox="0 0 5.5 12.5"
@@ -32,12 +34,12 @@ const ChooseItemPerpage = ({ defaultColumn, setColumnPerPage }) => {
                     <path
                       id="Rectangle"
                       d="M.75 0a.76.76 0 01.75.75v11a.76.76 0 01-.75.75.76.76 0 01-.75-.75v-11A.76.76 0 01.75 0z"
-                      class="cls-1"
+                      className="cls-1"
                     ></path>
                     <path
                       id="Rectangle-2"
                       d="M4.75 0a.76.76 0 01.75.75v11a.76.76 0 01-.75.75.76.76 0 01-.75-.75v-11A.76.76 0 014.75 0z"
-                      class="cls-1"
+                      className="cls-1"
                       data-name="Rectangle"
                     ></path>
                   </g>
@@ -50,7 +52,7 @@ const ChooseItemPerpage = ({ defaultColumn, setColumnPerPage }) => {
           <svg
             width="12px"
             height="12px"
-            class="w-[12px] h-[12px]"
+            className="w-[12px] h-[12px]"
             fill="currentColor"
             xmlns="http://www.w3.org/2000/svg"
             viewBox="0 0 9.5 12.5"
@@ -66,18 +68,18 @@ const ChooseItemPerpage = ({ defaultColumn, setColumnPerPage }) => {
                     <path
                       id="Rectangle"
                       d="M.75 0a.76.76 0 01.75.75v11a.76.76 0 01-.75.75.76.76 0 01-.75-.75v-11A.76.76 0 01.75 0z"
-                      class="cls-1"
+                      className="cls-1"
                     ></path>
                     <path
                       id="Rectangle-2"
                       d="M4.75 0a.76.76 0 01.75.75v11a.76.76 0 01-.75.75.76.76 0 01-.75-.75v-11A.76.76 0 014.75 0z"
-                      class="cls-1"
+                      className="cls-1"
                       data-name="Rectangle"
                     ></path>
                     <path
                       id="Rectangle-3"
                       d="M8.75 0a.76.76 0 01.75.75v11a.76.76 0 01-.75.75.76.76 0 01-.75-.75v-11A.76.76 0 018.75 0z"
-                      class="cls-1"
+                      className="cls-1"
                       data-name="Rectangle"
                     ></path>
                   </g>
