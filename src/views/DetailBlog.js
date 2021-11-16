@@ -40,7 +40,7 @@ const DetailBlog = ({
   }, [previewMode, params.id, fetchDataFromServer]);
   const _renderHeader = () => {
     if (previewMode) {
-      return <HeaderPage title={title} paths={paths} />;
+      return <HeaderPage title={title}  paths={paths} />;
     }
     if (!previewMode && !isLoading && dataFetching) {
       return (
