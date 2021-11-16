@@ -17,9 +17,11 @@ import { getCartOfUser } from "../../config/cart";
 import Skeleton from "../UI/LoadingSkeleton/Skeleton";
 const CartMain = () => {
   const token = useSelector((state) => state.isAuth.token);
-  const isLoggedIn = useSelector(state => state.isAuth.isLoggedIn);
+  const isLoggedIn = useSelector((state) => state.isAuth.isLoggedIn);
   const cart = useSelector((state) => state.cart.cart);
   const isShowCart = useSelector((state) => state.cart.showCart);
+  const total = useSelector(state => state.cart.total);
+  const discount = useSelector(state => state.cart.discount);
   const dispatch = useDispatch();
   const { isLoading, data, fetchDataFromServer, error } = useAxios();
   const [showVoucher, setShowVoucher] = useState(false);
@@ -35,7 +37,11 @@ const CartMain = () => {
     });
   }, [fetchDataFromServer, token, isLoggedIn]);
   useEffect(() => {
+    if (isLoading) {
+      dispatch(CartActions.startLoadingCartHandler());
+    }
     if (!isLoading && !error && data) {
+      dispatch(CartActions.finishLoadingCartHandler());
       const transformCart = data.data.cart.map((product) => {
         return {
           id: product._id,
@@ -65,6 +71,13 @@ const CartMain = () => {
     }
     return arraySkeleton;
   };
+  useEffect(() => {
+    if (isShowCart) {
+      document.body.setAttribute("data-sp", "open");
+    } else {
+      document.body.removeAttribute("data-sp");
+    }
+  }, [isShowCart]);
   return (
     <>
       <div className={`${styles.cart} ${isShowCart && styles["cart__back"]}`}>
@@ -124,7 +137,7 @@ const CartMain = () => {
                 imageClassName={styles["image-loading"]}
               />
             )}
-            {!isLoading && (
+            {!isLoading && cart.length > 0 && (
               <>
                 <div
                   onClick={() => setShowVoucher(true)}
@@ -152,21 +165,22 @@ const CartMain = () => {
                 <p
                   className={`${styles.subtotal} d-flex justify-content-between align-items-center pb-3`}
                 >
-                  <span>Subtotal:</span>
-                  <span>
-                    $
-                    {cart
-                      .reduce((acc, item) => {
-                        return acc + +item.price * +item.quantity;
-                      }, 0)
-                      .toFixed(2)}
-                  </span>
+                  <span>Subtotal: </span>
+                  <span>${total}</span>
                 </p>
-                <Link to={CHECK_OUT_PAGE}>
-                  <Button variant="contained" type="submit">
-                    Checkout
-                  </Button>
-                </Link>
+                <p
+                  className={`${styles.subtotal} d-flex justify-content-between align-items-center pb-3`}
+                >
+                  <span>Discount:</span>
+                  <span>{discount}%</span>
+                </p>
+                {cart.length > 0 && (
+                  <Link to={CHECK_OUT_PAGE}>
+                    <Button variant="contained" type="submit">
+                      Checkout
+                    </Button>
+                  </Link>
+                )}
               </>
             )}
           </div>

@@ -40,7 +40,7 @@ const ListImage = ({ images, isLoading }) => {
           images.map((item) => {
             return (
               <SwiperSlide key={item}>
-                <MagnifyImage src={item} />
+                <MagnifyImage src={item} magnifieWidth={250} magnifierHeight={250} zoomLevel={1.4}/>
               </SwiperSlide>
             );
           })}

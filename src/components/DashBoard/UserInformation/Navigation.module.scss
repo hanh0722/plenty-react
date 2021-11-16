@@ -1,7 +1,12 @@
 @import '../../constant/variable';
+.navigation{
+    height: 100px;
+}
 .nav{
     list-style: none;
-    height: 100px;
+    margin-bottom: 0;
+    padding-bottom: 5px;
+    padding-left: 0;
     li{
         padding-bottom: 10px;
         margin-right: 40px;
@@ -24,10 +29,6 @@
         }
         &:hover{
             color: var(--brown);
-            &::before{
-                width: 100%;
-                background-color: var(--brown);
-            }
         }
     }
     .active{
@@ -36,4 +37,15 @@
             background-color: var(--brown);
         }
     }
+    a{
+        text-decoration: none;
+        color: var(--black) !important;
+    }
+}
+.line{
+    height: 2px;
+    background: var(--button-green);
+    position: absolute;
+    bottom: 0;
+    transition: all .3s ease-in-out;
 }

@@ -23,6 +23,7 @@ const uploadSingleImageApi = `${uploadImageApi}/image`;
 const getCountryApi = 'https://countriesnow.space/api/v0.1/countries/flag/images';
 const postCountryByName = 'https://countriesnow.space/api/v0.1/countries/states';
 const updateUserInformation = `${userApi}/update`;
+const updatePasswordByToken = `${userApi}/change/password`;
 export {
   urlCheckVerify,
   registerUrl,
@@ -38,5 +39,6 @@ export {
   uploadSingleImageApi,
   getCountryApi,
   postCountryByName,
-  updateUserInformation
+  updateUserInformation,
+  updatePasswordByToken
 };

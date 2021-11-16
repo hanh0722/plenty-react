@@ -4,6 +4,7 @@ const URL_CONFIG = `${serverUrl}/api/post`;
 
 const createPostApi = `${URL_CONFIG}/create`;
 
-export { createPostApi };
+const getAllPostsApi = `${URL_CONFIG}/blogs`;
 
-
+const getBlogById = id => `${URL_CONFIG}/blog/${id}`;
+export { createPostApi, getAllPostsApi, getBlogById };

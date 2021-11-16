@@ -2,11 +2,7 @@ import React from "react";
 import LineCart from "./LineCart/LineCart";
 import styles from "./Cart.module.scss";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import {
-  faCartArrowDown,
-  faCarrot,
-  faTag,
-} from "@fortawesome/free-solid-svg-icons";
+import { faTag } from "@fortawesome/free-solid-svg-icons";
 import Layout from "./Layout/Layout";
 import useToggle from "../../../hook/use-toggle";
 import { CSSTransition } from "react-transition-group";
@@ -14,30 +10,66 @@ import "./Transition.scss";
 import { Button } from "@material-ui/core";
 import NorInput from "../../input/NormalInput/NorInput";
 import useInput from "../../../hook/use-input";
-const Cart = () => {
+import { checkInputIsEmpty } from "../../../util";
+import Skeleton from "../../UI/LoadingSkeleton/Skeleton";
+import { useSelector } from "react-redux";
+const Cart = ({ cart, isLoadingCart }) => {
   const { toggle, changeToggleHandler } = useToggle();
   const { value, valid, isTouched, changeInputHandler, touchedInputHandler } =
-    useInput((value) => value.trim().length > 0);
+    useInput((value) => checkInputIsEmpty(value));
+  const cartCheckout = useSelector((state) => state.cartCheckout);
   return (
     <>
-      <div
-        className={`d-flex justify-content-between align-items-center ${styles.line}`}
-      >
-        <p className="d-flex align-items-center">
-          <FontAwesomeIcon icon={faCartArrowDown} />
-          <span>Show your cart</span>
-          <FontAwesomeIcon icon={faCarrot} />
-        </p>
-        <p>$50.00</p>
-      </div>
       <div className={styles.Cart}>
-        <LineCart />
+        {isLoadingCart && (
+          <>
+            <div className={styles["loading-total"]}>
+              <Skeleton
+                src
+                times={5}
+                containerSkeleton={styles["loading-skeleton"]}
+                imageClassName={styles["image-loading"]}
+              />
+              <Skeleton
+                src
+                times={5}
+                containerSkeleton={styles["loading-skeleton"]}
+                imageClassName={styles["image-loading"]}
+              />
+              <Skeleton
+                src
+                times={5}
+                containerSkeleton={styles["loading-skeleton"]}
+                imageClassName={styles["image-loading"]}
+              />
+            </div>
+          </>
+        )}
+        {!isLoadingCart && cart.length > 0 && (
+          <>
+            <div className={`${cart.length > 2 && styles.flow}`}>
+              {cart.map((item) => {
+                return (
+                  <LineCart
+                    key={item.id}
+                    productName={item.name}
+                    url={item.imageUrl}
+                    price={item.price}
+                    total={item.price * item.quantity}
+                    quantity={item.quantity}
+                    productType={item.type}
+                  />
+                );
+              })}
+            </div>
+          </>
+        )}
       </div>
       <Layout>
         <span>Subtotal:</span>
-        <span>$50.00</span>
+        <span>${cartCheckout.first_price}</span>
       </Layout>
-      <Layout>
+      <Layout className={"align-items-center"}>
         <span>Voucher:</span>
         {!toggle && (
           <Button
@@ -55,7 +87,7 @@ const Cart = () => {
           unmountOnExit
           classNames="open--voucher"
         >
-          <Layout>
+          <Layout className={styles.discount}>
             <div className={styles.invalid}>
               <NorInput
                 input={{
@@ -70,15 +102,22 @@ const Cart = () => {
                   !valid && isTouched && "error__input"
                 }`}
               >
-                <div
-                  className={`${styles["accept--btn"]} d-flex justify-content-center align-items-center`}
-                >
-                  <FontAwesomeIcon icon={faTag} />
-                </div>
+                <FontAwesomeIcon icon={faTag} />
               </NorInput>
               {!valid && isTouched && (
-                <p className={`${styles.error} error__text`}>Voucher is empty!</p>
+                <p className={`${styles.error} error__text`}>
+                  Voucher is empty!
+                </p>
               )}
+              <div className="text-end pt-3">
+                <Button
+                  onClick={changeToggleHandler}
+                  variant="outlined"
+                  className={styles["cancel-button"]}
+                >
+                  Cancel
+                </Button>
+              </div>
             </div>
           </Layout>
         </CSSTransition>
@@ -86,7 +125,7 @@ const Cart = () => {
       </Layout>
       <Layout>
         <span>Total:</span>
-        <span>$40.00</span>
+        <span>${cartCheckout.total}</span>
       </Layout>
     </>
   );

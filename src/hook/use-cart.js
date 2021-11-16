@@ -37,7 +37,6 @@ const useCart = () => {
     }
     // add to cart when not having error
   }, [isLoading, error, dispatch]);
-  console.log(isLoading, error, data);
   const addCartHandler = (value, productId) => {
     if (!isLoggedIn || !token) {
       redirectUserToSign();

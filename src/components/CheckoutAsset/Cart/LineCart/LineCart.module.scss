@@ -1,3 +1,4 @@
+@import '../../../constant/variable';
 .item--cart{
     display: flex;
     align-items: center;
@@ -24,13 +25,18 @@
     }
     .infor{
         padding-left: 30px;
-    }
-    .price{
-        justify-self: flex-end;
+        font-size: $fs-sm;
+        text-transform: capitalize;
+        line-height: 30px;
     }
     border-bottom: 1px solid #ddd;
     padding-bottom: 20px;
     margin-bottom: 20px;
+    .container-price{
+        font-size: $fs-sm;
+        line-height: 30px;
+        text-align: end;
+    }
 }
 
 @media screen and (max-width: 768px) {

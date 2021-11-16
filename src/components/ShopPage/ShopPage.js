@@ -6,9 +6,11 @@ import useAxios from "../../hook/use-axios";
 import { getAllProductsFromServer } from "../../config/product";
 import { NOT_FOUND } from "../link/link";
 import Grid from "../UI/Grid/Grid";
+import Pagination from "../Pagination/Pagination";
+import ChooseItemPerpage from "../ChooseItemPerpage/ChooseItemPerpage";
 const ShopPage = () => {
   const { isLoading, fetchDataFromServer, error, data } = useAxios();
-  const [perPage, setPerPage] = useState(1);
+  const [perPage, setPage] = useState(8);
   const [totalPage, setTotalPage] = useState(null);
   const location = useLocation();
   const getCurrentPage = useMemo(() => {
@@ -34,34 +36,42 @@ const ShopPage = () => {
     return arrayRender;
   }, []);
   useEffect(() => {
-    if (!data) {
-      return;
+    if(!totalPage && data){
+      setTotalPage(data.data.total_product);
     }
-    setTotalPage(data.data.total_product);
-  }, [data]);
+  }, [data, totalPage]);
+
   return (
     <>
       {!isLoading && error && <Redirect to={NOT_FOUND} />}
-      <Grid>
-        {isLoading && _renderLoadingSkeleton(perPage)}
-        {!isLoading && data && (
-          <>
-            {data.data.products.map((product) => {
-              const path = nonAccentVietnamese(product.title);
-              return (
-                <Product
-                  key={product._id}
-                  imageUrl={product.images.urls[0]}
-                  price={product.last_price}
-                  name={product.title}
-                  id={product._id}
-                  link={`${route.path}/${path}?id=${product._id}`}
-                />
-              );
-            })}
-          </>
-        )}
-      </Grid>
+        <ChooseItemPerpage defaultColumn={8} setColumnPerPage={setPage}/>
+        <Grid>
+          {isLoading && _renderLoadingSkeleton(perPage)}
+          {!isLoading && data && (
+            <>
+               {data.data.products.map((product) => {
+                const path = nonAccentVietnamese(product.title);
+                return (
+                  <Product
+                    key={product._id}
+                    imageUrl={product.images.urls[0]}
+                    price={product.last_price}
+                    name={product.title}
+                    id={product._id}
+                    link={`${route.path}/${path}?id=${product._id}`}
+                  />
+                );
+              })}
+            </>
+          )}
+        </Grid>
+      {!isLoading && data && totalPage && (
+        <Pagination
+          perPage={perPage}
+          totalPage={totalPage}
+          currentPage={getCurrentPage}
+        />
+      )}
     </>
   );
 };

@@ -77,7 +77,7 @@ const DetailProduct = ({
               Price:{" "}
               {product.sale_percent !== 0 && (
                 <span className={classes["sale-value"]}>
-                  {product.regular_price}
+                  ${product.regular_price}
                 </span>
               )}{" "}
               ${product.last_price}

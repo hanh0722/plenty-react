@@ -158,8 +158,8 @@ const useAxios = () => {
           dispatchEvent(progressActions.finishedFetch());
         }, 1000);
       } catch (err) {
-        const message = err.message;
-        const code = err.statusCode || 500;
+        const message = err?.response?.data?.message || "Cannot fetch data from server"
+        const code = err?.response?.data?.code || 500;
         dispatch({
           type: type.STATUS,
           payload: code

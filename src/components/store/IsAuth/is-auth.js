@@ -25,6 +25,7 @@ const isAuthSlice = createSlice({
       state.isLoggedIn = false;
       state.expired = false;
       state.token = null;
+      removeStorageHandler();
     },
     setExpired(state) {
       state.expired = true;

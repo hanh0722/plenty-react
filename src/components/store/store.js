@@ -26,7 +26,7 @@ const store = configureStore({
         upload: uploadProductSlice.reducer,
         progress: progressSlice.reducer,
         nav: navigationDashSlice.reducer,
-        city: citySlice.reducer
+        city: citySlice.reducer,
     }
 })
 
