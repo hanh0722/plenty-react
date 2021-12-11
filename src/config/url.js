@@ -1,4 +1,4 @@
-export const serverUrl = "http://localhost:8080";
+export const serverUrl = "https://api-react-nj.herokuapp.com";
 const authLinks = `${serverUrl}/api/auth`;
 const userApi = `${serverUrl}/api/user`;
 const dashboardApi = `${serverUrl}/api/dashboard`;
