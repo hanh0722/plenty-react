@@ -18,6 +18,7 @@ import {
   DASHBOARD_MATERIAL,
   DASHBOARD,
   BLOG_DETAIL,
+  WISHLIST_URL,
 } from "../components/link/link";
 import {
   Index,
@@ -40,6 +41,7 @@ import {
   UserInformation,
   BlogDashboard,
   DetailBlog,
+  WishList
 } from "../views/ViewConfig/ViewConfig";
 export const RoutesConfig = [
   {
@@ -55,6 +57,10 @@ export const RoutesConfig = [
   {
     path: DETAIL,
     component: DetailItem,
+  },
+  {
+    path: WISHLIST_URL,
+    component: WishList
   },
   {
     path: SIGN_IN_PAGE,

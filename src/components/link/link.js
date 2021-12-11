@@ -26,6 +26,7 @@ export const DETAIL = '/shop/:name';
 export const PRODUCT_LIST = '/products/:type';
 export const NOT_FOUND = '/404';
 export const DASHBOARD = '/dashboard';
+export const WISHLIST_URL = '/wishlist';
 export const DASHBOARD_MATERIAL = {
     GENERAL: [
         {

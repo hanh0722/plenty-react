@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import Input from "../input/Input";
 import styles from "./SearchBar.module.scss";
 import useInput from "../../hook/use-input";
@@ -9,10 +9,13 @@ import { hamburgerActions } from "../store/hamburgerSlice";
 import Overlay from "../overlay/Overlay";
 import ReactDOM from "react-dom";
 import SearchItems from "../SearchItems/SearchItems";
-import { Container, Row } from "react-bootstrap";
-import DUMMY_DATA from "../DummyData/DUMMY_DATA";
+import { Container } from "react-bootstrap";
 import { Button } from "@material-ui/core";
-
+import useAxios from "../../hook/use-axios";
+import { getProductByKeyword } from "../../config/product";
+import RenderSkeletonProduct from "../../util/RenderSkeletonProduct";
+import Grid from "../UI/Grid/Grid";
+import { useState } from "react";
 const SearchBar = ({ isShowed }) => {
   const {
     valid,
@@ -23,15 +26,37 @@ const SearchBar = ({ isShowed }) => {
     resetHandler,
   } = useInput((value) => value.trim().length > 0);
   const dispatch = useDispatch();
+  const { isLoading, data, error, fetchDataFromServer } = useAxios();
+  const [isTyping, setIsTyping] = useState(false);
   const changeLayoutHandler = () => {
     dispatch(hamburgerActions.searchSlide());
   };
   const submitHandler = (event) => {
     event.preventDefault();
   };
-  const renderListItems = DUMMY_DATA.filter((items) => {
-    return items.name.trim().toLowerCase().includes(value.toLowerCase());
-  });
+  useEffect(() => {
+    const timeout = setTimeout(() => {
+      setIsTyping(false);
+      fetchDataFromServer({
+        url: getProductByKeyword,
+        params: {
+          search: value,
+          limit: 5
+        }
+      });
+    }, 1000);
+    return () => {
+      clearTimeout(timeout);
+      setIsTyping(true);
+    }
+  }, [fetchDataFromServer, value]);
+  useEffect(() => {
+    if (isShowed) {
+      document.body.setAttribute('data-sp', 'open');
+    } else {
+      document.body.removeAttribute('data-sp');
+    }
+  }, [isShowed]);
   return (
     <CSSTransition
       in={isShowed}
@@ -66,59 +91,48 @@ const SearchBar = ({ isShowed }) => {
                 hasValue={value.trim().length > 0}
                 setValueHandler={resetHandler}
               />
-              {!valid && isTouched && (
-                <p className="error__text">Searching box is empty!</p>
-              )}
-              {value.trim().length > 0 && renderListItems.length === 0 && (
+              {!isLoading && error && <p className="error__text text-center">Cannot get data</p>}
+              {!isLoading && data && !isTyping && data?.data?.results?.length === 0 && (
                 <p className="error__text text-center">
                   No result for <span>"{value}"</span>
                 </p>
               )}
             </div>
-            {value.trim().length > 0 && (
-              <div className={styles["flow__items"]}>
-                {renderListItems.length > 0 && (
-                  <>
-                    <p className="text-center pt-3">
-                      <span className={styles.title}>
-                        Found {renderListItems.length} results for:
-                      </span>{" "}
-                      "{value}"
-                    </p>
-                    <Row className={`${styles.items}`}>
-                      {value.trim().length !== 0 &&
-                        renderListItems.map((product, index) => {
-                          if (index <= 5) {
-                            return (
-                              <SearchItems
-                                key={product.id}
-                                type={product.type}
-                                price={product.price}
-                                name={product.name}
-                                imageUrl={product.imageUrl}
-                                id={product.id}
-                                resetHandler={resetHandler}
-                              />
-                            );
-                          }
-                          return "";
-                        })}
-                    </Row>
-                    {renderListItems.length > 0 && (
-                      <div className={`text-center pt-4`}>
-                        <Button
-                          type="submit"
-                          className="button"
-                          variant="contained"
-                        >
-                          More Results!
-                        </Button>
-                      </div>
-                    )}
-                  </>
-                )}
+            <div className={styles["flow__items"]}>
+
+              <div className={`${styles.items}`}>
+                <Grid>
+                  {(isLoading || isTyping) && RenderSkeletonProduct(5)}
+                  {data && !isLoading && !isTyping && data?.data?.results?.length > 0 &&
+                    data?.data?.results?.map((product, index) => {
+                      if (index <= 5) {
+                        return (
+                          <SearchItems
+                            key={product._id}
+                            type={product?.type_product}
+                            price={product?.last_price}
+                            name={product?.title}
+                            imageUrl={product?.images?.urls[0]}
+                            id={product._id}
+                            resetHandler={resetHandler}
+                          />
+                        );
+                      }
+                      return "";
+                    })}
+                </Grid>
               </div>
-            )}
+              {!isLoading && !isTyping && data && data?.data?.matched_products > 5 && (
+                <div className={`text-center pt-4`}>
+                  <Button
+                    className="button"
+                    variant="contained"
+                  >
+                    More Results!
+                  </Button>
+                </div>
+              )}
+            </div>
           </Container>
         </form>
         {ReactDOM.createPortal(

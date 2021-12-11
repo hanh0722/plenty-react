@@ -25,7 +25,9 @@ import FeatureMobile from "./FeatureMobile/FeatureMobile";
 import useMedia from "../../hook/use-media";
 import { isAuthActions } from "../store/IsAuth/is-auth";
 import { NotifyActions } from "../store/NotifyAfterLogin/NotifyAfterLogin";
-import { DASHBOARD_MATERIAL, DASHBOARD, HOME_PAGE } from "../link/link";
+import { DASHBOARD_MATERIAL, DASHBOARD, HOME_PAGE, WISHLIST_URL } from "../link/link";
+import { wishListActions } from "../store/WishList/wishlist-slice";
+
 const dataToolTip = ["Search", "Account", "WishList", "Cart"];
 const Icon = [faSearch, faUser, faHeart, faShoppingCart];
 const nestedPath = [
@@ -46,7 +48,6 @@ const Navigation = ({ isDowned }) => {
   };
   const state = useSelector((state) => state.hamburger.isClicked);
   const cart = useSelector((state) => state.cart.cart);
-  const wishlist = useSelector((state) => state.wishlist.wishlist);
   const isLoggedIn = useSelector((state) => state.isAuth.isLoggedIn);
   const isOpenSignOutDesktop = useMedia("(min-width: 991px)");
   const setShowedUpHandler = () => {
@@ -56,6 +57,8 @@ const Navigation = ({ isDowned }) => {
   };
   const signOutHandler = () => {
     dispatch(isAuthActions.setIsLoggedOut());
+    dispatch(wishListActions.resetWishList());
+    dispatch(CartActions.resetCartHandler());
     dispatch(
       NotifyActions.showedNotify({
         message: "Sign out successfully",
@@ -158,17 +161,12 @@ const Navigation = ({ isDowned }) => {
               if (index === 2) {
                 return (
                   <li key={index}>
-                    <FontAwesomeIcon icon={items} />
-                    <Thumb className={styles.tooltip}>
-                      {dataToolTip[index]}
-                    </Thumb>
-                    {wishlist.length > 0 && (
-                      <Breakpoints>
-                        {wishlist.reduce((acc, item) => {
-                          return acc + item.quantity;
-                        }, 0)}
-                      </Breakpoints>
-                    )}
+                    <Link to={WISHLIST_URL}>
+                      <FontAwesomeIcon icon={items} />
+                      <Thumb className={styles.tooltip}>
+                        {dataToolTip[index]}
+                      </Thumb>
+                    </Link>
                   </li>
                 );
               }

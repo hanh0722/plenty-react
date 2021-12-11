@@ -1,7 +1,8 @@
 import React, { useState } from "react";
 import styles from "./ChooseItemPerpage.module.scss";
 import { useHistory } from "react-router-dom";
-const ChooseItemPerpage = ({ defaultColumn, setColumnPerPage }) => {
+import QueryStringParse from 'query-string';
+const ChooseItemPerpage = ({ defaultColumn, setColumnPerPage, queryString }) => {
   const [column, setColumn] = useState(defaultColumn || 8);
   const history = useHistory();
   const changeColumnHandler = (column) => {
@@ -9,7 +10,11 @@ const ChooseItemPerpage = ({ defaultColumn, setColumnPerPage }) => {
     if (setColumnPerPage) {
       setColumnPerPage(column);
     }
-    history.push('?page=1');
+    const query = QueryStringParse.stringify({
+      page: 1,
+      ...queryString
+    });
+    history.push(`?${query}`);
   };
   return (
     <div className={`${styles.container}`}>

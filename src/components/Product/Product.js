@@ -14,6 +14,7 @@ const Product = (props) => {
   const addCartHandler = () => {
     addCartToServer(1, props.id);
   };
+  
   useEffect(() => {
     if (!isLoading && data && !error) {
       dispatch(
@@ -40,7 +41,7 @@ const Product = (props) => {
             <img src={props.imageUrl} alt="ImageItem" />
             <div className={styles.overlay}>
               <div
-                className={`${styles.icon} d-flex justify-content-center align-items-center`}
+                className={`${styles.icon} ${props.isWishList && styles.active} d-flex justify-content-center align-items-center`}
               >
                 <FontAwesomeIcon icon={faStar} />
               </div>
