@@ -1,5 +1,4 @@
 import React from "react";
-import { Col } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import styles from "./SearchItems.module.scss";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -25,9 +24,8 @@ const SearchItems = ({ imageUrl, name, type, price, id, resetHandler }) => {
     dispatch(hamburgerActions.searchSlide());
     resetHandler();
   };
-
   return (
-    <Col className={styles.col} xs={6} sm={4} md={3} lg={2}>
+    <div className={`${styles.col} text-center`}>
       <div className={styles["product__item"]}>
         <div className={styles.image}>
           <img src={imageUrl} alt="" />
@@ -55,7 +53,7 @@ const SearchItems = ({ imageUrl, name, type, price, id, resetHandler }) => {
           <p>${price}</p>
         </div>
       </div>
-    </Col>
+    </div>
   );
 };
 

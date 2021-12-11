@@ -8,10 +8,12 @@ const getProductByType = `${api}/get`;
 const getProductById = (id) => {
   return `${api}/products/${id}`;
 };
+const getProductByKeyword = `${api}/keyword`;
 const getAllTypesOfProducts = `${api}/get/type`;
 export {
   getAllProductsFromServer,
   getProductById,
   getProductByType,
   getAllTypesOfProducts,
+  getProductByKeyword
 };

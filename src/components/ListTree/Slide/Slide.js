@@ -9,7 +9,7 @@ import { useDispatch } from "react-redux";
 import { ProductActions } from "../../store/Product";
 import useCart from "../../../hook/use-cart";
 import { NotifyActions } from "../../store/NotifyAfterLogin/NotifyAfterLogin";
-const Slide = ({ imageUrl, name, price, type, id, addtoWishList }) => {
+const Slide = ({ imageUrl, name, price, type, id }) => {
   const dispatch = useDispatch();
   const { isLoading, error, data, addCartHandler } = useCart();
   const addToCartHandler = () => {
@@ -49,15 +49,6 @@ const Slide = ({ imageUrl, name, price, type, id, addtoWishList }) => {
         <div className={styles["options-image"]}>
           <p>
             <FontAwesomeIcon
-              onClick={() =>
-                addtoWishList({
-                  productId: id,
-                  name,
-                  price,
-                  type,
-                  imageUrl,
-                })
-              }
               icon={faStar}
             />
           </p>

@@ -18,6 +18,7 @@ import ProductAdmin from '../Dashboard/Product';
 import UserInformation from "../Dashboard/UserInformation";
 import BlogDashboard from '../Dashboard/Blog';
 import DetailBlog from "../DetailBlog";
+import WishList from "../WishList";
 export {
     Blog,
     Checkout,
@@ -38,5 +39,6 @@ export {
     ProductAdmin,
     UserInformation,
     BlogDashboard,
-    DetailBlog
+    DetailBlog,
+    WishList
 }

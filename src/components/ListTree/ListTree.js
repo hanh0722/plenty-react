@@ -8,8 +8,6 @@ import "swiper/components/pagination/pagination.min.css";
 import SwiperCore, { Navigation, Pagination } from "swiper/core";
 import styles from "./ListTree.module.scss";
 import Slide from "./Slide/Slide";
-import { useDispatch } from "react-redux";
-import { wishListActions } from "../store/wish-list";
 import useAxios from "../../hook/use-axios";
 import { getProductByType } from "../../config/product";
 import Skeleton from "../UI/LoadingSkeleton/Skeleton";
@@ -19,7 +17,6 @@ SwiperCore.use([Navigation, Pagination]);
 
 const ListTree = () => {
   const [type, setType] = useState("indoor");
-  const dispatch = useDispatch();
   const desktopScreen = useMedia('(min-width: 991px)');
   const quiteLargeScreen = useMedia('(min-width: 768px)');
   const mediumScreen = useMedia('(min-width: 576px)');
@@ -33,10 +30,6 @@ const ListTree = () => {
       },
     });
   }, [fetchDataFromServer, type]);
-
-  const addToWishList = (product) => {
-    dispatch(wishListActions.addToWishList(product));
-  };
   const renderLoading = useMemo(() => {
     if(desktopScreen){
       return 5;
@@ -138,7 +131,6 @@ const ListTree = () => {
                     imageUrl={product.images.urls[0]}
                     type={product.type_product}
                     id={product._id}
-                    addtoWishList={addToWishList}
                   />
                 </SwiperSlide>
               );

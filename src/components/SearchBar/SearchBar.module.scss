@@ -5,6 +5,8 @@
     top: 0;
     width: 100%;
     background: var(--search-bg);
+    height: 80vh;
+    overflow: scroll;
 }
 .row{
     padding-bottom: $md-pd;
@@ -23,14 +25,14 @@
 .title{
     font-size: $fs-sm;
 }
-@media screen and (max-width: 991px) {
-    .items{
-        height: 50vh;
-        overflow: scroll;
-    }
-}
+
 @media screen and (max-width: 768px) {
-    .items{
-        height: 70vh;
+    .container{
+        font-size: $fs-sm;
+        input{
+            &::placeholder{
+                font-size: $fs-sm !important;
+            }
+        }
     }
 }

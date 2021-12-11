@@ -87,6 +87,12 @@
             color: $white;
         }
     }
+    .active{
+        svg{
+            color: var(--white);
+        }
+        background: var(--brown);
+    }
 }
 .loading{
     height: 300px !important;

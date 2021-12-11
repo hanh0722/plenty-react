@@ -132,7 +132,7 @@ const useAxios = () => {
             let percentage = Math.round(
               (progressEvent.loaded * 100) / progressEvent.total
             );
-            if (cb_download) {
+            if (typeof cb_download === 'function') {
               cb_download(percentage);
             }
             dispatch({

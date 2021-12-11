@@ -2,8 +2,9 @@ import React from "react";
 import usePagination from "../../hook/use-pagination";
 import { Link } from "react-router-dom";
 import styles from "./Pagination.module.scss";
+import parseQueryString from 'query-string';
 
-const Pagination = ({ currentPage, perPage, totalPage, className }) => {
+const Pagination = ({ currentPage, perPage, totalPage, className, queryString }) => {
   const {
     goToNextPage,
     goToPrevPage,
@@ -40,7 +41,10 @@ const Pagination = ({ currentPage, perPage, totalPage, className }) => {
       {renderPagination.map((item) => {
         return (
           <li className={curPage === item ? styles.active : ""} key={item}>
-            <Link to={`?page=${item}`}>{item}</Link>
+            <Link to={`?${parseQueryString.stringify({
+              page: item,
+              ...queryString,
+            })}`}>{item}</Link>
           </li>
         );
       })}
