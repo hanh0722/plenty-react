@@ -8,13 +8,19 @@ import { useDispatch } from "react-redux";
 import { CartActions } from "../store/cart";
 import Skeleton from "../UI/LoadingSkeleton/Skeleton";
 import useCart from "../../hook/use-cart";
+import useAxios from "../../hook/use-axios";
+import { addItemToWishList } from "../../config/wishlist";
+import { useSelector } from "react-redux";
+import { NotifyActions } from "../store/NotifyAfterLogin/NotifyAfterLogin";
 const Product = (props) => {
+  const isAuth = useSelector(state => state.isAuth);
   const { isLoading, data, addCartHandler: addCartToServer, error } = useCart();
+  const { isLoading: isLoadingAddItem, fetchDataFromServer, error: errorAddItem, data: dataAddItem } = useAxios();
   const dispatch = useDispatch();
   const addCartHandler = () => {
     addCartToServer(1, props.id);
   };
-  
+
   useEffect(() => {
     if (!isLoading && data && !error) {
       dispatch(
@@ -30,6 +36,39 @@ const Product = (props) => {
       dispatch(CartActions.showCartHandler());
     }
   }, [data, isLoading, error, dispatch]);
+  const addItemToWatchList = id => {
+    const { isLoggedIn, token } = isAuth;
+    if (!isLoggedIn || !token) {
+      return;
+    }
+    fetchDataFromServer({
+      url: addItemToWishList,
+      method: 'PUT',
+      headers: {
+        Authorization: 'Bearer ' + token
+      },
+      data: {
+        productId: id
+      }
+    });
+  }
+  useEffect(() => {
+    if (isLoadingAddItem) {
+      return;
+    }
+    if (!isLoadingAddItem && errorAddItem) {
+      dispatch(NotifyActions.showedNotify({
+        message: errorAddItem.message,
+        code: errorAddItem.code
+      }));
+    }
+    if (!isLoadingAddItem && dataAddItem) {
+      dispatch(NotifyActions.showedNotify({
+        message: 'Added item successfully',
+        code: 200
+      }))
+    }
+  }, [isLoadingAddItem, errorAddItem, dataAddItem, dispatch]);
   return (
     <div className={styles.container} style={props.style}>
       <div className={`${styles.col}`}>
@@ -41,6 +80,7 @@ const Product = (props) => {
             <img src={props.imageUrl} alt="ImageItem" />
             <div className={styles.overlay}>
               <div
+                onClick={() => addItemToWatchList(props.id)}
                 className={`${styles.icon} ${props.isWishList && styles.active} d-flex justify-content-center align-items-center`}
               >
                 <FontAwesomeIcon icon={faStar} />

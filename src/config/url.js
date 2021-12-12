@@ -1,4 +1,4 @@
-export const serverUrl = "https://api-react-nj.herokuapp.com"
+export const serverUrl = "http://localhost:8080"
 const authLinks = `${serverUrl}/api/auth`;
 const userApi = `${serverUrl}/api/user`;
 const dashboardApi = `${serverUrl}/api/dashboard`;
@@ -24,6 +24,8 @@ const getCountryApi = 'https://countriesnow.space/api/v0.1/countries/flag/images
 const postCountryByName = 'https://countriesnow.space/api/v0.1/countries/states';
 const updateUserInformation = `${userApi}/update`;
 const updatePasswordByToken = `${userApi}/change/password`;
+const getUserById = id => `${userApi}/info/${id}`;
+const getUserDataApi = `${userApi}/validated`;
 export {
   urlCheckVerify,
   registerUrl,
@@ -40,5 +42,8 @@ export {
   getCountryApi,
   postCountryByName,
   updateUserInformation,
-  updatePasswordByToken
+  updatePasswordByToken,
+  getUserById,
+  getUserDataApi
+
 };

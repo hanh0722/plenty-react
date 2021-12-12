@@ -13,6 +13,8 @@ import classes from "./DetailProduct.module.scss";
 import useCart from "../../../hook/use-cart";
 import { useDispatch } from "react-redux";
 import { CartActions } from "../../store/cart";
+import queryString from 'query-string'
+import { CHECK_OUT_PAGE } from "../../link/link";
 const DetailProduct = ({
   product,
   changeToggleHandler,
@@ -135,7 +137,11 @@ const DetailProduct = ({
               </div>
             </div>
             <div className={`${styles.space} w-100`}>
-              <Link to="/checkout">
+              <Link to={`${CHECK_OUT_PAGE}?${queryString.stringify({
+                id: product?._id,
+                redirected: true,
+                single: true
+              })}`}>
                 <Button className="w-100" variant="contained">
                   Buy it now!
                 </Button>

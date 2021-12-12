@@ -12,12 +12,10 @@ import NorInput from "../../input/NormalInput/NorInput";
 import useInput from "../../../hook/use-input";
 import { checkInputIsEmpty } from "../../../util";
 import Skeleton from "../../UI/LoadingSkeleton/Skeleton";
-import { useSelector } from "react-redux";
 const Cart = ({ cart, isLoadingCart }) => {
   const { toggle, changeToggleHandler } = useToggle();
   const { value, valid, isTouched, changeInputHandler, touchedInputHandler } =
     useInput((value) => checkInputIsEmpty(value));
-  const cartCheckout = useSelector((state) => state.cartCheckout);
   return (
     <>
       <div className={styles.Cart}>
@@ -45,10 +43,10 @@ const Cart = ({ cart, isLoadingCart }) => {
             </div>
           </>
         )}
-        {!isLoadingCart && cart.length > 0 && (
+        {!isLoadingCart && cart?.cart?.length > 0 && (
           <>
-            <div className={`${cart.length > 2 && styles.flow}`}>
-              {cart.map((item) => {
+            <div className={`${cart?.cart?.length > 2 && styles.flow}`}>
+              {cart?.cart.map((item) => {
                 return (
                   <LineCart
                     key={item.id}
@@ -67,7 +65,7 @@ const Cart = ({ cart, isLoadingCart }) => {
       </div>
       <Layout>
         <span>Subtotal:</span>
-        <span>${cartCheckout.first_price}</span>
+        <span> ${cart?.discount > 0 ? Math.round(((cart?.total - (cart?.total * cart?.discount)) * 100) / 100) : cart?.total}</span>
       </Layout>
       <Layout className={"align-items-center"}>
         <span>Voucher:</span>
@@ -125,7 +123,7 @@ const Cart = ({ cart, isLoadingCart }) => {
       </Layout>
       <Layout>
         <span>Total:</span>
-        <span>${cartCheckout.total}</span>
+        <span>${cart?.total}</span>
       </Layout>
     </>
   );

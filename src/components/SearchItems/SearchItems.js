@@ -24,6 +24,9 @@ const SearchItems = ({ imageUrl, name, type, price, id, resetHandler }) => {
     dispatch(hamburgerActions.searchSlide());
     resetHandler();
   };
+  const addItemToWatchList = (id) => {
+    console.log(id);
+  };
   return (
     <div className={`${styles.col} text-center`}>
       <div className={styles["product__item"]}>
@@ -33,7 +36,7 @@ const SearchItems = ({ imageUrl, name, type, price, id, resetHandler }) => {
             <span onClick={() => {dispatch(ProductActions.setIdProduct(id));  dispatch(ProductActions.setShowModalHandler())}}>
               <FontAwesomeIcon icon={faEye} />
             </span>
-            <span>
+            <span onClick={() => addItemToWatchList(id)} >
               <FontAwesomeIcon icon={faStar} />
             </span>
             <span

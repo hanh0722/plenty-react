@@ -32,8 +32,7 @@ const DataForm = ({
     },
     [dispatch]
   );
-
-  const user = useSelector((state) => state.user.user?.user);
+  const user = useSelector((state) => state.user?.user);
   return (
     <BoxContainer>
       <div className={`${styles.form} ${classes.form}`}>
@@ -81,8 +80,8 @@ const DataForm = ({
                   setCountry={setCountry}
                   getCityHandler={getCityFromList}
                   initialCountry={{
-                    country: user.basic_information.country,
-                    flag: user.basic_information.flag,
+                    country: user?.basic_information?.country,
+                    flag: user?.basic_information?.flag,
                   }}
                 />
               </>
@@ -107,7 +106,7 @@ const DataForm = ({
                     placeholder: "Address",
                   }}
                   label={"Address"}
-                  initialValue={user.basic_information.address}
+                  initialValue={user?.basic_information?.address}
                 >
                   <FontAwesomeIcon icon={faMap} />
                 </Input>
