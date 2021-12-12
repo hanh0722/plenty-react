@@ -9,8 +9,16 @@
     font-size: $fs-sm;
     color: red !important;
 }
+.button{
+    margin-top: 30px !important;
+    background: var(--brown) !important;
+    color: var(--white) !important;
+}
 @media screen and (max-width: 768px) {
     .user--infor{
         flex-direction: column-reverse !important;
+    }
+    .person{
+        padding-top: 50px;
     }
 }

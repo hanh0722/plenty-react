@@ -27,6 +27,7 @@ import { isAuthActions } from "../store/IsAuth/is-auth";
 import { NotifyActions } from "../store/NotifyAfterLogin/NotifyAfterLogin";
 import { DASHBOARD_MATERIAL, DASHBOARD, HOME_PAGE, WISHLIST_URL } from "../link/link";
 import { wishListActions } from "../store/WishList/wishlist-slice";
+import { userDataActions } from "../store/GetUserData/get-user-data";
 
 const dataToolTip = ["Search", "Account", "WishList", "Cart"];
 const Icon = [faSearch, faUser, faHeart, faShoppingCart];
@@ -59,6 +60,7 @@ const Navigation = ({ isDowned }) => {
     dispatch(isAuthActions.setIsLoggedOut());
     dispatch(wishListActions.resetWishList());
     dispatch(CartActions.resetCartHandler());
+    dispatch(userDataActions.removeUserHandler());
     dispatch(
       NotifyActions.showedNotify({
         message: "Sign out successfully",
@@ -159,16 +161,19 @@ const Navigation = ({ isDowned }) => {
                 );
               }
               if (index === 2) {
-                return (
-                  <li key={index}>
-                    <Link to={WISHLIST_URL}>
-                      <FontAwesomeIcon icon={items} />
-                      <Thumb className={styles.tooltip}>
-                        {dataToolTip[index]}
-                      </Thumb>
-                    </Link>
-                  </li>
-                );
+                if (isLoggedIn) {
+                  return (
+                    <li key={index}>
+                      <Link to={WISHLIST_URL}>
+                        <FontAwesomeIcon icon={items} />
+                        <Thumb className={styles.tooltip}>
+                          {dataToolTip[index]}
+                        </Thumb>
+                      </Link>
+                    </li>
+                  );
+                }
+                return null;
               }
               if (index === 3) {
                 return (

@@ -2,7 +2,8 @@ import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
     user: null,
-    isLoading: false
+    isLoading: false,
+    error: false
 }
 
 const userDataSlice = createSlice({
@@ -18,6 +19,13 @@ const userDataSlice = createSlice({
         },
         finishedLoading(state){
             state.isLoading = false;
+        },
+        removeUserHandler(state) {
+            state.user = null;
+            state.isLoading = false;
+        },
+        setErrorToUser(state) {
+            state.error = true;
         }
     }
 })

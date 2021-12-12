@@ -15,7 +15,7 @@ const Welcome = ({ user, isLoading }) => {
         {!isLoading && user && (
           <>
             <div className={styles.text}>
-              <h4>Welcome back - {user.user.name}</h4>
+              <h4>Welcome back - {user?.name}</h4>
               <p>Go to introduction document</p>
               <Button variant="contained">Introduce</Button>
             </div>

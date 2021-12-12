@@ -9,6 +9,10 @@ import { HOME_PAGE } from "../components/link/link";
 import { useDispatch } from "react-redux";
 import { NotifyActions } from "../components/store/NotifyAfterLogin/NotifyAfterLogin";
 import { isAuthActions } from "../components/store/IsAuth/is-auth";
+import { getUserById } from "../config/url";
+import useAxios from "../hook/use-axios";
+import { userDataActions } from "../components/store/GetUserData/get-user-data";
+
 const SignIn = () => {
   const dispatch = useDispatch();
   const history = useHistory();
@@ -21,6 +25,8 @@ const SignIn = () => {
     status,
     resetAllHandler,
   } = useFetch();
+
+  const {isLoading: isLoadingUser, data, error: errorUser, fetchDataFromServer} = useAxios();
   const getUserFromInput = (userData) => {
     if (
       !userData.email.includes("@") ||
@@ -49,15 +55,34 @@ const SignIn = () => {
       localStorage.setItem("token/customer", token);
       localStorage.setItem("expiry/customer", expiry);
       dispatch(isAuthActions.setIsAuthenticated(token));
-      dispatch(
-        NotifyActions.showedNotify({
-          message: "Success",
-          code: 200,
-        })
-      );
+      const { _id } = dataSignIn;
+      dispatch(userDataActions.isLoadingFetch());
+      fetchDataFromServer({
+        url: getUserById(_id),
+      });
+    }
+  }, [dataSignIn, error, isLoading, status, dispatch, fetchDataFromServer]);
+  useEffect(() => {
+    if(isLoadingUser) {
+      return;
+    };
+    if(!isLoadingUser && data) {
+      if(errorUser) {
+        return dispatch(NotifyActions.showedNotify({
+          message: "Cannot get data of user",
+          code: 401
+        }))
+      };
+      const user = data?.data;
+      dispatch(userDataActions.getUserFromServer(user));
+      dispatch(userDataActions.finishedLoading());
+      dispatch(NotifyActions.showedNotify({
+        message: "Sign in successfully",
+        code: 200
+      }));
       history.push(HOME_PAGE);
     }
-  }, [dataSignIn, error, isLoading, history, status, dispatch]);
+  }, [isLoadingUser, dispatch, data, errorUser, history]);
   return (
     <>
       <HeaderPage

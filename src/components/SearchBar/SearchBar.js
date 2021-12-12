@@ -1,4 +1,5 @@
 import React, { useEffect } from "react";
+import { Link } from "react-router-dom";
 import Input from "../input/Input";
 import styles from "./SearchBar.module.scss";
 import useInput from "../../hook/use-input";
@@ -16,6 +17,7 @@ import { getProductByKeyword } from "../../config/product";
 import RenderSkeletonProduct from "../../util/RenderSkeletonProduct";
 import Grid from "../UI/Grid/Grid";
 import { useState } from "react";
+import { SHOP } from '../link/link';
 const SearchBar = ({ isShowed }) => {
   const {
     valid,
@@ -124,12 +126,13 @@ const SearchBar = ({ isShowed }) => {
               </div>
               {!isLoading && !isTyping && data && data?.data?.matched_products > 5 && (
                 <div className={`text-center pt-4`}>
-                  <Button
+                  <Link to={SHOP}><Button
                     className="button"
                     variant="contained"
+                    onClick={changeLayoutHandler}
                   >
                     More Results!
-                  </Button>
+                  </Button></Link>
                 </div>
               )}
             </div>
