@@ -4,11 +4,11 @@ import { Col, Row } from 'react-bootstrap';
 import BillingInfor from './BillingInfor/BillingInfor';
 import InvoiceHistory from './InvoiceHistory/InvoiceHistory';
 const Billing = () => {
-    return(
+    return (
         <Row>
             <Col xs={12} sm={12} md={8} lg={8}>
-                <Plan/>
-                <BillingInfor/>
+                <Plan />
+                <BillingInfor />
             </Col>
             <Col xs={12} sm={12} md={4} lg={4}>
                 <InvoiceHistory/>

@@ -19,6 +19,7 @@ import {
   DASHBOARD,
   BLOG_DETAIL,
   WISHLIST_URL,
+  SUCCESS_CHECKOUT,
 } from "../components/link/link";
 import {
   Index,
@@ -41,7 +42,8 @@ import {
   UserInformation,
   BlogDashboard,
   DetailBlog,
-  WishList
+  WishList,
+  SuccessCheckout
 } from "../views/ViewConfig/ViewConfig";
 export const RoutesConfig = [
   {
@@ -104,6 +106,11 @@ export const RoutesConfig = [
   {
     path: CHECK_OUT_PAGE,
     component: Checkout,
+    exact: true
+  },
+  {
+    path: SUCCESS_CHECKOUT,
+    component: SuccessCheckout
   },
   {
     path: RESET_PASSWORD_VERIFY,

@@ -1,0 +1,18 @@
+.container{
+    img{
+        max-width: 500px;
+        max-height: 400px;
+    }
+    button{
+        padding: 10px 40px;
+    }
+}
+@media screen and (max-width: 576px) {
+    .container{
+        img{
+            width: 100%;
+            max-width: 100%;
+            max-height: auto;
+        }
+    }
+}
