@@ -14,6 +14,9 @@
     background: var(--brown) !important;
     color: var(--white) !important;
 }
+.disabled{
+    background: var(--disabled) !important;
+}
 @media screen and (max-width: 768px) {
     .user--infor{
         flex-direction: column-reverse !important;

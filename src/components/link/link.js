@@ -16,6 +16,7 @@ export const PAGE_SUCCESS_REGISTER = '/verified/success';
 export const RESET_PASSWORD_VERIFY = '/reset/validation';
 export const SUCCESS_RESET = '/reset/success';
 export const SUCCESS_CHANGE_PASSWORD = '/success';
+export const SUCCESS_CHECKOUT = '/checkout/success';
 export const PRODUCTS = {
     INDOOR: '/products/indoor',
     OUTDOOR: '/products/outdoor',

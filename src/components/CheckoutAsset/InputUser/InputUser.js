@@ -1,15 +1,24 @@
-import React from "react";
+import React, { useEffect } from "react";
 import NormalInput from "../../input/NormalInput/NorInput";
 import useInput from "../../../hook/use-input";
 import styles from "./InputUser.module.scss";
 import { CSSTransition } from "react-transition-group";
 
 const InputUser = (props) => {
-  const { valid, touchedInputHandler, changeInputHandler, isTouched, value } =
+  const { valid, touchedInputHandler, changeInputHandler, isTouched, value, setInitialValue } =
     useInput((value) => props.checkCondition(value));
+  const {initialValue} = props;
   const onChangeHandler = (event) => {
     changeInputHandler(event);
+    if(props.onChange) {
+      props.onChange(event.target.value);
+    }
   };
+  useEffect(() => {
+    if(initialValue) {
+      setInitialValue(initialValue);
+    }
+  }, [setInitialValue, initialValue]);
   return (
     <>
       <div className={styles.input}>

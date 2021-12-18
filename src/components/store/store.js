@@ -12,6 +12,7 @@ import progressSlice from "./ProgressLoading/ProgressLoading";
 import navigationDashSlice from "./NavigationDash/navigation-dash";
 import citySlice from "./GetCity/get-city";
 import WishListSlice from "./WishList/wishlist-slice";
+import OrderSlice from "./OrderSlice/OrderSlice";
 const store = configureStore({
     reducer: {
         hamburger: hamburgerSlice.reducer,
@@ -26,7 +27,8 @@ const store = configureStore({
         progress: progressSlice.reducer,
         nav: navigationDashSlice.reducer,
         city: citySlice.reducer,
-        wishlist: WishListSlice.reducer
+        wishlist: WishListSlice.reducer,
+        orderURL: OrderSlice.reducer
     }
 })
 
