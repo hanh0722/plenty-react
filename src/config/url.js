@@ -1,4 +1,4 @@
-export const serverUrl = "https://api-react-nj.herokuapp.com"
+export const serverUrl = "https://api-react-nj-app.herokuapp.com"
 const authLinks = `${serverUrl}/api/auth`;
 const userApi = `${serverUrl}/api/user`;
 const dashboardApi = `${serverUrl}/api/dashboard`;
@@ -26,6 +26,7 @@ const updateUserInformation = `${userApi}/update`;
 const updatePasswordByToken = `${userApi}/change/password`;
 const getUserById = id => `${userApi}/info/${id}`;
 const getUserDataApi = `${userApi}/validated`;
+const getBillsOfUser = `${userApi}/get/bills`;
 export {
   urlCheckVerify,
   registerUrl,
@@ -44,6 +45,6 @@ export {
   updateUserInformation,
   updatePasswordByToken,
   getUserById,
-  getUserDataApi
-
+  getUserDataApi,
+  getBillsOfUser
 };

@@ -1,0 +1,61 @@
+@import "../../../constant/variable";
+.links {
+  text-decoration: none;
+  color: var(--black) !important; 
+}
+.card {
+  transition: all 0.25s ease-in-out;
+  &:hover {
+    transform: scale(1.03);
+  }
+  .image {
+    min-height: 30px;
+    max-height: 30px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    img {
+      width: 30px;
+      min-height: 30px;
+      max-height: 30px;
+      object-fit: cover;
+    }
+  }
+  box-shadow: $sm-shadow;
+  padding: 20px;
+  border-radius: 10px;
+  .information {
+    padding-top: 30px;
+    font-size: 12px;
+    .title {
+      font-weight: bold;
+      font-size: 16px;
+      padding-bottom: 15px;
+    }
+    .price {
+      .discount {
+        padding-right: 10px;
+        font-size: 14px;
+        text-decoration: line-through;
+      }
+      .total {
+        padding: 4px 8px;
+        border-radius: 4px;
+        color: var(--red-primary);
+        background: var(--light-red-primary);
+        font-weight: bold;
+      }
+    }
+  }
+  position: relative;
+  .time {
+    position: absolute;
+    right: 20px;
+    top: 20px;
+    font-size: 14px;
+    color: $white;
+    background: var(--red-dark-color);
+    padding: 3px 8px;
+    border-radius: 6px;
+  }
+}

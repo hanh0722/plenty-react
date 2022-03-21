@@ -20,6 +20,7 @@ import BlogDashboard from '../Dashboard/Blog';
 import DetailBlog from "../DetailBlog";
 import WishList from "../WishList";
 import SuccessCheckout from "../SuccessCheckout";
+import Package from "../Dashboard/Package";
 export {
     Blog,
     Checkout,
@@ -42,5 +43,6 @@ export {
     BlogDashboard,
     DetailBlog,
     WishList,
-    SuccessCheckout
+    SuccessCheckout,
+    Package
 }

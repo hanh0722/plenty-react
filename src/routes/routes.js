@@ -43,7 +43,8 @@ import {
   BlogDashboard,
   DetailBlog,
   WishList,
-  SuccessCheckout
+  SuccessCheckout,
+  Package
 } from "../views/ViewConfig/ViewConfig";
 export const RoutesConfig = [
   {
@@ -135,6 +136,10 @@ export const RoutesConfig = [
   {
     path: `${DASHBOARD}${DASHBOARD_MATERIAL.ADMIN[1].path}`,
     component: BlogDashboard,
+  },
+  {
+    path: `${DASHBOARD}${DASHBOARD_MATERIAL.ADMIN[4].path}`,
+    component: Package
   },
   {
     path: NOT_FOUND,
