@@ -1,5 +1,5 @@
 import { faDesktop, faPercentage, faShoppingCart, faBan, faHome, faStore} from "@fortawesome/free-solid-svg-icons";
-import { faUser, faChartBar, faNewspaper } from "@fortawesome/free-regular-svg-icons";
+import { faUser, faChartBar, faNewspaper, faBookmark } from "@fortawesome/free-regular-svg-icons";
 
 export const HOME_PAGE = '/';
 export const SHOP = '/shop';
@@ -83,6 +83,11 @@ export const DASHBOARD_MATERIAL = {
             icon: faStore,
             name: 'Product',
             path: '/product'
+        },
+        {
+            icon: faBookmark,
+            name: 'Package',
+            path: '/package'
         }
     ],
     CHANGE_VALUE_USER: '/user/account'
